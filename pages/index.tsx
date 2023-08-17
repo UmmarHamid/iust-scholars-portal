@@ -1,7 +1,5 @@
-import { NextScript } from 'next/document';
 import Head from 'next/head';
-import Iustlogo from '@/components/Logo/iustlogo';
-import Login from '@/components/Button/Login';
+import Logo from '@/components/Logo/Logo';
 
 export const index = () => {
   return (
@@ -13,8 +11,14 @@ export const index = () => {
       </Head>
 
       <main>
-        <Iustlogo />
-        <Login />
+        <Logo
+          alt='IUST-logo'
+          href='google.com'
+          width={200}
+          height={65}
+          imgSrc='next.svg'
+        />
+        {/* // <Login /> */}
       </main>
     </>
   );
