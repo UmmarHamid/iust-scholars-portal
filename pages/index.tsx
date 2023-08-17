@@ -1,5 +1,13 @@
 import Head from 'next/head';
 import Logo from '@/components/Logo/Logo';
+import { MdBuild, MdCall } from 'react-icons/md';
+import { Button } from '@chakra-ui/button';
+import { Stack } from '@chakra-ui/react';
+import { styled } from 'styled-components';
+
+const LoginButtonsWrapperStyled = styled.div`
+  margin: auto;
+`;
 
 export const index = () => {
   return (
@@ -18,7 +26,16 @@ export const index = () => {
           height={65}
           imgSrc='next.svg'
         />
-        {/* // <Login /> */}
+        <LoginButtonsWrapperStyled>
+          <Stack direction='row' spacing={4}>
+            <Button leftIcon={<MdBuild />} colorScheme='pink' variant='solid'>
+              Settings
+            </Button>
+            <Button rightIcon={<MdCall />} colorScheme='blue' variant='outline'>
+              Call us
+            </Button>
+          </Stack>
+        </LoginButtonsWrapperStyled>
       </main>
     </>
   );
