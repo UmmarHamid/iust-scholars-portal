@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@chakra-ui/button": "^2.1.0",
+    "@chakra-ui/icons": "^2.1.0",
     "@chakra-ui/react": "^2.8.0",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
@@ -25,6 +26,7 @@
     "prettier": "^3.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-icon": "^1.0.0",
     "react-icons": "^4.10.1",
     "styled-components": "^6.0.7",
     "typescript": "5.1.6"
@@ -38,6 +40,7 @@
     "@storybook/nextjs": "^7.2.2",
     "@storybook/react": "^7.2.2",
     "@storybook/testing-library": "^0.2.0",
+    "@types/styled-components": "^5.1.26",
     "eslint-plugin-storybook": "^0.6.13",
     "storybook": "^7.2.2"
   }

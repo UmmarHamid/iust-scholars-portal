@@ -10,7 +10,6 @@ type LogoType = {
 };
 
 const LogoStyled = styled.div`
-  display: flex;
   padding: 20px;
 `;
 
