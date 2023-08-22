@@ -9,10 +9,12 @@ const StyledDiv = styled.div`
   display: flex;
   align-content: center;
   justify-content: space-around;
+  margin-bottom: 5%;
 `;
 const StyledButton = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 5%;
 `;
 
 export const supervisor = () => {
@@ -20,16 +22,13 @@ export const supervisor = () => {
     <>
       <title>Supervisor</title>
       <Box
-        w='65%'
-        h='900px'
+        w='100%'
+        h='850px'
         bgGradient={[
           'linear(to-tr, teal.300, yellow.400)',
           'linear(to-t, blue.200, teal.500)',
           'linear(to-b, orange.100, purple.300)',
         ]}
-        borderRadius={20}
-        marginTop='2%'
-        marginLeft='20%'
       >
         <StyledButton>
           <Link href={'/'}>
@@ -55,7 +54,6 @@ export const supervisor = () => {
               h='100%'
               bgGradient={['linear-gradient(90deg,#ba8b02,#181818  )']}
               borderRadius={40}
-              marginTop='10%'
               fontSize={36}
               padding='20%'
               textAlign='center'
@@ -71,7 +69,6 @@ export const supervisor = () => {
               h='100%'
               bgGradient={['linear-gradient(#84fab0,#8fd3f4  )']}
               borderRadius={40}
-              marginTop='10%'
               fontSize={36}
               padding='15%'
               textAlign='center'
@@ -82,6 +79,7 @@ export const supervisor = () => {
             </Box>
           </Link>
         </StyledDiv>
+
         <StyledDiv>
           <Link href={'/login'}>
             <Box
@@ -89,9 +87,8 @@ export const supervisor = () => {
               h='100%'
               bgGradient={['linear-gradient(to right, #243949 , #517fa4 )']}
               borderRadius={40}
-              marginTop='30%'
               fontSize={42}
-              padding='15%'
+              padding='18%'
               textAlign='center'
               color='#fff'
               fontWeight={700}
@@ -104,10 +101,9 @@ export const supervisor = () => {
               w='100%'
               h='100%'
               bgGradient={['linear-gradient(to right, #434343 , black   )']}
-              borderRadius={40}
-              marginTop='30%'
+              borderRadius={38}
               fontSize={38}
-              padding='10%'
+              padding='15%'
               textAlign='center'
               color='#fff'
               fontWeight={700}
