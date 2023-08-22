@@ -3,34 +3,21 @@ import { BsFillHouseDoorFill } from 'react-icons/bs';
 import { BiLogOut } from 'react-icons/bi';
 import Link from 'next/link';
 import { Box, SimpleGrid } from '@chakra-ui/react';
-import { styled } from 'styled-components';
 
-const StyledDiv = styled.div`
-  display: flex;
-  align-content: center;
-  justify-content: space-around;
-  margin-bottom: 5%;
-`;
-const StyledButton = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5%;
-`;
-
-export const supervisor = () => {
+export const Index = () => {
   return (
     <>
       <title>Supervisor</title>
       <Box
         w='100%'
-        h='850px'
+        h='100vh'
         bgGradient={[
           'linear(to-tr, teal.300, yellow.400)',
           'linear(to-t, blue.200, teal.500)',
           'linear(to-b, orange.100, purple.300)',
         ]}
       >
-        <StyledButton>
+        <Box display={'flex'} justifyContent={'space-between'}>
           <Link href={'/'}>
             <Button
               leftIcon={<BsFillHouseDoorFill />}
@@ -46,8 +33,13 @@ export const supervisor = () => {
           <Button colorScheme='red' leftIcon={<BiLogOut />} margin={10}>
             Logout
           </Button>
-        </StyledButton>
-        <StyledDiv>
+        </Box>
+        <SimpleGrid
+          height={'calc(100vh - 128px)'}
+          padding={'5%'}
+          columns={2}
+          spacing={'100px'}
+        >
           <Link href={'/login'}>
             <Box
               w='100%'
@@ -78,9 +70,7 @@ export const supervisor = () => {
               Report Generation
             </Box>
           </Link>
-        </StyledDiv>
 
-        <StyledDiv>
           <Link href={'/login'}>
             <Box
               w='100%'
@@ -111,9 +101,9 @@ export const supervisor = () => {
               Research Progress
             </Box>
           </Link>
-        </StyledDiv>
+        </SimpleGrid>
       </Box>
     </>
   );
 };
-export default supervisor;
+export default Index;
