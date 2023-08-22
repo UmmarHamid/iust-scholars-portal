@@ -24,7 +24,7 @@ const InputContainerStyled = styled.div`
   width: 50%;
 `;
 
-export const index = () => {
+export const Index = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClick = () => setShowPassword(!showPassword);
   return (
@@ -86,4 +86,4 @@ export const index = () => {
     </>
   );
 };
-export default index;
+export default Index;
