@@ -12,6 +12,7 @@ const MainStyled = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 120px 0;
   padding: 10px;
 `;
 const InputContainerStyled = styled.div`
@@ -20,6 +21,7 @@ const InputContainerStyled = styled.div`
   gap: 20px;
   align-items: center;
   padding: 20px;
+  width: 50%;
 `;
 
 export const index = () => {
@@ -75,7 +77,7 @@ export const index = () => {
           </Link>
           <Text fontSize='25px'>
             Not Registered Yet?{'  '}
-            <Link color='#4267B2' href='#' fontSize='25px'>
+            <Link color='#4267B2' href='/signup' fontSize='25px'>
               Register Now...
             </Link>
           </Text>
