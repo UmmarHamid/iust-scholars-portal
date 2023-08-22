@@ -147,7 +147,7 @@ export const Homepage = () => {
             href='google.com'
             width={300}
             height={75}
-            imgSrc='/next.svg'
+            imgSrc='/iustlogo.png'
           />
 
           <Stack direction='row' spacing={10} pt={4}>
