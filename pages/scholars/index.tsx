@@ -2,12 +2,11 @@ import Logo from '@/components/Logo/Logo';
 import { Box, Button, Heading, SimpleGrid } from '@chakra-ui/react';
 import Head from 'next/head';
 import { styled } from 'styled-components';
-import { BiLogOut, BiUserPlus } from 'react-icons/bi';
+import { BiLogOut, BiRegistered, BiSolidUserDetail } from 'react-icons/bi';
+import { HiDocumentDuplicate } from 'react-icons/hi';
+import { AiOutlineTeam } from 'react-icons/ai';
+import { MdAssignmentInd, MdOutlineSaveAs } from 'react-icons/md';
 import Link from 'next/link';
-import { RxUpdate } from 'react-icons/rx';
-import { PiUserListFill } from 'react-icons/pi';
-import { IoPeopleCircle } from 'react-icons/io5';
-import { MdAssignmentAdd, MdOutlineGroups } from 'react-icons/md';
 
 const StyledIcon = styled.div`
   font-size: 7em;
@@ -58,7 +57,7 @@ export const Index = () => {
           fontWeight='bold'
           color='teal'
         >
-          Department Of Computer Science
+          Welcome User
         </Heading>
         <Button colorScheme='red' leftIcon={<BiLogOut />}>
           Logout
@@ -71,40 +70,40 @@ export const Index = () => {
         padding={'5%'}
       >
         <LinkStyled href='/'>
-          <StyledIcon> {<BiUserPlus />} </StyledIcon>
+          <StyledIcon> {<BiSolidUserDetail />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            Add Scholar
+            Personal Details
           </Heading>
         </LinkStyled>
         <LinkStyled href='/'>
-          <StyledIcon> {<PiUserListFill />} </StyledIcon>
+          <StyledIcon> {<BiRegistered />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            Scholars Details
+            Registered Courses
           </Heading>
         </LinkStyled>
         <LinkStyled href='/'>
-          <StyledIcon> {<RxUpdate />} </StyledIcon>
+          <StyledIcon> {<MdOutlineSaveAs />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            Update Details
+            Submission Details
           </Heading>
         </LinkStyled>
 
         <LinkStyled href='/'>
-          <StyledIcon> {<MdOutlineGroups />} </StyledIcon>
+          <StyledIcon> {<MdAssignmentInd />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            Supervisors
+            Assigned Supervisors
           </Heading>
         </LinkStyled>
         <LinkStyled href='/'>
-          <StyledIcon> {<IoPeopleCircle />} </StyledIcon>
+          <StyledIcon> {<AiOutlineTeam />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            SRAC Members
+            Assigned SRAC Members
           </Heading>
         </LinkStyled>
         <LinkStyled href='/'>
-          <StyledIcon> {<MdAssignmentAdd />} </StyledIcon>
+          <StyledIcon> {<HiDocumentDuplicate />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            Assign Supervisor
+            Synopsis Details
           </Heading>
         </LinkStyled>
       </SimpleGrid>
