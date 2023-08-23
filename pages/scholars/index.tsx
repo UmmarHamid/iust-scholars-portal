@@ -1,41 +1,25 @@
 import Logo from '@/components/Logo/Logo';
-import { Button, Heading } from '@chakra-ui/react';
+import { Box, Button, Heading, SimpleGrid } from '@chakra-ui/react';
 import Head from 'next/head';
 import { styled } from 'styled-components';
-import {
-  BiLogOut,
-  BiRegistered,
-  BiSolidUserDetail,
-  BiUserPlus,
-} from 'react-icons/bi';
-import Link from 'next/link';
-import { IoPeopleCircle } from 'react-icons/io5';
+import { BiLogOut, BiRegistered, BiSolidUserDetail } from 'react-icons/bi';
 import { HiDocumentDuplicate } from 'react-icons/hi';
 import { AiOutlineTeam } from 'react-icons/ai';
 import { MdAssignmentInd, MdOutlineSaveAs } from 'react-icons/md';
-const StyledHead = styled.div`
-  display: flex;
-  justify-content: space-around;
-  background-image: linear-gradient(43deg, #2c5364, #203a43, #0f2027);
-`;
-const StyledDisplay = styled.div`
-  display: flex;
-  justify-content: space-around;
-`;
+import Link from 'next/link';
+
 const StyledIcon = styled.div`
   font-size: 7em;
-  padding-left: 25%;
   color: #0c2b50;
 `;
-const StyledComponent = styled.div`
-  margin: 5%;
+
+const LinkStyled = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
-const StyledText = styled.h2`
-  font-size: 36px;
-  color: #2f77cd;
-  font-weight: 300;
-  padding-top: 2%;
-`;
+
 const StyledFooter = styled.footer`
   left: 0;
   bottom: 0;
@@ -47,16 +31,21 @@ const StyledFooter = styled.footer`
   line-height: 50px;
 `;
 
-export const index = () => {
+export const Index = () => {
   return (
     <>
       <Head>
         <title>office</title>
       </Head>
-      <StyledHead>
+      <Box
+        display={'flex'}
+        justifyContent={'space-around'}
+        alignItems={'center'}
+        height={'100px'}
+      >
         <Logo
           alt='IUST-logo'
-          href='/'
+          href='google.com'
           width={300}
           height={75}
           imgSrc='/iustlogo.png'
@@ -66,60 +55,62 @@ export const index = () => {
           size='xl'
           fontFamily='Georgia'
           fontWeight='bold'
-          color='#fff'
-          mb={15}
-          padding='2%'
+          color='teal'
         >
-          Welcome Zubair
+          Welcome User
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />} margin='2%'>
+        <Button colorScheme='red' leftIcon={<BiLogOut />}>
           Logout
         </Button>
-      </StyledHead>
-      <StyledDisplay>
-        <StyledComponent>
-          <Link href='/'>
-            <StyledIcon> {<BiSolidUserDetail />} </StyledIcon>
-            <StyledText>Personal Details</StyledText>
-          </Link>
-        </StyledComponent>
-        <StyledComponent>
-          <Link href='/'>
-            <StyledIcon> {<BiRegistered />} </StyledIcon>
-            <StyledText>Registered Courses</StyledText>
-          </Link>
-        </StyledComponent>
-        <StyledComponent>
-          <Link href='/'>
-            <StyledIcon> {<MdOutlineSaveAs />} </StyledIcon>
-            <StyledText>Submission Details</StyledText>
-          </Link>
-        </StyledComponent>
-      </StyledDisplay>
-      <StyledDisplay>
-        <StyledComponent>
-          <Link href='/'>
-            <StyledIcon> {<MdAssignmentInd />} </StyledIcon>
-            <StyledText> Assigned Supervisors</StyledText>
-          </Link>
-        </StyledComponent>
-        <StyledComponent>
-          <Link href='/'>
-            <StyledIcon> {<AiOutlineTeam />} </StyledIcon>
-            <StyledText>Assigned SRAC Members </StyledText>
-          </Link>
-        </StyledComponent>
-        <StyledComponent>
-          <Link href='/'>
-            <StyledIcon> {<HiDocumentDuplicate />} </StyledIcon>
-            <StyledText>Synopsis Details</StyledText>
-          </Link>
-        </StyledComponent>
-      </StyledDisplay>
+      </Box>
+      <SimpleGrid
+        columns={3}
+        gap={'100px'}
+        height={'calc(100vh - 150px)'}
+        padding={'5%'}
+      >
+        <LinkStyled href='/'>
+          <StyledIcon> {<BiSolidUserDetail />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Personal Details
+          </Heading>
+        </LinkStyled>
+        <LinkStyled href='/'>
+          <StyledIcon> {<BiRegistered />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Registered Courses
+          </Heading>
+        </LinkStyled>
+        <LinkStyled href='/'>
+          <StyledIcon> {<MdOutlineSaveAs />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Submission Details
+          </Heading>
+        </LinkStyled>
+
+        <LinkStyled href='/'>
+          <StyledIcon> {<MdAssignmentInd />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Assigned Supervisors
+          </Heading>
+        </LinkStyled>
+        <LinkStyled href='/'>
+          <StyledIcon> {<AiOutlineTeam />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Assigned SRAC Members
+          </Heading>
+        </LinkStyled>
+        <LinkStyled href='/'>
+          <StyledIcon> {<HiDocumentDuplicate />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Synopsis Details
+          </Heading>
+        </LinkStyled>
+      </SimpleGrid>
       <StyledFooter>
         © 2023 - Islamic University of Science and Technology.
       </StyledFooter>
     </>
   );
 };
-export default index;
+export default Index;

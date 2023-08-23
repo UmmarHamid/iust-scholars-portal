@@ -1,5 +1,5 @@
 import Logo from '@/components/Logo/Logo';
-import { Box, Button, Heading, SimpleGrid, calc } from '@chakra-ui/react';
+import { Box, Button, Heading, SimpleGrid } from '@chakra-ui/react';
 import Head from 'next/head';
 import { styled } from 'styled-components';
 import { BiLogOut, BiUserPlus } from 'react-icons/bi';
