@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import { Button } from '@chakra-ui/button';
-import { InputGroup, InputRightElement, border } from '@chakra-ui/react';
+import { InputGroup, InputRightElement } from '@chakra-ui/react';
 import { styled } from 'styled-components';
 import { Heading } from '@chakra-ui/react';
 import { Input } from '@chakra-ui/react';
 import { useState } from 'react';
-import { FormControl, FormLabel } from '@chakra-ui/react';
+import Footer from '@/components/Footer/Footer';
 
 const MainStyled = styled.main`
   display: flex;
@@ -85,6 +85,7 @@ export const index = () => {
           </Button>
         </InputContainerStyled>
       </MainStyled>
+      <Footer />
     </>
   );
 };
