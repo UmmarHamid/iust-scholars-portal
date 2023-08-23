@@ -66,7 +66,8 @@ export const Index = () => {
       </Box>
       <SimpleGrid
         columns={2}
-        gap={'100px'}
+        rowGap={'50px'}
+        columnGap={'200px'}
         height={'calc(100vh - 150px)'}
         padding={'5%'}
       >
