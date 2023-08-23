@@ -1,5 +1,5 @@
 import Logo from '@/components/Logo/Logo';
-import { Button, Heading } from '@chakra-ui/react';
+import { Box, Button, Heading, SimpleGrid, calc } from '@chakra-ui/react';
 import Head from 'next/head';
 import { styled } from 'styled-components';
 import { BiLogOut, BiUserPlus } from 'react-icons/bi';
@@ -7,30 +7,20 @@ import Link from 'next/link';
 import { RxUpdate } from 'react-icons/rx';
 import { PiUserListFill } from 'react-icons/pi';
 import { IoPeopleCircle } from 'react-icons/io5';
-import { MdAssignment, MdAssignmentAdd, MdOutlineGroups } from 'react-icons/md';
-const StyledHead = styled.div`
-  display: flex;
-  justify-content: space-around;
-  background-image: linear-gradient(43deg, #2c5364, #203a43, #0f2027);
-`;
-const StyledDisplay = styled.div`
-  display: flex;
-  justify-content: space-around;
-`;
+import { MdAssignmentAdd, MdOutlineGroups } from 'react-icons/md';
+
 const StyledIcon = styled.div`
   font-size: 7em;
-  padding-left: 25%;
   color: #0c2b50;
 `;
-const StyledComponent = styled.div`
-  margin: 5%;
+
+const LinkStyled = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
-const StyledText = styled.h2`
-  font-size: 36px;
-  color: #2f77cd;
-  font-weight: 300;
-  padding-top: 2%;
-`;
+
 const StyledFooter = styled.footer`
   left: 0;
   bottom: 0;
@@ -42,16 +32,21 @@ const StyledFooter = styled.footer`
   line-height: 50px;
 `;
 
-export const index = () => {
+export const Index = () => {
   return (
     <>
       <Head>
         <title>office</title>
       </Head>
-      <StyledHead>
+      <Box
+        display={'flex'}
+        justifyContent={'space-around'}
+        alignItems={'center'}
+        height={'100px'}
+      >
         <Logo
           alt='IUST-logo'
-          href='/'
+          href='google.com'
           width={300}
           height={75}
           imgSrc='/iustlogo.png'
@@ -61,60 +56,62 @@ export const index = () => {
           size='xl'
           fontFamily='Georgia'
           fontWeight='bold'
-          color='#fff'
-          mb={15}
-          padding='2%'
+          color='teal'
         >
           Department Of Computer Science
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />} margin='2%'>
+        <Button colorScheme='red' leftIcon={<BiLogOut />}>
           Logout
         </Button>
-      </StyledHead>
-      <StyledDisplay>
-        <StyledComponent>
-          <Link href='/'>
-            <StyledIcon> {<BiUserPlus />} </StyledIcon>
-            <StyledText>Add Scholar</StyledText>
-          </Link>
-        </StyledComponent>
-        <StyledComponent>
-          <Link href='/'>
-            <StyledIcon> {<PiUserListFill />} </StyledIcon>
-            <StyledText>Scholars Details</StyledText>
-          </Link>
-        </StyledComponent>
-        <StyledComponent>
-          <Link href='/'>
-            <StyledIcon> {<RxUpdate />} </StyledIcon>
-            <StyledText>Update Details</StyledText>
-          </Link>
-        </StyledComponent>
-      </StyledDisplay>
-      <StyledDisplay>
-        <StyledComponent>
-          <Link href='/'>
-            <StyledIcon> {<MdOutlineGroups />} </StyledIcon>
-            <StyledText>Supervisors</StyledText>
-          </Link>
-        </StyledComponent>
-        <StyledComponent>
-          <Link href='/'>
-            <StyledIcon> {<IoPeopleCircle />} </StyledIcon>
-            <StyledText>SRAC Members</StyledText>
-          </Link>
-        </StyledComponent>
-        <StyledComponent>
-          <Link href='/'>
-            <StyledIcon> {<MdAssignmentAdd />} </StyledIcon>
-            <StyledText>Assign Supervisor</StyledText>
-          </Link>
-        </StyledComponent>
-      </StyledDisplay>
+      </Box>
+      <SimpleGrid
+        columns={3}
+        gap={'100px'}
+        height={'calc(100vh - 150px)'}
+        padding={'5%'}
+      >
+        <LinkStyled href='/'>
+          <StyledIcon> {<BiUserPlus />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Add Scholar
+          </Heading>
+        </LinkStyled>
+        <LinkStyled href='/'>
+          <StyledIcon> {<PiUserListFill />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Scholars Details
+          </Heading>
+        </LinkStyled>
+        <LinkStyled href='/'>
+          <StyledIcon> {<RxUpdate />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Update Details
+          </Heading>
+        </LinkStyled>
+
+        <LinkStyled href='/'>
+          <StyledIcon> {<MdOutlineGroups />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Supervisors
+          </Heading>
+        </LinkStyled>
+        <LinkStyled href='/'>
+          <StyledIcon> {<IoPeopleCircle />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            SRAC Members
+          </Heading>
+        </LinkStyled>
+        <LinkStyled href='/'>
+          <StyledIcon> {<MdAssignmentAdd />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Assign Supervisor
+          </Heading>
+        </LinkStyled>
+      </SimpleGrid>
       <StyledFooter>
         © 2023 - Islamic University of Science and Technology.
       </StyledFooter>
     </>
   );
 };
-export default index;
+export default Index;
