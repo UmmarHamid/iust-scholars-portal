@@ -40,7 +40,7 @@ export const Index = () => {
           columns={2}
           spacing={'100px'}
         >
-          <Link href={'/login'}>
+          <Link href={'/assignedscholars'}>
             <Box
               w='100%'
               h='100%'
