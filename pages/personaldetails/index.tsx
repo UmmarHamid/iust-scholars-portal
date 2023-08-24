@@ -5,6 +5,19 @@ import Link from 'next/link';
 import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react';
 
 export const Index = () => {
+  const user = {
+    name: 'samin',
+    father: 'Samin"s father',
+    mother: 'Samin"s mother',
+    address: 'Khrew',
+    dob: '10-09-2010',
+    phone: '9797979797',
+    email: 'samin@something.com',
+    department: 'Astronomy',
+    registrationNumber: '123123',
+    joiningDate: '20-07-2023',
+    qualifiedExam: 'MBBS',
+  };
   return (
     <>
       <title>Personal Details</title>
@@ -14,7 +27,7 @@ export const Index = () => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href={'/'}>
+        <Link href={'/scholars'}>
           <Button
             leftIcon={<BiArrowBack />}
             colorScheme='facebook'
@@ -44,37 +57,37 @@ export const Index = () => {
         margin={'20px'}
       >
         <Text fontWeight={300} fontSize={'30px'}>
-          Name
+          {`Name: ${user.name}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          Father's Name
+          {`Father's Name: ${user.father}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          Mother's Name
+          {` Mothers Name: ${user.mother}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          Address
+          {`Address: ${user.address}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          D.O.B
+          {`D.O.B: ${user.dob}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          Phone
+          {`Phone: ${user.phone}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          Email
+          {`Email: ${user.email}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          Department
+          {`Department: ${user.department}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          Registration No,
+          {`Registration No: ${user.registrationNumber}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          Joining Date
+          {`Joining Date: ${user.joiningDate}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          Qualified Exam
+          {`Qualified Exam: ${user.qualifiedExam}`}
         </Text>
       </Box>
     </>

@@ -68,8 +68,9 @@ export const Index = () => {
         gap={'100px'}
         height={'calc(100vh - 150px)'}
         padding={'5%'}
+        textAlign={'center'}
       >
-        <LinkStyled href='/'>
+        <LinkStyled href='/personaldetails'>
           <StyledIcon> {<BiSolidUserDetail />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Personal Details
