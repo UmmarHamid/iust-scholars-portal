@@ -22,9 +22,8 @@ const LinkStyled = styled(Link)`
 `;
 
 const StyledFooter = styled.footer`
-  left: 0;
   bottom: 0;
-  position: relative;
+  position: fixed;
   width: 100%;
   background-color: #002147;
   color: #fff;
@@ -82,7 +81,7 @@ export const Index = () => {
             Scholars Details
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/'>
+        <LinkStyled href='/office/updatedetails'>
           <StyledIcon> {<RxUpdate />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Update Details
