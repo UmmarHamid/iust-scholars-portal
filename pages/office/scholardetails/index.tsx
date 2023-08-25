@@ -10,9 +10,8 @@ const StyledIcon = styled.h1`
   color: #0c2b50;
 `;
 const StyledFooter = styled.footer`
-  left: 0;
   bottom: 0;
-  position: relative;
+  position: fixed;
   width: 100%;
   background-color: #002147;
   color: #fff;
@@ -23,7 +22,7 @@ export const index = () => {
   return (
     <>
       <Head>
-        <title>Add Scholar</title>
+        <title>Scholar Details</title>
       </Head>
       <Box
         display={'flex'}
@@ -34,21 +33,21 @@ export const index = () => {
         <Link href='/office'>
           <StyledIcon>{<MdArrowBackIosNew />}</StyledIcon>
         </Link>
-        <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-          Add Scholar
+        <Heading as={'h2'} color={'teal'} fontWeight={300}>
+          Scholar Details
         </Heading>
         <Button colorScheme='red' leftIcon={<BiLogOut />}>
           Logout
         </Button>
       </Box>
-      <Box margin={'4%'}>
+      <Container maxW='5xl'>
         <Heading
           margin={'2%'}
           as={'h6'}
           color={'#07443E'}
           letterSpacing={'10px'}
         >
-          1. Zubair DOCS IUST0121014521
+          1.Zubair DOCS IUST0121014521
         </Heading>
         <Heading
           margin={'2%'}
@@ -58,7 +57,7 @@ export const index = () => {
         >
           2.Samin DOCS IUST0121014544
         </Heading>
-      </Box>
+      </Container>
       <StyledFooter>
         © 2023 - Islamic University of Science and Technology.
       </StyledFooter>

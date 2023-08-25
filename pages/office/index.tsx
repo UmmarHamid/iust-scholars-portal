@@ -70,13 +70,13 @@ export const Index = () => {
         height={'calc(100vh - 150px)'}
         padding={'5%'}
       >
-        <LinkStyled href='/office/addScholar'>
+        <LinkStyled href='/office/addscholar'>
           <StyledIcon> {<BiUserPlus />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Add Scholar
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/'>
+        <LinkStyled href='/office/scholardetails'>
           <StyledIcon> {<PiUserListFill />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Scholars Details
