@@ -94,7 +94,7 @@ export const Index = () => {
             Supervisors
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/'>
+        <LinkStyled href='/office/sracmembers'>
           <StyledIcon> {<IoPeopleCircle />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             SRAC Members

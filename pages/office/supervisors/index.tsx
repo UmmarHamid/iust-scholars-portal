@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { BiLogOut } from 'react-icons/bi';
 import Head from 'next/head';
-import ImageFormat from '@/components/Image/image';
 import Image from 'next/image';
 import {
   Text,
