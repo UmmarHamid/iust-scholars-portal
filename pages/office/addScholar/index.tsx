@@ -35,7 +35,7 @@ export const index = () => {
         <Link href='/office'>
           <StyledIcon>{<MdArrowBackIosNew />}</StyledIcon>
         </Link>
-        <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+        <Heading as={'h2'} color={'teal'} fontWeight={300}>
           Add Scholar
         </Heading>
         <Button colorScheme='red' leftIcon={<BiLogOut />}>
@@ -44,35 +44,28 @@ export const index = () => {
       </Box>
       <Container maxW='2xl' centerContent>
         <FormControl>
-          <FormLabel>Full Name</FormLabel>
+          <FormLabel>{`Full Name`}</FormLabel>
+          <Input type='Text' mb={4} />
+          <FormLabel>{`Father's Name`}</FormLabel>
+          <Input type='Text' mb={4} />
+          <FormLabel>{`Mother's Name`}</FormLabel>
+          <Input type='Text' mb={4} />
+          <FormLabel>{`Address`}</FormLabel>
           <Input type='Text' />
-          <FormLabel>Father's Name</FormLabel>
-          <Input type='Text' />
-          <FormLabel>Mother's Name</FormLabel>
-          <Input type='Text' />
-          <FormLabel>Address</FormLabel>
-          <Input type='Text' />
-          <FormLabel>D.O.B</FormLabel>
-          <Input type='date' />
-          <FormLabel>Phone no.</FormLabel>
-          <Input type='number' />
-          <FormLabel>Email</FormLabel>
-          <Input type='email' />
-          <FormLabel>Registration No.</FormLabel>
-          <Input type='Text' />
-          <FormLabel>Joining Date</FormLabel>
-          <Input type='Date' />
-          <FormLabel>Qualified Exam</FormLabel>
-          <Input type='Text' />
+          <FormLabel>{`D.O.B`}</FormLabel>
+          <Input type='date' mb={4} />
+          <FormLabel>{`Phone no.`}</FormLabel>
+          <Input type='number' mb={4} />
+          <FormLabel>{`Email`}</FormLabel>
+          <Input type='email' mb={4} />
+          <FormLabel>{`Registration No.`}</FormLabel>
+          <Input type='Text' mb={4} />
+          <FormLabel>{`Joining Date`}</FormLabel>
+          <Input type='Date' mb={4} />
+          <FormLabel>{`Qualified Exam`}</FormLabel>
+          <Input type='Text' mb={4} />
         </FormControl>
-        <Button
-          fontSize={26}
-          paddingLeft='25%'
-          paddingRight='25%'
-          colorScheme='teal'
-          size='lg'
-          margin='5%'
-        >
+        <Button fontSize={26} colorScheme='teal' size='lg' width={'50%'}>
           Submit
         </Button>
       </Container>
