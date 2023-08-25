@@ -31,7 +31,7 @@ export const index = () => {
         height={'100px'}
       >
         <Link href='/office'>
-          <StyledIcon>{<MdArrowBackIosNew />}</StyledIcon>
+          <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
           Scholar Details
