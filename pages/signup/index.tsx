@@ -23,7 +23,7 @@ const InputContainerStyled = styled.div`
   padding: 20px;
 `;
 
-export const index = () => {
+export const Index = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClick = () => setShowPassword(!showPassword);
   return (
@@ -88,4 +88,4 @@ export const index = () => {
     </>
   );
 };
-export default index;
+export default Index;
