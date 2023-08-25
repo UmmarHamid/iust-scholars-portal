@@ -3,6 +3,7 @@ import { MdArrowBackIosNew } from 'react-icons/md';
 import { BiLogOut } from 'react-icons/bi';
 import Head from 'next/head';
 import ImageFormat from '@/components/Image/image';
+import Image from 'next/image';
 import {
   Text,
   Box,
@@ -21,6 +22,11 @@ const StyledIcon = styled.h1`
   color: #0c2b50;
   padding-left: 30%;
 `;
+
+const ImageStyled = styled(Image)`
+  padding: 10px;
+  border-radius: 16px;
+`;
 export const index = () => {
   return (
     <>
@@ -34,9 +40,9 @@ export const index = () => {
         height={'100px'}
       >
         <Link href='/office'>
-          <StyledIcon>{<MdArrowBackIosNew />}</StyledIcon>
+          <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
         </Link>
-        <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+        <Heading as={'h2'} color={'teal'} fontWeight={300}>
           Supervisors
         </Heading>
         <Button colorScheme='red' leftIcon={<BiLogOut />}>
@@ -48,17 +54,16 @@ export const index = () => {
           display={'flex'}
           justifyContent={'space-around'}
           variant='simple'
-          border='none'
         >
           <Tbody>
             <Tr>
               <Td isNumeric>1</Td>
               <Td>
-                <ImageFormat
+                <ImageStyled
                   alt='Image'
                   width={100}
                   height={75}
-                  imgSrc='/r.jfif'
+                  src='/r.jfif'
                 />
               </Td>
               <Td>
@@ -66,12 +71,12 @@ export const index = () => {
                 <Text>Associate Professor</Text>
                 <Text>rumaan.bashir@islamicuniversity.edu.in</Text>
               </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href='https://scholar.google.co.in/citations?user=tEdj4wQAAAAJ'>
                   Google Scholar
                 </Link>
               </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href='https://orcid.org/my-orcid?orcid=0000-0001-6656-005X'>
                   ORCID
                 </Link>
@@ -80,11 +85,11 @@ export const index = () => {
             <Tr>
               <Td isNumeric>2</Td>
               <Td>
-                <ImageFormat
+                <ImageStyled
                   alt='Image'
                   width={100}
                   height={75}
-                  imgSrc='/k.jfif'
+                  src='/k.jfif'
                 />
               </Td>
               <Td>
@@ -92,7 +97,7 @@ export const index = () => {
                 <Text>Associate Professor</Text>
                 <Text>kaiser.giri@islamicuniversity.edu.in</Text>
               </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href='https://scholar.google.com/citations?hl=en&authuser=1&user=UVAOMYMAAAAJ'>
                   <Text>Google Scholar </Text>
                 </Link>
@@ -100,7 +105,7 @@ export const index = () => {
                   <Text> Scopus</Text>
                 </Link>
               </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href='https://orcid.org/0000-0001-8792-5011'>
                   <Text>ORCID</Text>
                 </Link>
@@ -108,7 +113,7 @@ export const index = () => {
                   <Text>Web Of Science</Text>
                 </Link>
               </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href='https://www.researchgate.net/profile/Kaiser-Giri'>
                   Research Gate
                 </Link>
@@ -117,11 +122,11 @@ export const index = () => {
             <Tr>
               <Td isNumeric>3</Td>
               <Td>
-                <ImageFormat
+                <ImageStyled
                   alt='Image'
                   width={100}
                   height={75}
-                  imgSrc='/j.jfif'
+                  src='/j.jfif'
                 />
               </Td>
               <Td>
@@ -129,7 +134,7 @@ export const index = () => {
                 <Text>Associate Professor</Text>
                 <Text>javaid.iqbal@islamicuniversity.edu.in</Text>
               </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href='https://scholar.google.com/citations?user=iv_GX-IAAAAJ&hl=en'>
                   <Text>Google Scholar </Text>
                 </Link>
@@ -137,7 +142,7 @@ export const index = () => {
                   <Text> Scopus</Text>
                 </Link>
               </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href='https://orcid.org/0000-0003-0312-4888'>
                   <Text>ORCID</Text>
                 </Link>
@@ -145,7 +150,7 @@ export const index = () => {
                   <Text>Web Of Science</Text>
                 </Link>
               </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href='https://www.researchgate.net/profile/Javaid-Bhat-5'>
                   Research Gate
                 </Link>
@@ -154,11 +159,11 @@ export const index = () => {
             <Tr>
               <Td isNumeric>4</Td>
               <Td>
-                <ImageFormat
+                <ImageStyled
                   alt='Image'
                   width={100}
                   height={75}
-                  imgSrc='/m.jfif'
+                  src='/m.jfif'
                 />
               </Td>
               <Td>
@@ -166,7 +171,7 @@ export const index = () => {
                 <Text>Assistant Professor</Text>
                 <Text>muzafar.rasool@islamicuniversity.edu.in</Text>
               </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href='https://scholar.google.com/citations?user=WNvjdtoAAAAJ&hl=en'>
                   <Text>Google Scholar </Text>
                 </Link>
@@ -174,7 +179,7 @@ export const index = () => {
                   <Text> Scopus</Text>
                 </Link>
               </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href='https://orcid.org/0000-0003-0592-0781'>
                   <Text>ORCID</Text>
                 </Link>
@@ -182,7 +187,7 @@ export const index = () => {
                   <Text>Web Of Science</Text>
                 </Link>
               </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href='https://www.researchgate.net/profile/Muzafar-Bhat-4'>
                   Research Gate
                 </Link>
