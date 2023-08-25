@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { BiLogOut } from 'react-icons/bi';
 import Head from 'next/head';
+import Image from 'next/image';
 import {
   Text,
   Box,
@@ -14,7 +15,6 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import Logo from '@/components/Logo/Logo';
 const StyledIcon = styled.h1`
   font-size: 46px;
   font-weight: 700;
@@ -22,14 +22,18 @@ const StyledIcon = styled.h1`
   padding-left: 30%;
 `;
 const StyledFooter = styled.footer`
-  left: 0;
   bottom: 0;
-  position: relative;
+  position: fixed;
   width: 100%;
   background-color: #002147;
   color: #fff;
   text-align: center;
   line-height: 50px;
+`;
+
+const ImageStyled = styled(Image)`
+  padding: 10px;
+  border-radius: 16px;
 `;
 export const index = () => {
   return (
@@ -44,10 +48,10 @@ export const index = () => {
         height={'100px'}
       >
         <Link href='/office'>
-          <StyledIcon>{<MdArrowBackIosNew />}</StyledIcon>
+          <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
         </Link>
-        <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-          Srac Members
+        <Heading as={'h2'} color={'teal'} fontWeight={300}>
+          SRAC Members
         </Heading>
         <Button colorScheme='red' leftIcon={<BiLogOut />}>
           Logout
@@ -58,18 +62,16 @@ export const index = () => {
           display={'flex'}
           justifyContent={'space-around'}
           variant='simple'
-          border='none'
         >
           <Tbody>
             <Tr>
               <Td isNumeric>1</Td>
               <Td>
-                <Logo
-                  href='/'
+                <ImageStyled
                   alt='Not available yet'
                   width={100}
                   height={75}
-                  imgSrc='/'
+                  src='/r.jfif'
                 />
               </Td>
               <Td>
@@ -77,58 +79,21 @@ export const index = () => {
                 <Text></Text>
                 <Text></Text>
               </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href=''>Not available yet</Link>
               </Td>
-              <Td color='blue'>
-                <Link href=''>Not available yet</Link>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td isNumeric>2</Td>
-              <Td>
-                <Logo
-                  href='/'
-                  alt='Not available yet'
-                  width={100}
-                  height={75}
-                  imgSrc='/'
-                />
-              </Td>
-              <Td>
-                <Heading>Not available yet</Heading>
-                <Text></Text>
-                <Text></Text>
-              </Td>
-              <Td color='blue'>
-                <Link href=''>
-                  <Text>Not available yet </Text>
-                </Link>
-                {/* <Link href='https://www.scopus.com/authid/detail.uri?authorId=56031665200'> */}
-                {/* </Td><Text> Scopus</Text> */}
-                {/* </Link> */}
-              </Td>
-              <Td color='blue'>
-                <Link href=''>
-                  <Text>Not available yet</Text>
-                </Link>
-                {/* <Link href='https://www.webofscience.com/wos/author/rid/ABG-6767-2020'> */}
-                {/* <Text>Web Of Science</Text> */}
-                {/* </Link> */}
-              </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href=''>Not available yet</Link>
               </Td>
             </Tr>
             <Tr>
               <Td isNumeric>2</Td>
               <Td>
-                <Logo
-                  href='/'
+                <ImageStyled
                   alt='Not available yet'
                   width={100}
                   height={75}
-                  imgSrc='/'
+                  src='/r.jfif'
                 />
               </Td>
               <Td>
@@ -136,59 +101,17 @@ export const index = () => {
                 <Text></Text>
                 <Text></Text>
               </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href=''>
                   <Text>Not available yet </Text>
                 </Link>
-                {/* <Link href='https://www.scopus.com/authid/detail.uri?authorId=56031665200'> */}
-                {/* </Td><Text> Scopus</Text> */}
-                {/* </Link> */}
               </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href=''>
                   <Text>Not available yet</Text>
                 </Link>
-                {/* <Link href='https://www.webofscience.com/wos/author/rid/ABG-6767-2020'> */}
-                {/* <Text>Web Of Science</Text> */}
-                {/* </Link> */}
               </Td>
-              <Td color='blue'>
-                <Link href=''>Not available yet</Link>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td isNumeric>2</Td>
-              <Td>
-                <Logo
-                  href='/'
-                  alt='Not available yet'
-                  width={100}
-                  height={75}
-                  imgSrc='/'
-                />
-              </Td>
-              <Td>
-                <Heading>Not available yet</Heading>
-                <Text></Text>
-                <Text></Text>
-              </Td>
-              <Td color='blue'>
-                <Link href=''>
-                  <Text>Not available yet </Text>
-                </Link>
-                {/* <Link href='https://www.scopus.com/authid/detail.uri?authorId=56031665200'> */}
-                {/* </Td><Text> Scopus</Text> */}
-                {/* </Link> */}
-              </Td>
-              <Td color='blue'>
-                <Link href=''>
-                  <Text>Not available yet</Text>
-                </Link>
-                {/* <Link href='https://www.webofscience.com/wos/author/rid/ABG-6767-2020'> */}
-                {/* <Text>Web Of Science</Text> */}
-                {/* </Link> */}
-              </Td>
-              <Td color='blue'>
+              <Td color='teal'>
                 <Link href=''>Not available yet</Link>
               </Td>
             </Tr>
