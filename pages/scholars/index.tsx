@@ -70,7 +70,7 @@ export const Index = () => {
         padding={'5%'}
         textAlign={'center'}
       >
-        <LinkStyled href='/personaldetails'>
+        <LinkStyled href='/scholars/personaldetails'>
           <StyledIcon> {<BiSolidUserDetail />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Personal Details
@@ -101,7 +101,7 @@ export const Index = () => {
             Assigned SRAC Members
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/'>
+        <LinkStyled href='/scholars/synopsisdetails'>
           <StyledIcon> {<HiDocumentDuplicate />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Synopsis Details
