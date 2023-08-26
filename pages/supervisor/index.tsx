@@ -1,108 +1,109 @@
-import { Button } from '@chakra-ui/button';
-import { BsFillHouseDoorFill } from 'react-icons/bs';
+import Logo from '@/components/Logo/Logo';
+import { Box, Button, Heading, SimpleGrid } from '@chakra-ui/react';
+import Head from 'next/head';
+import { styled } from 'styled-components';
 import { BiLogOut } from 'react-icons/bi';
 import Link from 'next/link';
-import { Box, SimpleGrid } from '@chakra-ui/react';
+import { RxCube } from 'react-icons/rx';
+import { PiUserListFill } from 'react-icons/pi';
+import { GiArchiveResearch } from 'react-icons/gi';
+import { IoPeopleCircle } from 'react-icons/io5';
+import { MdAssignmentAdd, MdOutlineGroups } from 'react-icons/md';
+import { FaClipboardList } from 'react-icons/fa';
+import { AiOutlineFileDone } from 'react-icons/ai';
+
+const StyledIcon = styled.div`
+  font-size: 7em;
+  color: #0c2b50;
+`;
+
+const LinkStyled = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledFooter = styled.footer`
+  left: 0;
+  bottom: 0;
+  position: relative;
+  width: 100%;
+  background-color: #002147;
+  color: #fff;
+  text-align: center;
+  line-height: 50px;
+`;
 
 export const Index = () => {
   return (
     <>
-      <title>Supervisor</title>
+      <Head>
+        <title>Supervisor</title>
+      </Head>
       <Box
-        w='100%'
-        h='100vh'
-        bgGradient={[
-          'linear(to-tr, teal.300, yellow.400)',
-          'linear(to-t, blue.200, teal.500)',
-          'linear(to-b, orange.100, purple.300)',
-        ]}
+        display={'flex'}
+        justifyContent={'space-around'}
+        alignItems={'center'}
+        height={'100px'}
       >
-        <Box display={'flex'} justifyContent={'space-between'}>
-          <Link href={'/'}>
-            <Button
-              leftIcon={<BsFillHouseDoorFill />}
-              colorScheme='facebook'
-              variant='solid'
-              size='lg'
-              margin={10}
-            >
-              Home
-            </Button>
-          </Link>
-
-          <Button colorScheme='red' leftIcon={<BiLogOut />} margin={10}>
-            Logout
-          </Button>
-        </Box>
-        <SimpleGrid
-          height={'calc(100vh - 128px)'}
-          padding={'5%'}
-          columns={2}
-          spacing={'100px'}
+        <Logo
+          alt='IUST-logo'
+          href='/'
+          width={300}
+          height={75}
+          imgSrc='/iustlogo.png'
+        />
+        <Heading
+          as='h2'
+          size='xl'
+          fontFamily='Georgia'
+          fontWeight='bold'
+          color='teal'
         >
-          <Link href={'/assignedscholars'}>
-            <Box
-              w='100%'
-              h='100%'
-              bgGradient={['linear-gradient(90deg,#ba8b02,#181818  )']}
-              borderRadius={40}
-              fontSize={36}
-              padding='20%'
-              textAlign='center'
-              color='#fff'
-              fontWeight={700}
-            >
-              Assigned Scholars
-            </Box>
-          </Link>
-          <Link href={'/login'}>
-            <Box
-              w='100%'
-              h='100%'
-              bgGradient={['linear-gradient(#84fab0,#8fd3f4  )']}
-              borderRadius={40}
-              fontSize={36}
-              padding='15%'
-              textAlign='center'
-              color='#fff'
-              fontWeight={700}
-            >
-              Report Generation
-            </Box>
-          </Link>
-
-          <Link href={'/supervisor/assignsracmembers'}>
-            <Box
-              w='100%'
-              h='100%'
-              bgGradient={['linear-gradient(to right, #243949 , #517fa4 )']}
-              borderRadius={40}
-              fontSize={42}
-              padding='18%'
-              textAlign='center'
-              color='#fff'
-              fontWeight={700}
-            >
-              SRAC Members
-            </Box>
-          </Link>
-          <Link href={'/supervisor/researchprogress'}>
-            <Box
-              w='100%'
-              h='100%'
-              bgGradient={['linear-gradient(to right, #434343 , black   )']}
-              borderRadius={38}
-              fontSize={38}
-              padding='15%'
-              textAlign='center'
-              color='#fff'
-              fontWeight={700}
-            >
-              Research Progress
-            </Box>
-          </Link>
-        </SimpleGrid>
+          Name of Supervisor
+        </Heading>
+        <Button colorScheme='red' leftIcon={<BiLogOut />}>
+          Logout
+        </Button>
       </Box>
+      <SimpleGrid
+        columns={2}
+        rowGap={'50px'}
+        columnGap={'200px'}
+        height={'calc(100vh - 150px)'}
+        padding={'5%'}
+        marginBottom={'20%'}
+      >
+        <LinkStyled href='/' style={{ gridColumn: 'span 2' }}>
+          <StyledIcon> {<FaClipboardList />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Assigned Scholars
+          </Heading>
+        </LinkStyled>
+        <LinkStyled href='/'>
+          <StyledIcon> {<MdAssignmentAdd />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Report Generation
+          </Heading>
+        </LinkStyled>
+        <LinkStyled href='/'>
+          <StyledIcon> {<GiArchiveResearch />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Progress Module
+          </Heading>
+        </LinkStyled>
+
+        <LinkStyled href='/' style={{ gridColumn: 'span 2' }}>
+          <StyledIcon> {<AiOutlineFileDone />} </StyledIcon>
+          <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
+            Approve SRAC Members
+          </Heading>
+        </LinkStyled>
+      </SimpleGrid>
+      <StyledFooter>
+        © 2023 - Islamic University of Science and Technology.
+      </StyledFooter>
     </>
   );
 };
