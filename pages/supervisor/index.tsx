@@ -87,14 +87,17 @@ export const Index = () => {
             Report Generation
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/'>
+        <LinkStyled href='/supervisor/researchprogress'>
           <StyledIcon> {<GiArchiveResearch />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Progress Module
           </Heading>
         </LinkStyled>
 
-        <LinkStyled href='/' style={{ gridColumn: 'span 2' }}>
+        <LinkStyled
+          href='/supervisor/approvesracmembers'
+          style={{ gridColumn: 'span 2' }}
+        >
           <StyledIcon> {<AiOutlineFileDone />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Approve SRAC Members
