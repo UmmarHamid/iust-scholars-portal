@@ -90,7 +90,7 @@ export const Index = () => {
           </Heading>
         </LinkStyled>
 
-        <LinkStyled href='/'>
+        <LinkStyled href='/drc/reportgeneration'>
           <StyledIcon> {<MdAssignmentAdd />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Report Generation
