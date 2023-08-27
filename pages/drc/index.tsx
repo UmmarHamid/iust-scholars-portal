@@ -83,7 +83,7 @@ export const Index = () => {
             Approve SRAC Members
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/'>
+        <LinkStyled href='/drc/approvesynopsis'>
           <StyledIcon> {<RxCube />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Approve Synopsis
