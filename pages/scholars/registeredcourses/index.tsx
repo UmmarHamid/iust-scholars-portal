@@ -29,11 +29,11 @@ const StyledFooter = styled.footer`
   line-height: 50px;
 `;
 
-export const index = () => {
+export const Index = () => {
   return (
     <>
       <Head>
-        <title>Srac Members</title>
+        <title>Registered Courses</title>
       </Head>
       <Box
         display={'flex'}
@@ -41,7 +41,7 @@ export const index = () => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/office'>
+        <Link href='/scholars'>
           <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
@@ -65,7 +65,7 @@ export const index = () => {
                   as='h2'
                   fontFamily='Georgia'
                   fontWeight={'300'}
-                  color='#4267B2'
+                  color='teal'
                   mr={'550px'}
                 >
                   Web Development
@@ -82,7 +82,7 @@ export const index = () => {
                   as='h2'
                   fontFamily='Georgia'
                   fontWeight={'300'}
-                  color='#4267B2'
+                  color='teal'
                   mr={'550px'}
                 >
                   CCNA
@@ -101,4 +101,4 @@ export const index = () => {
     </>
   );
 };
-export default index;
+export default Index;

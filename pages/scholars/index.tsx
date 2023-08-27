@@ -76,7 +76,7 @@ export const Index = () => {
             Personal Details
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/'>
+        <LinkStyled href='/scholars/registeredcourses'>
           <StyledIcon> {<BiRegistered />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Registered Courses
