@@ -25,9 +25,8 @@ const InputContainerStyled = styled.div`
   width: 50%;
 `;
 const StyledFooter = styled.footer`
-  left: 0;
   bottom: 0;
-  position: relative;
+  position: fixed;
   width: 100%;
   background-color: #002147;
   color: #fff;
@@ -93,9 +92,7 @@ export const Index = () => {
             colorScheme='green'
             variant='solid'
             mt={10}
-            padding={'3%'}
-            paddingLeft={'25%'}
-            paddingRight={'25%'}
+            width={'50%'}
             fontSize={'20px'}
           >
             Login
