@@ -1,19 +1,10 @@
 import styled from 'styled-components';
 import { MdArrowBackIosNew } from 'react-icons/md';
-import {
-  Box,
-  Button,
-  Container,
-  Heading,
-  Input,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, Container, Heading, Input, Text } from '@chakra-ui/react';
 import { BiLogOut } from 'react-icons/bi';
 import { AiOutlineFolderView } from 'react-icons/ai';
 import Head from 'next/head';
 import Link from 'next/link';
-import Logo from '@/components/Logo/Logo';
 const StyledIcon = styled.h1`
   font-size: 42px;
   font-weight: 700;
@@ -28,7 +19,7 @@ const StyledFooter = styled.footer`
   text-align: center;
   line-height: 50px;
 `;
-export const index = () => {
+export const Index = () => {
   return (
     <>
       <Head>
@@ -40,7 +31,7 @@ export const index = () => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/drc'>
+        <Link href='/supervisor'>
           <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
@@ -160,4 +151,4 @@ export const index = () => {
     </>
   );
 };
-export default index;
+export default Index;

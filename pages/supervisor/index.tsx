@@ -86,7 +86,7 @@ export const Index = () => {
               SRAC Members
             </Box>
           </Link>
-          <Link href={'/login'}>
+          <Link href={'/supervisor/researchprogress'}>
             <Box
               w='100%'
               h='100%'
