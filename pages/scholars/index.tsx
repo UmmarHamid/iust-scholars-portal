@@ -82,7 +82,7 @@ export const Index = () => {
             Registered Courses
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/'>
+        <LinkStyled href='/scholars/submissiondetails'>
           <StyledIcon> {<MdOutlineSaveAs />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Submission Details
