@@ -77,7 +77,7 @@ export const Index = () => {
             Details of Scholars
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/'>
+        <LinkStyled href='/drc/approvesrac'>
           <StyledIcon> {<MdOutlineGroups />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Approve SRAC Members
