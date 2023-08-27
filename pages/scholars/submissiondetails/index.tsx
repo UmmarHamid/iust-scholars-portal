@@ -65,15 +65,15 @@ export const Index = () => {
           </Text>
 
           <Text fontWeight={300} fontSize={'30px'}>
-            Labelthesis:
+            Thesis:
           </Text>
-          <Textarea fontWeight={300} fontSize={'20px'}>
+          <Textarea rows={5} fontWeight={300} fontSize={'20px'}>
             {` ${user.labelthesis}`}
           </Textarea>
           <Text fontWeight={300} fontSize={'30px'}>
             Summary of Progress Report:
           </Text>
-          <Textarea fontWeight={300} fontSize={'20px'}>
+          <Textarea rows={5} fontWeight={300} fontSize={'20px'}>
             {` ${user.summary}`}
           </Textarea>
           <Button
