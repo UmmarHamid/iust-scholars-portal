@@ -89,7 +89,7 @@ export const Index = () => {
           </Heading>
         </LinkStyled>
 
-        <LinkStyled href='/'>
+        <LinkStyled href='/scholars/assignedsupervisor'>
           <StyledIcon> {<MdAssignmentInd />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Assigned Supervisors
