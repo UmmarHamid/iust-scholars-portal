@@ -26,7 +26,7 @@ const StyledFooter = styled.footer`
   text-align: center;
   line-height: 50px;
 `;
-export const index = () => {
+export const Index = () => {
   return (
     <>
       <Head>
@@ -57,15 +57,13 @@ export const index = () => {
           <Text fontSize={'2xl'} color={'#07443E'}>
             1. Zubair DOCS IUST0121014521
           </Text>
-          <Link href='/'>
-            <Stack direction={['row']} spacing={'2%'}>
-              <Input padding={'0 10px'} placeholder='SRAC Member 1' size='xl' />
-              <Input padding={'0 10px'} placeholder='SRAC Member 2' size='xl' />
-              <Button padding={'10px 30px'} colorScheme='blue'>
-                Approve
-              </Button>
-            </Stack>
-          </Link>
+          <Stack direction={['row']} spacing={'2%'}>
+            <Input padding={'0 10px'} placeholder='SRAC Member 1' size='xl' />
+            <Input padding={'0 10px'} placeholder='SRAC Member 2' size='xl' />
+            <Button padding={'10px 30px'} colorScheme='blue'>
+              Approve
+            </Button>
+          </Stack>
         </Box>
         <Box
           marginTop='3%'
@@ -76,15 +74,13 @@ export const index = () => {
           <Text fontSize={'2xl'} color={'#07443E'}>
             2. Samin DOCS IUST0121014533
           </Text>
-          <Link href='/'>
-            <Stack direction={['row']} spacing={'2%'}>
-              <Input padding={'0 10px'} placeholder='SRAC Member 1' size='xl' />
-              <Input padding={'0 10px'} placeholder='SRAC Member 2' size='xl' />
-              <Button padding={'10px 30px'} colorScheme='blue'>
-                Approve
-              </Button>
-            </Stack>
-          </Link>
+          <Stack direction={['row']} spacing={'2%'}>
+            <Input padding={'0 10px'} placeholder='SRAC Member 1' size='xl' />
+            <Input padding={'0 10px'} placeholder='SRAC Member 2' size='xl' />
+            <Button padding={'10px 30px'} colorScheme='blue'>
+              Approve
+            </Button>
+          </Stack>
         </Box>
       </Container>
       <StyledFooter>
@@ -93,4 +89,4 @@ export const index = () => {
     </>
   );
 };
-export default index;
+export default Index;
