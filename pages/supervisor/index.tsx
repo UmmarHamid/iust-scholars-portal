@@ -71,7 +71,7 @@ export const Index = () => {
             </Box>
           </Link>
 
-          <Link href={'/login'}>
+          <Link href={'/supervisor/assignsracmembers'}>
             <Box
               w='100%'
               h='100%'
