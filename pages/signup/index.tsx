@@ -1,17 +1,10 @@
 import Head from 'next/head';
 import { Button } from '@chakra-ui/button';
-import {
-  Box,
-  InputGroup,
-  InputRightElement,
-  Link,
-  border,
-} from '@chakra-ui/react';
+import { Box, InputGroup, InputRightElement, Link } from '@chakra-ui/react';
 import { styled } from 'styled-components';
 import { Heading } from '@chakra-ui/react';
 import { Input } from '@chakra-ui/react';
 import { useState } from 'react';
-import { FormControl, FormLabel } from '@chakra-ui/react';
 import { MdArrowBackIosNew } from 'react-icons/md';
 
 const MainStyled = styled.main`
@@ -30,9 +23,8 @@ const InputContainerStyled = styled.div`
   padding: 20px;
 `;
 const StyledFooter = styled.footer`
-  left: 0;
   bottom: 0;
-  position: relative;
+  position: fixed;
   width: 100%;
   background-color: #002147;
   color: #fff;
@@ -110,9 +102,7 @@ export const Index = () => {
             colorScheme='green'
             variant='solid'
             mt={10}
-            padding={'3%'}
-            paddingLeft={'25%'}
-            paddingRight={'25%'}
+            width={'50%'}
             fontSize={'20px'}
           >
             Sign Up
