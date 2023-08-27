@@ -13,7 +13,6 @@ import { BiLogOut } from 'react-icons/bi';
 import { AiOutlineFolderView } from 'react-icons/ai';
 import Head from 'next/head';
 import Link from 'next/link';
-import Logo from '@/components/Logo/Logo';
 const StyledIcon = styled.h1`
   font-size: 42px;
   font-weight: 700;

@@ -96,7 +96,7 @@ export const Index = () => {
             Report Generation
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/'>
+        <LinkStyled href='/drc/approvesubmission'>
           <StyledIcon> {<IoPeopleCircle />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Approve Submission
