@@ -34,7 +34,7 @@ const ImageStyled = styled(Image)`
   border-radius: 16px;
 `;
 
-export const index = () => {
+export const Index = () => {
   return (
     <>
       <Head>
@@ -46,7 +46,7 @@ export const index = () => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/office'>
+        <Link href='/scholars'>
           <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
@@ -128,4 +128,4 @@ export const index = () => {
     </>
   );
 };
-export default index;
+export default Index;
