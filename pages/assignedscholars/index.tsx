@@ -2,6 +2,7 @@ import { Button } from '@chakra-ui/button';
 import { BiArrowBack, BiLogOut } from 'react-icons/bi';
 import Link from 'next/link';
 import { Box, Heading, Text } from '@chakra-ui/react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 export const Index = () => {
   const scholarsList = [
@@ -36,6 +37,8 @@ export const Index = () => {
       researchTitle: 'Astronomy',
     },
   ];
+
+  const supabaseClient = useSupabaseClient();
   return (
     <>
       <title>Assigned Scholars</title>
@@ -63,7 +66,11 @@ export const Index = () => {
         >
           Assigned Scholars
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />}>
+        <Button
+          colorScheme='red'
+          leftIcon={<BiLogOut />}
+          onClick={() => supabaseClient.auth.signOut()}
+        >
           Logout
         </Button>
       </Box>
