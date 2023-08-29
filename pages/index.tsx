@@ -55,11 +55,15 @@ const VCSectionStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
+  margin: 5%;
   padding: 2%;
   height: 100%;
   width: 62%;
   border-radius: 20px;
+`;
+const StyledMessage = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 const StyledHeading = styled.h1`
   font-size: 28px;
@@ -144,7 +148,7 @@ export const Homepage = () => {
         <StyledHeader>
           <Logo
             alt='IUST-logo'
-            href='google.com'
+            href='/'
             width={300}
             height={75}
             imgSrc='/iustlogo.png'
@@ -204,49 +208,72 @@ export const Homepage = () => {
             </Link>
           </StyledDeptFirst>
           <StyledDeptSecond>
-            <Link href='google.com'>
+            <Link href='/researchachievementsbs'>
               Research Achievements by School of Business Studies
             </Link>
           </StyledDeptSecond>
           <StyledDeptThird>
-            <Link href='google.com'>
+            <Link href='/achievementsh&s'>
               Research Achievements by School of Humanities and Social Sciences
             </Link>
           </StyledDeptThird>
           <StyledDeptFourth>
-            <Link href='google.com'>
-              Research Achievements by School of Humanities and Social Sciences
+            <Link href='/achievementsos'>
+              Research Achievements by School of Sciences
             </Link>
           </StyledDeptFourth>
         </DepartmentsContainerStyled>
 
         {/* VC Section */}
-        <VCSectionStyled>
-          <Image alt='Vc' width={134} height={144} src={'/vc.jpg'} />
+        <StyledMessage>
+          <VCSectionStyled>
+            <Image alt='Vc' width={134} height={144} src={'/vc.jpg'} />
 
-          <StyledHeading>Vc Message</StyledHeading>
-          <p>
-            I am delighted to welcome you to Islamic University of Science and
-            Technology (IUST). IUST is committed to shoulder the responsibility
-            of quality education, pursue research in important areas, and engage
-            in activities that advance the good of society in order to find
-            solutions to societal issues. We are guided by the 2021-26 strategic
-            plan to make IUST a leading university in the country. Our mission
-            is to foster a capable human resource that can make the University a
-            place of intellectual curiosity and inquisitiveness and bring
-            together bright minds to address the issues of today while taking
-            their rightful place in shaping the future. We aim to foster a high
-            degree of expertise, creativity and diversity in our students, so
-            that they will become the next generation of creative researchers,
-            leaders, nation-builders, artists, policy- and decision-makers. Ours
-            is a university centered on our students’ success, providing them
-            with right experiences, putting them on right career paths and
-            fostering their skills and mind-set to make them ready for
-            successful careers and professional advancement. Once the students
-            graduate from here, they would have the career direction and the
-            confidence required for success in their chosen fields.
-          </p>
-        </VCSectionStyled>
+            <StyledHeading>Vc Message</StyledHeading>
+            <p>
+              I am delighted to welcome you to Islamic University of Science and
+              Technology (IUST). IUST is committed to shoulder the
+              responsibility of quality education, pursue research in important
+              areas, and engage in activities that advance the good of society
+              in order to find solutions to societal issues. We are guided by
+              the 2021-26 strategic plan to make IUST a leading university in
+              the country. Our mission is to foster a capable human resource
+              that can make the University a place of intellectual curiosity and
+              inquisitiveness and bring together bright minds to address the
+              issues of today while taking their rightful place in shaping the
+              future. We aim to foster a high degree of expertise, creativity
+              and diversity in our students, so that they will become the next
+              generation of creative researchers, leaders, nation-builders,
+              artists, policy- and decision-makers. Ours is a university
+              centered on our students’ success, providing them with right
+              experiences, putting them on right career paths and fostering
+              their skills and mind-set to make them ready for successful
+              careers and professional advancement.
+            </p>
+          </VCSectionStyled>
+          <VCSectionStyled>
+            <Image alt='Vc' width={134} height={144} src={'/dean.jfif'} />
+
+            <StyledHeading>Dean Research</StyledHeading>
+            <p>
+              @IUST, our dogma is that every faculty member is a meaningful
+              researcher and a potential innovator of products, processes. His
+              academic pursuits and deliverance would get richer and stronger
+              through research and innovation while engaging with scholars and
+              colleagues. For this purpose, there must be an enabling research
+              ecosystem driven by encouragement and recognition. The overarching
+              role of Team Reaserch@IUST would be to integrate research,
+              innovation, technology development, industry connect and
+              facilitate community outreach. Our research policy is aligned
+              towards catalyzing new research thinking as mandated in NEP 2020.
+              It will cut across multidiscipline and interdisciplinary domains
+              of knowledge, adopting best practices and forging strong tie-ups
+              and collaborations. The journey of IUST from an academic
+              university to a research-intensive university has begun. We invite
+              you to be part of this exciting journey!
+            </p>
+          </VCSectionStyled>
+        </StyledMessage>
 
         {/* Research Section */}
         {/* TODO: Make this section dynamic */}
