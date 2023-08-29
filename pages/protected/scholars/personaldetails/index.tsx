@@ -8,20 +8,6 @@ import { GetServerSideProps } from 'next';
 
 export const Index = ({ data, error }: any) => {
   const user = data[0];
-  console.log(user);
-  // const user = {
-  //   name: 'samin',
-  //   father: 'Samin"s father',
-  //   mother: 'Samin"s mother',
-  //   address: 'Khrew',
-  //   dob: '10-09-2010',
-  //   phone: '9797979797',
-  //   email: 'samin@something.com',
-  //   department: 'Astronomy',
-  //   registrationNumber: '123123',
-  //   joiningDate: '20-07-2023',
-  //   qualifiedExam: 'MBBS',
-  // };
   return (
     <>
       <title>Personal Details</title>
@@ -79,9 +65,6 @@ export const Index = ({ data, error }: any) => {
           {`Phone: ${user.phone}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Email: ${user.email}`}
-        </Text>
-        <Text fontWeight={300} fontSize={'30px'}>
           {`Department: ${user.department}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
@@ -100,7 +83,6 @@ export const Index = ({ data, error }: any) => {
 export default Index;
 export const getServerSideProps: GetServerSideProps = async () => {
   const session = await supabase.auth.getUser;
-  console.log(session);
   const { data, error } = await supabase.from('scholars_profiles').select('*');
   return { props: { data, error } };
 };
