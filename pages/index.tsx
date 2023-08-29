@@ -199,7 +199,7 @@ export const Homepage = () => {
         {/* TODO: Make this section dynamic */}
         <DepartmentsContainerStyled>
           <StyledDeptFirst>
-            <Link href='google.com'>
+            <Link href='/researchachievementsoet'>
               Research Achievements by School of Engineering and Technology
             </Link>
           </StyledDeptFirst>

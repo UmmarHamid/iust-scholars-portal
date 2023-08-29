@@ -1,17 +1,14 @@
 import styled from 'styled-components';
-import { MdArrowBackIosNew } from 'react-icons/md';
-import { BiArrowBack, BiLogOut } from 'react-icons/bi';
+import { BiArrowBack } from 'react-icons/bi';
 import Head from 'next/head';
 import {
   Box,
   Button,
-  Container,
   Heading,
   Table,
   TableContainer,
   Tbody,
   Td,
-  Text,
   Tr,
 } from '@chakra-ui/react';
 import Link from 'next/link';
@@ -155,7 +152,7 @@ export const Index = () => {
                 <Link href='/'>Research Projects</Link>
               </Td>
               <Td color={'blue'}>
-                <Link href='/https://scholar.google.com/citations?hl=en&user=mDiLTIMAAAAJ'>
+                <Link href='https://scholar.google.com/citations?hl=en&user=mDiLTIMAAAAJ'>
                   Google Scholar
                 </Link>
               </Td>
