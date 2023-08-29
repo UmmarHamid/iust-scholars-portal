@@ -7,6 +7,8 @@ import { BsFillPencilFill, BsFillPersonFill } from 'react-icons/bs';
 import Footer from '@/components/Footer/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
+import { useRouter } from 'next/router';
 
 const StyledHeader = styled.header`
   display: flex;
@@ -136,6 +138,15 @@ const StyledSpotlightText2 = styled.h1`
 `;
 
 export const Homepage = () => {
+  const supabaseClient = useSupabaseClient();
+  const user = useUser();
+
+  const router = useRouter();
+
+  const handleSignout = () => {
+    supabaseClient.auth.signOut();
+    router.push('/login');
+  };
   return (
     <>
       <Head>
@@ -155,33 +166,33 @@ export const Homepage = () => {
           />
 
           <Stack direction='row' spacing={10} pt={4}>
-            <Link href={'/login'}>
-              <Button
-                leftIcon={<BsFillPersonFill />}
-                colorScheme='red'
-                variant='solid'
-              >
-                Employee Login
+            {!user && (
+              <Link href={'/login'}>
+                <Button
+                  leftIcon={<BsFillPersonFill />}
+                  colorScheme='blue'
+                  variant='solid'
+                >
+                  Student Login
+                </Button>
+              </Link>
+            )}
+            {!user && (
+              <Link href={'/signup'}>
+                <Button
+                  rightIcon={<BsFillPencilFill />}
+                  colorScheme='whatsapp'
+                  variant='outline'
+                >
+                  Sign Up
+                </Button>
+              </Link>
+            )}
+            {user && (
+              <Button onClick={handleSignout} colorScheme='red' variant='solid'>
+                Sign Out
               </Button>
-            </Link>
-            <Link href={'/login'}>
-              <Button
-                leftIcon={<BsFillPersonFill />}
-                colorScheme='blue'
-                variant='solid'
-              >
-                Student Login
-              </Button>
-            </Link>
-            <Link href={'/signup'}>
-              <Button
-                rightIcon={<BsFillPencilFill />}
-                colorScheme='whatsapp'
-                variant='outline'
-              >
-                Sign Up
-              </Button>
-            </Link>
+            )}
           </Stack>
         </StyledHeader>
         {/* Photo Gallery Section */}
@@ -203,22 +214,22 @@ export const Homepage = () => {
         {/* TODO: Make this section dynamic */}
         <DepartmentsContainerStyled>
           <StyledDeptFirst>
-            <Link href='/researchachievementsoet'>
+            <Link href='/protected/researchachievementsoet'>
               Research Achievements by School of Engineering and Technology
             </Link>
           </StyledDeptFirst>
           <StyledDeptSecond>
-            <Link href='/researchachievementsbs'>
+            <Link href='/protected/researchachievementsbs'>
               Research Achievements by School of Business Studies
             </Link>
           </StyledDeptSecond>
           <StyledDeptThird>
-            <Link href='/achievementsh&s'>
+            <Link href='/protected/achievementsh&s'>
               Research Achievements by School of Humanities and Social Sciences
             </Link>
           </StyledDeptThird>
           <StyledDeptFourth>
-            <Link href='/achievementsos'>
+            <Link href='/protected/achievementsos'>
               Research Achievements by School of Sciences
             </Link>
           </StyledDeptFourth>

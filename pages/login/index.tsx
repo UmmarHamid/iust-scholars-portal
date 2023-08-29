@@ -49,7 +49,7 @@ export const Index = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (user) router.push('/scholars');
+    if (user) router.push('/');
   }, [user, router]);
 
   const [showPassword, setShowPassword] = useState(false);
@@ -87,61 +87,57 @@ export const Index = () => {
             </Heading>
           </Box>
           <main>
-            {!user ? (
-              <Auth
-                redirectTo='http://localhost:3000/'
-                localization={{
-                  variables: {
-                    sign_in: {
-                      email_label: '',
-                      password_label: '',
-                      email_input_placeholder: 'Username',
-                      password_input_placeholder: 'Password',
+            <Auth
+              redirectTo='http://localhost:3000/'
+              localization={{
+                variables: {
+                  sign_in: {
+                    email_label: '',
+                    password_label: '',
+                    email_input_placeholder: 'Username',
+                    password_input_placeholder: 'Password',
+                  },
+                },
+              }}
+              appearance={{
+                theme: ThemeSupa,
+                variables: {
+                  default: {
+                    colors: {
+                      brand: 'rgb(56, 161, 105)',
+                      brandAccent: 'rgb(28, 134, 78)',
                     },
                   },
-                }}
-                appearance={{
-                  theme: ThemeSupa,
-                  variables: {
-                    default: {
-                      colors: {
-                        brand: 'rgb(56, 161, 105)',
-                        brandAccent: 'rgb(28, 134, 78)',
-                      },
-                    },
+                },
+                style: {
+                  button: {
+                    fontSize: '20px',
+                    fontWeight: '600',
+                    flexBasis: '50%',
+                    width: '40%',
+                    margin: '0 auto',
                   },
-                  style: {
-                    button: {
-                      fontSize: '20px',
-                      fontWeight: '600',
-                      flexBasis: '50%',
-                      width: '40%',
-                      margin: '0 auto',
-                    },
-                    anchor: {
-                      color: 'black',
-                      fontSize: '20px',
-                      textDecoration: 'none',
-                    },
-                    container: {
-                      margin: '20px 20%',
-                    },
-                    label: {},
-                    input: { width: '100%' },
-                    loader: {},
-                    message: {
-                      fontWeight: 'bold',
-                    },
-                    divider: {},
+                  anchor: {
+                    color: 'black',
+                    fontSize: '20px',
+                    textDecoration: 'none',
                   },
-                }}
-                supabaseClient={supabaseClient}
-                providers={[]}
-                socialLayout='horizontal'
-              />
-            ) : (
-              <></>
-            )}
+                  container: {
+                    margin: '20px 20%',
+                  },
+                  label: {},
+                  input: { width: '100%' },
+                  loader: {},
+                  message: {
+                    fontWeight: 'bold',
+                  },
+                  divider: {},
+                },
+              }}
+              supabaseClient={supabaseClient}
+              providers={[]}
+              socialLayout='horizontal'
+            />
           </main>
           <StyledFooter>
             © 2023 - Islamic University of Science and Technology.
