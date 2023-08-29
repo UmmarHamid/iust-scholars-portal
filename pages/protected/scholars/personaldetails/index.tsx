@@ -47,7 +47,7 @@ export const Index = ({ data, error }: any) => {
         margin={'20px'}
       >
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Name: ${user.name}`}
+          {`Name: ${user.username}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
           {`Father's Name: ${user.father}`}
