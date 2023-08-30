@@ -14,10 +14,8 @@ export async function middleware(req: NextRequest) {
 
   const redirectUrl = req.nextUrl.clone();
 
-  const userDetails: any = await supabase.from('scholars_profiles').select('*');
-
   // Check auth condition
-  if (session?.user.email?.endsWith('.com')) {
+  if (session?.user.email) {
     // Authentication successful, forward request to protected route.
     return res;
   }
