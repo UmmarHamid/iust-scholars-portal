@@ -13,6 +13,8 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import Link from 'next/link';
+import { GetServerSideProps } from 'next';
+import supabase from '@/utils/supabase';
 const StyledIcon = styled.h1`
   font-size: 46px;
   font-weight: 700;
@@ -28,8 +30,11 @@ const StyledFooter = styled.footer`
   text-align: center;
   line-height: 50px;
 `;
+interface courseType {
+  courses: Array<{ id: string; name: string; credits: number }>;
+}
 
-export const Index = () => {
+export const Index = ({ courses }: courseType) => {
   return (
     <>
       <Head>
@@ -58,40 +63,25 @@ export const Index = () => {
           variant='simple'
         >
           <Tbody>
-            <Tr>
-              <Td isNumeric>1</Td>
-              <Td>
-                <Heading
-                  as='h2'
-                  fontFamily='Georgia'
-                  fontWeight={'300'}
-                  color='teal'
-                  mr={'550px'}
-                >
-                  Web Development
-                </Heading>
-              </Td>
-              <Td color='teal' fontWeight={300} fontSize={'30px'}>
-                <Link href=''>Credits</Link>
-              </Td>
-            </Tr>
-            <Tr>
-              <Td isNumeric>2</Td>
-              <Td>
-                <Heading
-                  as='h2'
-                  fontFamily='Georgia'
-                  fontWeight={'300'}
-                  color='teal'
-                  mr={'550px'}
-                >
-                  CCNA
-                </Heading>
-              </Td>
-              <Td color='teal' fontWeight={300} fontSize={'30px'}>
-                <Link href=''>Credits</Link>
-              </Td>
-            </Tr>
+            {courses.map((course, index) => (
+              <Tr key={course.id}>
+                <Td isNumeric>{index + 1}</Td>
+                <Td>
+                  <Heading
+                    as='h2'
+                    fontFamily='Georgia'
+                    fontWeight={'300'}
+                    color='teal'
+                    mr={'550px'}
+                  >
+                    {course.name}
+                  </Heading>
+                </Td>
+                <Td color='teal' fontWeight={300} fontSize={'30px'}>
+                  <Link href=''>{`Credits: ${course.credits}`}</Link>
+                </Td>
+              </Tr>
+            ))}
           </Tbody>
         </Table>
       </TableContainer>
@@ -102,3 +92,11 @@ export const Index = () => {
   );
 };
 export default Index;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  let { data, error } = await supabase
+    .from('scholars_profiles')
+    .select(`courses(*)`);
+  const courses = data ? Array(data[0].courses) : [];
+  return { props: { courses, error } };
+};
