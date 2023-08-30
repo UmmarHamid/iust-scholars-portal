@@ -49,7 +49,7 @@ export const Index = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (user) router.push('/');
+    if (user) router.push('/protected/scholars');
   }, [user, router]);
 
   const [showPassword, setShowPassword] = useState(false);

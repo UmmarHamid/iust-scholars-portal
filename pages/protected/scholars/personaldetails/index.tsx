@@ -5,9 +5,11 @@ import Link from 'next/link';
 import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react';
 import supabase from '../../../../utils/supabase';
 import { GetServerSideProps } from 'next';
+import { useUser } from '@supabase/auth-helpers-react';
 
 export const Index = ({ data, error }: any) => {
-  const user = data[0];
+  const loggedinUser = useUser();
+  const userDetails = data[0];
   return (
     <>
       <title>Personal Details</title>
@@ -47,34 +49,37 @@ export const Index = ({ data, error }: any) => {
         margin={'20px'}
       >
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Name: ${user.username}`}
+          {`Name: ${userDetails.username}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Father's Name: ${user.father}`}
+          {`Father's Name: ${userDetails.father}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {` Mothers Name: ${user.mother}`}
+          {` Mothers Name: ${userDetails.mother}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Address: ${user.address}`}
+          {`Address: ${userDetails.address}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`D.O.B: ${user.dob}`}
+          {`Email: ${loggedinUser?.email}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Phone: ${user.phone}`}
+          {`D.O.B: ${userDetails.dob}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Department: ${user.department}`}
+          {`Phone: ${userDetails.phone}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Registration No: ${user.reg_no}`}
+          {`Department: ${userDetails.department}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Joining Date: ${user.join_date}`}
+          {`Registration No: ${userDetails.reg_no}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Qualified Exam: ${user.qualified_exam}`}
+          {`Joining Date: ${userDetails.join_date}`}
+        </Text>
+        <Text fontWeight={300} fontSize={'30px'}>
+          {`Qualified Exam: ${userDetails.qualified_exam}`}
         </Text>
       </Box>
     </>
@@ -82,7 +87,6 @@ export const Index = ({ data, error }: any) => {
 };
 export default Index;
 export const getServerSideProps: GetServerSideProps = async () => {
-  const session = await supabase.auth.getUser;
   const { data, error } = await supabase.from('scholars_profiles').select('*');
   return { props: { data, error } };
 };

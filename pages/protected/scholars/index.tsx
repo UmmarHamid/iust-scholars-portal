@@ -70,38 +70,38 @@ export const Index = () => {
         padding={'5%'}
         textAlign={'center'}
       >
-        <LinkStyled href='/scholars/personaldetails'>
+        <LinkStyled href='/protected/scholars/personaldetails'>
           <StyledIcon> {<BiSolidUserDetail />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Personal Details
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/scholars/registeredcourses'>
+        <LinkStyled href='/protected/scholars/registeredcourses'>
           <StyledIcon> {<BiRegistered />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Registered Courses
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/scholars/submissiondetails'>
+        <LinkStyled href='/protected/scholars/submissiondetails'>
           <StyledIcon> {<MdOutlineSaveAs />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Submission Details
           </Heading>
         </LinkStyled>
 
-        <LinkStyled href='/scholars/assignedsupervisor'>
+        <LinkStyled href='/protected/scholars/assignedsupervisor'>
           <StyledIcon> {<MdAssignmentInd />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Assigned Supervisors
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/scholars/assignedsracmembers'>
+        <LinkStyled href='/protected/scholars/assignedsracmembers'>
           <StyledIcon> {<AiOutlineTeam />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Assigned SRAC Members
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/scholars/synopsisdetails'>
+        <LinkStyled href='/protected/scholars/synopsisdetails'>
           <StyledIcon> {<HiDocumentDuplicate />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Synopsis Details
