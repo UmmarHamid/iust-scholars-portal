@@ -12,7 +12,6 @@ const StyledIcon = styled.h1`
   color: #0c2b50;
 `;
 
-import { Database } from '@/types/supabase';
 const StyledFooter = styled.footer`
   bottom: 0;
   position: fixed;
@@ -50,7 +49,7 @@ export const index = ({ scholars }: any) => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/protected/office'>
+        <Link href='/protected/drc'>
           <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
