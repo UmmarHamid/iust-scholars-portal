@@ -71,7 +71,10 @@ export const Index = () => {
         height={'calc(100vh - 150px)'}
         padding={'5%'}
       >
-        <LinkStyled href='/' style={{ gridColumn: 'span 2' }}>
+        <LinkStyled
+          href='/protected/drc/scholardetails'
+          style={{ gridColumn: 'span 2' }}
+        >
           <StyledIcon> {<PiUserListFill />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Details of Scholars
