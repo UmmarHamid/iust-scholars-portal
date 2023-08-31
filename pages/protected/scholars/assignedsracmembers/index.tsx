@@ -70,7 +70,7 @@ export const Index = () => {
                   alt='Not available yet'
                   width={100}
                   height={75}
-                  src='/r.jfif'
+                  src='/.jfif'
                 />
               </Td>
               <Td>
@@ -98,7 +98,7 @@ export const Index = () => {
                   alt='Not available yet'
                   width={100}
                   height={75}
-                  src='/r.jfif'
+                  src='/.jfif'
                 />
               </Td>
               <Td>

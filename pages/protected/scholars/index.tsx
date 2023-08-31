@@ -35,7 +35,7 @@ export const Index = () => {
   return (
     <>
       <Head>
-        <title>office</title>
+        <title>Scholar</title>
       </Head>
       <Box
         display={'flex'}
@@ -45,7 +45,7 @@ export const Index = () => {
       >
         <Logo
           alt='IUST-logo'
-          href='google.com'
+          href='/'
           width={300}
           height={75}
           imgSrc='/iustlogo.png'
@@ -85,14 +85,14 @@ export const Index = () => {
         <LinkStyled href='/protected/scholars/submissiondetails'>
           <StyledIcon> {<MdOutlineSaveAs />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            Submission Details
+            Progress Submission
           </Heading>
         </LinkStyled>
 
         <LinkStyled href='/protected/scholars/assignedsupervisor'>
           <StyledIcon> {<MdAssignmentInd />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            Assigned Supervisors
+            Assigned Supervisor
           </Heading>
         </LinkStyled>
         <LinkStyled href='/protected/scholars/assignedsracmembers'>

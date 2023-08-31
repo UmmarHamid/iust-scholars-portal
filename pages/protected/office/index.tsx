@@ -45,7 +45,7 @@ export const Index = () => {
       >
         <Logo
           alt='IUST-logo'
-          href='google.com'
+          href='/'
           width={300}
           height={75}
           imgSrc='/iustlogo.png'
@@ -69,7 +69,7 @@ export const Index = () => {
         height={'calc(100vh - 150px)'}
         padding={'5%'}
       >
-        <LinkStyled href='/protected/office/addscholar'>
+        <LinkStyled href='/protected/office/addScholar'>
           <StyledIcon> {<BiUserPlus />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Add Scholar

@@ -39,7 +39,7 @@ export const index = () => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/protected/office'>
+        <Link href='/protected/office/updatedetails'>
           <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>

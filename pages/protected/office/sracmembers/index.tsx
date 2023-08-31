@@ -81,7 +81,7 @@ export const index = ({ members }: any) => {
                     alt='Not available yet'
                     width={100}
                     height={75}
-                    src='/r.jfif'
+                    src='/'
                   />
                 </Td>
                 <Td>

@@ -30,13 +30,14 @@ const StyledFooter = styled.footer`
   color: #fff;
   text-align: center;
   line-height: 50px;
+  margin-top: 15%;
 `;
 
 export const Index = () => {
   return (
     <>
       <Head>
-        <title>office</title>
+        <title>DRC</title>
       </Head>
       <Box
         display={'flex'}
@@ -46,7 +47,7 @@ export const Index = () => {
       >
         <Logo
           alt='IUST-logo'
-          href='google.com'
+          href='/'
           width={300}
           height={75}
           imgSrc='/iustlogo.png'

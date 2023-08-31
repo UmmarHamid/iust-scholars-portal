@@ -6,6 +6,24 @@ import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react';
 import supabase from '../../../../utils/supabase';
 import { GetServerSideProps } from 'next';
 import { useUser } from '@supabase/auth-helpers-react';
+import { styled } from 'styled-components';
+import { MdArrowBackIosNew } from 'react-icons/md';
+
+const StyledFooter = styled.footer`
+  left: 0;
+  bottom: 0;
+  position: relative;
+  width: 100%;
+  background-color: #002147;
+  color: #fff;
+  text-align: center;
+  line-height: 50px;
+`;
+const StyledIcon = styled.h1`
+  font-size: 42px;
+  font-weight: 700;
+  color: #0c2b50;
+`;
 
 export const Index = ({ data, error }: any) => {
   const loggedinUser = useUser();
@@ -15,19 +33,12 @@ export const Index = ({ data, error }: any) => {
       <title>Personal Details</title>
       <Box
         display={'flex'}
-        justifyContent={'space-between'}
+        justifyContent={'space-around'}
         alignItems={'center'}
         height={'100px'}
       >
         <Link href={'/protected/scholars'}>
-          <Button
-            leftIcon={<BiArrowBack />}
-            colorScheme='facebook'
-            variant='solid'
-            marginLeft={'20px'}
-          >
-            Back
-          </Button>
+          <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
         </Link>
         <Heading
           as='h2'
@@ -82,6 +93,9 @@ export const Index = ({ data, error }: any) => {
           {`Qualified Exam: ${userDetails.qualified_exam}`}
         </Text>
       </Box>
+      <StyledFooter>
+        © 2023 - Islamic University of Science and Technology.
+      </StyledFooter>
     </>
   );
 };

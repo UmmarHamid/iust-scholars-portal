@@ -69,7 +69,7 @@ export const index = () => {
                   alt='Not available yet'
                   width={200}
                   height={150}
-                  src='/vc.jpg'
+                  src='/.jpg'
                 />
               </Td>
               <Td>

@@ -28,7 +28,15 @@ const ImageStyled = styled(Image)`
   padding: 10px;
   border-radius: 16px;
 `;
-
+const StyledFooter = styled.footer`
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  background-color: #002147;
+  color: #fff;
+  text-align: center;
+  line-height: 50px;
+`;
 type supervisorProfile = {
   assigned_scholars: string | null;
   designation: string | null;
@@ -67,15 +75,15 @@ export const index = ({ supervisors }: any) => {
           <Tbody>
             {supervisors.map((supervisor: supervisorProfile) => (
               <Tr key={supervisor.id}>
-                <Td isNumeric>1</Td>
-                <Td>
+                {/* <Td isNumeric>1</Td> */}
+                {/* <Td>
                   <ImageStyled
                     alt='Image'
                     width={100}
                     height={75}
                     src='/r.jfif'
                   />
-                </Td>
+                </Td> */}
                 <Td>
                   <Heading>{supervisor.name}</Heading>
                   <Text>{supervisor.designation}</Text>
@@ -90,6 +98,9 @@ export const index = ({ supervisors }: any) => {
           </Tbody>
         </Table>
       </TableContainer>
+      <StyledFooter>
+        © 2023 - Islamic University of Science and Technology.
+      </StyledFooter>
     </>
   );
 };

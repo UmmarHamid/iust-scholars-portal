@@ -10,13 +10,22 @@ const StyledIcon = styled.h1`
   font-weight: 700;
   color: #0c2b50;
 `;
+const StyledFooter = styled.footer`
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  background-color: #002147;
+  color: #fff;
+  text-align: center;
+  line-height: 50px;
+`;
 
 export const Index = () => {
   const user = {
     name: 'Shabir',
     registrationNumber: '123123',
     department: 'Astronomy',
-    supervisor: 'Samin`s father',
+    supervisor: ' XYZ',
     titleOfResearch: 'Aquatic Habitat',
     introduction:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry remained essentially unchanged.',
@@ -138,11 +147,15 @@ export const Index = () => {
             mt={10}
             margin={'auto'}
             width={'50%'}
+            marginBottom='10%'
           >
             Submit
           </Button>
         </Box>
       </Container>
+      <StyledFooter>
+        © 2023 - Islamic University of Science and Technology.
+      </StyledFooter>
     </>
   );
 };
