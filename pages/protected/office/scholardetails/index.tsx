@@ -62,15 +62,19 @@ export const index = ({ scholars }: any) => {
       </Box>
       <Container maxW='5xl'>
         {scholars.map((scholar: ScholarProfile, index: number) => (
-          <Heading
+          <Link
             key={scholar.id}
-            margin={'2%'}
-            as={'h6'}
-            color={'#07443E'}
-            letterSpacing={'10px'}
+            href={`/protected/office/scholardetails/${'1'}`}
           >
-            {`${index + 1}- ${scholar.username} ${scholar.reg_no} `}
-          </Heading>
+            <Heading
+              margin={'2%'}
+              as={'h6'}
+              color={'#07443E'}
+              letterSpacing={'10px'}
+            >
+              {`${index + 1}- ${scholar.username} ${scholar.reg_no} `}
+            </Heading>
+          </Link>
         ))}
       </Container>
       <StyledFooter>

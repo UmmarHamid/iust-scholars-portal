@@ -31,7 +31,7 @@ export const index = () => {
   return (
     <>
       <Head>
-        <title>Approve Synopsis</title>
+        <title>Approve Submission</title>
       </Head>
       <Box
         display={'flex'}
@@ -43,81 +43,35 @@ export const index = () => {
           <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
-          Approve Synopsis
+          Approve Submission
         </Heading>
         <Button colorScheme='red' leftIcon={<BiLogOut />}>
           Logout
         </Button>
       </Box>
       <Container maxWidth={'5xl'}>
-        <Text fontSize={'2xl'} color={'#07443E'}>
-          1. Zubair DOCS IUST0121014521
-        </Text>
         <Box
-          marginTop={'2%'}
           display={'flex'}
-          justifyContent={'space-around'}
+          justifyContent={'space-between'}
           alignItems={'center'}
         >
-          <Button
-            leftIcon={<AiOutlineFolderView />}
-            padding={'10px 40px'}
-            colorScheme='green'
-          >
-            View Synopsis
-          </Button>
-          <Input
-            type='text'
-            placeholder='Remarks'
-            padding={'10px 30px'}
-            size='2xl'
-            margin={'20px 20px'}
-          />
-          <Button padding={'10px 30px'} colorScheme='blue' marginRight={'20px'}>
-            Submit
-          </Button>
-        </Box>
-        <Box
-          marginTop={'2%'}
-          display={'flex'}
-          justifyContent={'space-around'}
-          alignItems={'center'}
-        >
-          <Button
-            leftIcon={<AiOutlineFolderView />}
-            padding={'10px 40px'}
-            colorScheme='green'
-          >
-            View Submission
-          </Button>
-          <Input
-            type='text'
-            placeholder='Remarks'
-            padding={'10px 30px'}
-            size='2xl'
-            margin={'20px 20px'}
-          />
-          <Button padding={'10px 30px'} colorScheme='blue' marginRight={'20px'}>
-            Submit
-          </Button>
-        </Box>
-        <Box
-          marginTop={'2%'}
-          display={'flex'}
-          justifyContent={'space-around'}
-          alignItems={'center'}
-        >
-          <Button
-            leftIcon={<AiOutlineFolderView />}
-            padding={'10px 40px'}
-            colorScheme='green'
-          >
-            Viva Score
-          </Button>
-
-          <Button padding={'10px 30px'} colorScheme='blue' marginRight={'20px'}>
-            Approve
-          </Button>
+          <Text fontSize={'2xl'} color={'#07443E'}>
+            1. Zubair DOCS IUST0121014521
+          </Text>
+          <Stack direction={['row']} spacing={'3%'}>
+            <Button
+              padding={'10px 30px'}
+              leftIcon={<AiOutlineFolderView />}
+              colorScheme='green'
+            >
+              {' '}
+              View
+            </Button>
+            <Input padding={'0 10px'} placeholder='Remarks' size='xl' />
+            <Button padding={'10px 30px'} colorScheme='blue'>
+              Submit
+            </Button>
+          </Stack>
         </Box>
       </Container>
       <StyledFooter>

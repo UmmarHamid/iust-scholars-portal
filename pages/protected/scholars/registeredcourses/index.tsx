@@ -94,9 +94,7 @@ export const Index = ({ courses }: courseType) => {
 export default Index;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  let { data, error } = await supabase
-    .from('scholars_profiles')
-    .select(`courses(*)`);
+  let { data, error } = await supabase.from('courses').select(`*`);
   const courses = data ? Array(data[0].courses) : [];
   return { props: { courses, error } };
 };

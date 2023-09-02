@@ -214,22 +214,22 @@ export const Homepage = () => {
         {/* TODO: Make this section dynamic */}
         <DepartmentsContainerStyled>
           <StyledDeptFirst>
-            <Link href='/protected/researchachievementsoet'>
+            <Link href='/researchachievementsoet'>
               Research Achievements by School of Engineering and Technology
             </Link>
           </StyledDeptFirst>
           <StyledDeptSecond>
-            <Link href='/protected/researchachievementsbs'>
+            <Link href='/researchachievementsbs'>
               Research Achievements by School of Business Studies
             </Link>
           </StyledDeptSecond>
           <StyledDeptThird>
-            <Link href='/protected/achievementsh&s'>
+            <Link href='/achievementsh&s'>
               Research Achievements by School of Humanities and Social Sciences
             </Link>
           </StyledDeptThird>
           <StyledDeptFourth>
-            <Link href='/protected/achievementsos'>
+            <Link href='/achievementsos'>
               Research Achievements by School of Sciences
             </Link>
           </StyledDeptFourth>

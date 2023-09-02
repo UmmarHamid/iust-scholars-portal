@@ -53,13 +53,13 @@ export const index = () => {
         height={'calc(100vh - 150px)'}
         padding={'5%'}
       >
-        <LinkStyled href='/office/editscholar'>
+        <LinkStyled href='/protected/office/editscholar'>
           <StyledIcon> {<RxUpdate />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Edit Scholar
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/office/updateaward'>
+        <LinkStyled href='/protected/office/updateaward'>
           <StyledIcon> {<HiDocumentArrowUp />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Update Award

@@ -75,7 +75,10 @@ export const Index = () => {
         padding={'5%'}
         marginBottom={'20%'}
       >
-        <LinkStyled href='/' style={{ gridColumn: 'span 2' }}>
+        <LinkStyled
+          href='/protected/supervisor/assignedscholars'
+          style={{ gridColumn: 'span 2' }}
+        >
           <StyledIcon> {<FaClipboardList />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Assigned Scholars
@@ -87,7 +90,7 @@ export const Index = () => {
             Report Generation
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/supervisor/researchprogress'>
+        <LinkStyled href='/protected/supervisor/researchprogress'>
           <StyledIcon> {<GiArchiveResearch />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Progress Module
@@ -95,12 +98,12 @@ export const Index = () => {
         </LinkStyled>
 
         <LinkStyled
-          href='/supervisor/approvesracmembers'
+          href='/protected/supervisor/approvesracmembers'
           style={{ gridColumn: 'span 2' }}
         >
           <StyledIcon> {<AiOutlineFileDone />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            Approve SRAC Members
+            Assign SRAC Members
           </Heading>
         </LinkStyled>
       </SimpleGrid>

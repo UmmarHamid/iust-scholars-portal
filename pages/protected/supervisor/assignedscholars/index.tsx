@@ -12,6 +12,7 @@ const StyledIcon = styled.h1`
   color: #0c2b50;
 `;
 
+import { Database } from '@/types/supabase';
 const StyledFooter = styled.footer`
   bottom: 0;
   position: fixed;
@@ -49,7 +50,7 @@ export const index = ({ scholars }: any) => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/protected/drc'>
+        <Link href='/protected/office'>
           <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
@@ -61,15 +62,19 @@ export const index = ({ scholars }: any) => {
       </Box>
       <Container maxW='5xl'>
         {scholars.map((scholar: ScholarProfile, index: number) => (
-          <Heading
+          <Link
             key={scholar.id}
-            margin={'2%'}
-            as={'h6'}
-            color={'#07443E'}
-            letterSpacing={'10px'}
+            href={`/protected/supervisor/assignedscholars/${'1'}`}
           >
-            {`${index + 1}- ${scholar.username} ${scholar.reg_no} `}
-          </Heading>
+            <Heading
+              margin={'2%'}
+              as={'h6'}
+              color={'#07443E'}
+              letterSpacing={'10px'}
+            >
+              {`${index + 1}- ${scholar.username} ${scholar.reg_no} `}
+            </Heading>
+          </Link>
         ))}
       </Container>
       <StyledFooter>
