@@ -34,9 +34,11 @@ export const Index = () => {
     reg_no: '',
     join_date: '',
     qualified_exam: '',
+    email: '',
   });
 
   const handleAddScholar = async () => {
+    // TODO: Add form Validation here
     const { data, error } = await supabase
       .from('scholars_profiles')
       .insert([formData])
@@ -117,6 +119,14 @@ export const Index = () => {
               setFormData({ ...formData, phone: e.target.value })
             }
             type='number'
+            mb={4}
+          />
+          <FormLabel>{`Email`}</FormLabel>
+          <Input
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+            type='email'
             mb={4}
           />
           <FormLabel>{`Registration No.`}</FormLabel>

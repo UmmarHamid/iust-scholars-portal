@@ -7,9 +7,8 @@ import supabase from '../../../../utils/supabase';
 import { GetServerSideProps } from 'next';
 import { useUser } from '@supabase/auth-helpers-react';
 
-export const ScholarDetails = ({ data, error }: any) => {
+export const ScholarDetails = ({ data: userDetails, error }: any) => {
   const loggedinUser = useUser();
-  const userDetails = data[0];
   return (
     <>
       <title>Personal Details</title>
@@ -86,7 +85,11 @@ export const ScholarDetails = ({ data, error }: any) => {
   );
 };
 export default ScholarDetails;
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { data, error } = await supabase.from('scholars_profiles').select('*');
-  return { props: { data, error } };
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  console.log(params);
+  const { data, error } = await supabase
+    .from('scholars_profiles')
+    .select('*')
+    .eq('email', params?.scholarId);
+  return { props: { data: data ? data[0] : [], error } };
 };

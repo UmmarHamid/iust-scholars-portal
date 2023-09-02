@@ -36,6 +36,7 @@ type ScholarProfile = {
   registered_courses: string | null;
   user_role: string | null;
   username: string | null;
+  email: string;
 };
 
 export const index = ({ scholars }: any) => {
@@ -64,7 +65,7 @@ export const index = ({ scholars }: any) => {
         {scholars.map((scholar: ScholarProfile, index: number) => (
           <Link
             key={scholar.id}
-            href={`/protected/office/scholardetails/${'1'}`}
+            href={`/protected/office/scholardetails/${scholar.email}`}
           >
             <Heading
               margin={'2%'}

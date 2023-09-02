@@ -1,15 +1,13 @@
 import { Button } from '@chakra-ui/button';
-import { BsFillHouseDoorFill } from 'react-icons/bs';
 import { BiArrowBack, BiLogOut } from 'react-icons/bi';
 import Link from 'next/link';
-import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Heading, Text } from '@chakra-ui/react';
 import supabase from '../../../../utils/supabase';
 import { GetServerSideProps } from 'next';
 import { useUser } from '@supabase/auth-helpers-react';
 
-export const Index = ({ data, error }: any) => {
+export const Index = ({ data: userDetails, error }: any) => {
   const loggedinUser = useUser();
-  const userDetails = data[0];
   return (
     <>
       <title>Personal Details</title>
@@ -86,7 +84,10 @@ export const Index = ({ data, error }: any) => {
   );
 };
 export default Index;
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { data, error } = await supabase.from('scholars_profiles').select('*');
-  return { props: { data, error } };
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const { data, error } = await supabase
+    .from('scholars_profiles')
+    .select('*')
+    .eq('email', params?.scholarId);
+  return { props: { data: data ? data[0] : [], error } };
 };

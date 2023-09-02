@@ -7,6 +7,7 @@ import { HiDocumentDuplicate } from 'react-icons/hi';
 import { AiOutlineTeam } from 'react-icons/ai';
 import { MdAssignmentInd, MdOutlineSaveAs } from 'react-icons/md';
 import Link from 'next/link';
+import { useUser } from '@supabase/auth-helpers-react';
 
 const StyledIcon = styled.div`
   font-size: 7em;
@@ -32,6 +33,7 @@ const StyledFooter = styled.footer`
 `;
 
 export const Index = () => {
+  const user = useUser();
   return (
     <>
       <Head>
@@ -70,7 +72,7 @@ export const Index = () => {
         padding={'5%'}
         textAlign={'center'}
       >
-        <LinkStyled href='/protected/scholars/personaldetails'>
+        <LinkStyled href={`/protected/scholars/personaldetails/${user?.email}`}>
           <StyledIcon> {<BiSolidUserDetail />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Personal Details
