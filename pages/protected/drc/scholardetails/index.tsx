@@ -36,6 +36,7 @@ type ScholarProfile = {
   registered_courses: string | null;
   user_role: string | null;
   username: string | null;
+  email: string;
 };
 
 export const index = ({ scholars }: any) => {
@@ -50,7 +51,7 @@ export const index = ({ scholars }: any) => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/protected/supervisor'>
+        <Link href='/protected/drc'>
           <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
@@ -64,7 +65,7 @@ export const index = ({ scholars }: any) => {
         {scholars.map((scholar: ScholarProfile, index: number) => (
           <Link
             key={scholar.id}
-            href={`/protected/supervisor/assignedscholars/${'1'}`}
+            href={`/protected/drc/scholardetails/${scholar.email}`}
           >
             <Heading
               margin={'2%'}

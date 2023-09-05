@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { BiLogOut } from 'react-icons/bi';
+import { useUser } from '@supabase/auth-helpers-react';
+
 import Head from 'next/head';
 import {
   Box,
@@ -30,11 +32,13 @@ const StyledFooter = styled.footer`
   text-align: center;
   line-height: 50px;
 `;
-interface courseType {
-  courses: Array<{ id: string; name: string; credits: number }>;
-}
+type coursesType = Array<{ id: string; name: string; credits: number }>;
 
-export const Index = ({ courses }: courseType) => {
+export const Index = ({ scholarCourses }: any) => {
+  const courses = scholarCourses as coursesType;
+
+  const loggedinUser = useUser();
+
   return (
     <>
       <Head>
@@ -46,7 +50,7 @@ export const Index = ({ courses }: courseType) => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/protected/scholars'>
+        <Link href={`/protected/scholars/${loggedinUser?.email}`}>
           <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
@@ -93,8 +97,19 @@ export const Index = ({ courses }: courseType) => {
 };
 export default Index;
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  let { data, error } = await supabase.from('courses').select(`*`);
-  const courses = data ? Array(data[0].courses) : [];
-  return { props: { courses, error } };
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  let scholarId = params?.scholarId;
+  let { data, error } = await supabase
+    .from('courses')
+    .select(
+      'id, name, credits, scholar_registered_courses(course_id, scholar_id)'
+    );
+
+  let filteredCourses = data?.filter((course) => {
+    return course.scholar_registered_courses.some(
+      (entry) => entry.scholar_id === scholarId
+    );
+  });
+
+  return { props: { scholarCourses: filteredCourses, error } };
 };

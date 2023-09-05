@@ -8,6 +8,8 @@ import { AiOutlineTeam } from 'react-icons/ai';
 import { MdAssignmentInd, MdOutlineSaveAs } from 'react-icons/md';
 import Link from 'next/link';
 import { useUser } from '@supabase/auth-helpers-react';
+import { GetServerSideProps } from 'next';
+import supabase from '@/utils/supabase';
 
 const StyledIcon = styled.div`
   font-size: 7em;
@@ -32,7 +34,7 @@ const StyledFooter = styled.footer`
   line-height: 50px;
 `;
 
-export const Index = () => {
+export const Index = ({ userId }: any) => {
   const user = useUser();
   return (
     <>
@@ -72,13 +74,13 @@ export const Index = () => {
         padding={'5%'}
         textAlign={'center'}
       >
-        <LinkStyled href={`/protected/scholars/personaldetails/${user?.email}`}>
+        <LinkStyled href={`/protected/scholars/personaldetails/${userId}`}>
           <StyledIcon> {<BiSolidUserDetail />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Personal Details
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/protected/scholars/registeredcourses'>
+        <LinkStyled href={`/protected/scholars/registeredcourses/${userId}`}>
           <StyledIcon> {<BiRegistered />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Registered Courses
@@ -117,3 +119,12 @@ export const Index = () => {
   );
 };
 export default Index;
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const { data, error } = await supabase
+    .from('scholars_profiles')
+    .select('*')
+    .eq('email', params?.scholarId);
+  const userId = data ? data[0].id : null;
+  return { props: { userId, error } };
+};

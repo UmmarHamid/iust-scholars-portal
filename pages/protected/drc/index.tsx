@@ -36,7 +36,7 @@ export const Index = () => {
   return (
     <>
       <Head>
-        <title>office</title>
+        <title>DRC</title>
       </Head>
       <Box
         display={'flex'}

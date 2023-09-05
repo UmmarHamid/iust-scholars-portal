@@ -6,7 +6,7 @@ import supabase from '../../../../utils/supabase';
 import { GetServerSideProps } from 'next';
 import { useUser } from '@supabase/auth-helpers-react';
 
-export const Index = ({ data: userDetails, error }: any) => {
+export const Index = ({ data: userDetails, error, userId }: any) => {
   const loggedinUser = useUser();
   return (
     <>
@@ -17,7 +17,7 @@ export const Index = ({ data: userDetails, error }: any) => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href={'/protected/scholars'}>
+        <Link href={`/protected/scholars/${userDetails.email}`}>
           <Button
             leftIcon={<BiArrowBack />}
             colorScheme='facebook'
@@ -85,9 +85,12 @@ export const Index = ({ data: userDetails, error }: any) => {
 };
 export default Index;
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  console.log(params);
   const { data, error } = await supabase
     .from('scholars_profiles')
     .select('*')
-    .eq('email', params?.scholarId);
-  return { props: { data: data ? data[0] : [], error } };
+    .eq('id', params?.scholarId);
+  return {
+    props: { data: data ? data[0] : [], error },
+  };
 };

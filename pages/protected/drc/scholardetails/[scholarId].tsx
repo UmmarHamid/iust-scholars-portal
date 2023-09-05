@@ -18,7 +18,7 @@ export const ScholarDetails = ({ data: userDetails, error }: any) => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href={'/protected/office/scholardetails'}>
+        <Link href={'/protected/drc/scholardetails'}>
           <Button
             leftIcon={<BiArrowBack />}
             colorScheme='facebook'

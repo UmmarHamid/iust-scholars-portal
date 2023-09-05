@@ -1,10 +1,12 @@
+'use client';
 import styled from 'styled-components';
-
+import Select from 'react-select';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import {
   Box,
   Button,
   Container,
+  Flex,
   FormControl,
   FormLabel,
   Heading,
@@ -16,13 +18,21 @@ import Link from 'next/link';
 import { useState } from 'react';
 import supabase from '@/utils/supabase';
 import { useRouter } from 'next/router';
+import { GetServerSideProps } from 'next';
 const StyledIcon = styled.h1`
   font-size: 42px;
   font-weight: 700;
   color: #0c2b50;
 `;
-export const Index = () => {
+
+type courseType = {
+  id: string;
+  name: string;
+  credits: number;
+};
+export const Index = ({ courses }: any) => {
   const router = useRouter();
+
   const [formData, setFormData] = useState({
     username: '',
     father: '',
@@ -36,6 +46,9 @@ export const Index = () => {
     qualified_exam: '',
     email: '',
   });
+  const formattedCourses = courses.map((course: courseType) => {
+    return { label: course.name, value: course.id };
+  });
 
   const handleAddScholar = async () => {
     // TODO: Add form Validation here
@@ -44,14 +57,28 @@ export const Index = () => {
       .insert([formData])
       .select();
 
-    if (data) {
-      alert(`User with name ${data[0].username} created successfully`);
-      router.push('/protected/office');
+    const scholar = data ? data[0] : [];
+
+    if (scholar) {
+      console.log(`User created successfully`, scholar);
+      const coursesPayload = selectedCourses.map((course: any) => {
+        return { course_id: course.value, scholar_id: scholar.id };
+      });
+      console.log(coursesPayload);
+      const { data, error } = await supabase
+        .from('scholar_registered_courses')
+        .insert(coursesPayload)
+        .select();
+
+      console.log(data, error);
+      // router.push('/protected/office');
     }
     if (error) {
-      alert(`Some error occurred`);
+      console.log('error creating new scholar');
     }
   };
+
+  const [selectedCourses, setSelectedCourses] = useState(formattedCourses[0]);
 
   return (
     <>
@@ -153,6 +180,17 @@ export const Index = () => {
             type='Text'
             mb={4}
           />
+          <FormLabel>{`Selected Courses`}</FormLabel>
+          <Box marginBottom={'16px'}>
+            <Select
+              options={formattedCourses}
+              isMulti
+              onChange={(values) => {
+                setSelectedCourses(values);
+              }}
+              closeMenuOnSelect={false}
+            />
+          </Box>
         </FormControl>
         <Button
           onClick={handleAddScholar}
@@ -168,3 +206,9 @@ export const Index = () => {
   );
 };
 export default Index;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { data: courses, error } = await supabase.from('courses').select('*');
+  console.log(courses);
+  return { props: { courses, error } };
+};
