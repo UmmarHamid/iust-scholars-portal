@@ -3,6 +3,7 @@ import { MdArrowBackIosNew } from 'react-icons/md';
 import { BiLogOut } from 'react-icons/bi';
 import Head from 'next/head';
 import Image from 'next/image';
+import { useUser } from '@supabase/auth-helpers-react';
 import {
   Box,
   Button,
@@ -14,6 +15,8 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import Link from 'next/link';
+import { GetServerSideProps } from 'next';
+import supabase from '@/utils/supabase';
 const StyledIcon = styled.h1`
   font-size: 46px;
   font-weight: 700;
@@ -34,7 +37,8 @@ const ImageStyled = styled(Image)`
   border-radius: 16px;
 `;
 
-export const index = () => {
+export const Index = ({ supervisor }: any) => {
+  const loggedinUser = useUser();
   return (
     <>
       <Head>
@@ -46,7 +50,7 @@ export const index = () => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/protected/scholars'>
+        <Link href={`/protected/scholars/${loggedinUser?.email}`}>
           <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
@@ -80,14 +84,14 @@ export const index = () => {
                   color='#4267B2'
                   mr={'100px'}
                 >
-                  Salman
+                  {`${supervisor.name}`}
                 </Heading>
               </Td>
               <Td color='teal' fontWeight={300} fontSize={'30px'}>
-                <Link href=''>Designation</Link>
+                {`${supervisor.designation}`}
               </Td>
               <Td color='teal' fontWeight={300} fontSize={'30px'}>
-                <Link href=''>salman855@gmail.com</Link>
+                {`${supervisor.email}`}
               </Td>
             </Tr>
           </Tbody>
@@ -99,4 +103,28 @@ export const index = () => {
     </>
   );
 };
-export default index;
+export default Index;
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  let scholarId = params?.scholarId;
+  let { data: scholarData } = await supabase
+    .from('scholars_profiles')
+    .select('*')
+    .eq('id', scholarId)
+    .single();
+
+  // Check if the scholar record exists
+  if (scholarData) {
+    // Now, retrieve the supervisor information for the assigned supervisor
+    let { data: supervisorData } = await supabase
+      .from('supervisor_profiles')
+      .select('*')
+      .eq('id', scholarData.assigned_supervisor)
+      .single();
+    // Check if the supervisor record exists
+
+    return { props: { supervisor: supervisorData } };
+  } else {
+    return { props: { supervisor: [] } };
+  }
+};

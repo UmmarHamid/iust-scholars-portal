@@ -93,7 +93,7 @@ export const Index = ({ userId }: any) => {
           </Heading>
         </LinkStyled>
 
-        <LinkStyled href='/protected/scholars/assignedsupervisor'>
+        <LinkStyled href={`/protected/scholars/assignedsupervisor/${userId}`}>
           <StyledIcon> {<MdAssignmentInd />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Assigned Supervisors
