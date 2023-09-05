@@ -18,7 +18,7 @@ export const ScholarDetails = ({ data: userDetails, error }: any) => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href={'/protected/office'}>
+        <Link href={'/protected/drc'}>
           <BackIcon />
         </Link>
         <Heading

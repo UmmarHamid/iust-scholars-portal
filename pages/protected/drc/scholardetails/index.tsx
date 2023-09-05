@@ -4,9 +4,8 @@ import { Box, Container, Heading } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import supabase from '@/utils/supabase';
 import BackIcon from '@/components/BackIcon/BackIcon';
-import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import Logout from '@/components/Logout/Logout';
-
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
 type ScholarProfile = {
   address: string | null;
   department: string | null;
@@ -21,6 +20,7 @@ type ScholarProfile = {
   registered_courses: string | null;
   user_role: string | null;
   username: string | null;
+  email: string;
 };
 
 export const index = ({ scholars }: any) => {
@@ -35,7 +35,7 @@ export const index = ({ scholars }: any) => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/protected/supervisor'>
+        <Link href='/protected/drc'>
           <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
@@ -43,11 +43,11 @@ export const index = ({ scholars }: any) => {
         </Heading>
         <Logout />
       </Box>
-      <Container maxW='5xl' marginBottom={'25%'}>
+      <Container maxW='5xl' marginBottom={'20%'}>
         {scholars.map((scholar: ScholarProfile, index: number) => (
           <Link
             key={scholar.id}
-            href={`/protected/supervisor/assignedscholars/${'1'}`}
+            href={`/protected/drc/scholardetails/${scholar.email}`}
           >
             <Heading
               margin={'2%'}

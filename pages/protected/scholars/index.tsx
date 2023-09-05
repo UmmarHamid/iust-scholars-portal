@@ -1,14 +1,15 @@
 import Logo from '@/components/Logo/Logo';
-import { Box, Button, Heading, SimpleGrid } from '@chakra-ui/react';
+import { Box, Heading, SimpleGrid } from '@chakra-ui/react';
 import Head from 'next/head';
 import { styled } from 'styled-components';
-import { BiLogOut, BiRegistered, BiSolidUserDetail } from 'react-icons/bi';
+import { BiRegistered, BiSolidUserDetail } from 'react-icons/bi';
 import { HiDocumentDuplicate } from 'react-icons/hi';
 import { AiOutlineTeam } from 'react-icons/ai';
 import { MdAssignmentInd, MdOutlineSaveAs } from 'react-icons/md';
 import Link from 'next/link';
 import { useUser } from '@supabase/auth-helpers-react';
-
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import Logout from '@/components/Logout/Logout';
 const StyledIcon = styled.div`
   font-size: 7em;
   color: #0c2b50;
@@ -21,23 +22,13 @@ const LinkStyled = styled(Link)`
   justify-content: center;
 `;
 
-const StyledFooter = styled.footer`
-  left: 0;
-  bottom: 0;
-  position: relative;
-  width: 100%;
-  background-color: #002147;
-  color: #fff;
-  text-align: center;
-  line-height: 50px;
-`;
-
 export const Index = () => {
   const user = useUser();
+
   return (
     <>
       <Head>
-        <title>office</title>
+        <title>Scholar</title>
       </Head>
       <Box
         display={'flex'}
@@ -47,7 +38,7 @@ export const Index = () => {
       >
         <Logo
           alt='IUST-logo'
-          href='google.com'
+          href='/'
           width={300}
           height={75}
           imgSrc='/iustlogo.png'
@@ -61,9 +52,7 @@ export const Index = () => {
         >
           Welcome User
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />}>
-          Logout
-        </Button>
+        <Logout />
       </Box>
       <SimpleGrid
         columns={3}
@@ -71,6 +60,7 @@ export const Index = () => {
         height={'calc(100vh - 150px)'}
         padding={'5%'}
         textAlign={'center'}
+        marginBottom={'6%'}
       >
         <LinkStyled href={`/protected/scholars/personaldetails/${user?.email}`}>
           <StyledIcon> {<BiSolidUserDetail />} </StyledIcon>
@@ -84,17 +74,17 @@ export const Index = () => {
             Registered Courses
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/protected/scholars/submissiondetails'>
+        <LinkStyled href='/protected/scholars/progressreport'>
           <StyledIcon> {<MdOutlineSaveAs />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            Submission Details
+            Progress Report
           </Heading>
         </LinkStyled>
 
         <LinkStyled href='/protected/scholars/assignedsupervisor'>
           <StyledIcon> {<MdAssignmentInd />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            Assigned Supervisors
+            Assigned Supervisor
           </Heading>
         </LinkStyled>
         <LinkStyled href='/protected/scholars/assignedsracmembers'>
@@ -110,9 +100,7 @@ export const Index = () => {
           </Heading>
         </LinkStyled>
       </SimpleGrid>
-      <StyledFooter>
-        © 2023 - Islamic University of Science and Technology.
-      </StyledFooter>
+      <InnerFooter />
     </>
   );
 };

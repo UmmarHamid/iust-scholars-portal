@@ -5,7 +5,8 @@ import { styled } from 'styled-components';
 import { Heading } from '@chakra-ui/react';
 import { Input } from '@chakra-ui/react';
 import { useState } from 'react';
-import { MdArrowBackIosNew } from 'react-icons/md';
+import BackIcon from '@/components/BackIcon/BackIcon';
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
 
 const MainStyled = styled.main`
   display: flex;
@@ -13,6 +14,7 @@ const MainStyled = styled.main`
   align-items: center;
   padding: 10px;
   margin-left: 120px;
+  margin-bottom: 4%;
 `;
 const InputContainerStyled = styled.div`
   display: flex;
@@ -22,21 +24,7 @@ const InputContainerStyled = styled.div`
   gap: 20px;
   padding: 20px;
 `;
-const StyledFooter = styled.footer`
-  bottom: 0;
-  position: fixed;
-  width: 100%;
-  background-color: #002147;
-  color: #fff;
-  text-align: center;
-  line-height: 50px;
-  margin-top: 3%;
-`;
-const StyledIcon = styled.h1`
-  font-size: 42px;
-  font-weight: 700;
-  color: #0c2b50;
-`;
+
 export const Index = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClick = () => setShowPassword(!showPassword);
@@ -56,7 +44,7 @@ export const Index = () => {
         marginLeft={'25%'}
       >
         <Link href='/'>
-          <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
+          <BackIcon />
         </Link>
         <Heading as={'h1'} color={'teal'} fontWeight={700}>
           Sign Up
@@ -109,9 +97,7 @@ export const Index = () => {
           </Button>
         </InputContainerStyled>
       </MainStyled>
-      <StyledFooter>
-        © 2023 - Islamic University of Science and Technology.
-      </StyledFooter>
+      <InnerFooter />
     </>
   );
 };

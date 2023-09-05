@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { MdArrowBackIosNew } from 'react-icons/md';
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import {
   Box,
   Button,
@@ -9,23 +9,11 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import { BiLogOut } from 'react-icons/bi';
 import Head from 'next/head';
 import Link from 'next/link';
-const StyledIcon = styled.h1`
-  font-size: 42px;
-  font-weight: 700;
-  color: #0c2b50;
-`;
-const StyledFooter = styled.footer`
-  bottom: 0;
-  position: fixed;
-  width: 100%;
-  background-color: #002147;
-  color: #fff;
-  text-align: center;
-  line-height: 50px;
-`;
+import BackIcon from '@/components/BackIcon/BackIcon';
+import Logout from '@/components/Logout/Logout';
+
 export const Index = () => {
   return (
     <>
@@ -39,16 +27,14 @@ export const Index = () => {
         height={'100px'}
       >
         <Link href='/protected/drc'>
-          <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
+          <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
           Approve SRAC
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />}>
-          Logout
-        </Button>
+        <Logout />
       </Box>
-      <Container maxWidth={'5xl'}>
+      <Container maxWidth={'5xl'} marginBottom={'25%'}>
         <Box
           display={'flex'}
           justifyContent={'space-between'}
@@ -83,9 +69,7 @@ export const Index = () => {
           </Stack>
         </Box>
       </Container>
-      <StyledFooter>
-        © 2023 - Islamic University of Science and Technology.
-      </StyledFooter>
+      <InnerFooter />
     </>
   );
 };

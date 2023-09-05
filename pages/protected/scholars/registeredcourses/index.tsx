@@ -1,10 +1,6 @@
-import styled from 'styled-components';
-import { MdArrowBackIosNew } from 'react-icons/md';
-import { BiLogOut } from 'react-icons/bi';
 import Head from 'next/head';
 import {
   Box,
-  Button,
   Heading,
   Table,
   TableContainer,
@@ -15,21 +11,10 @@ import {
 import Link from 'next/link';
 import { GetServerSideProps } from 'next';
 import supabase from '@/utils/supabase';
-const StyledIcon = styled.h1`
-  font-size: 46px;
-  font-weight: 700;
-  color: #0c2b50;
-  padding-left: 30%;
-`;
-const StyledFooter = styled.footer`
-  bottom: 0;
-  position: fixed;
-  width: 100%;
-  background-color: #002147;
-  color: #fff;
-  text-align: center;
-  line-height: 50px;
-`;
+import BackIcon from '@/components/BackIcon/BackIcon';
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import Logout from '@/components/Logout/Logout';
+
 interface courseType {
   courses: Array<{ id: string; name: string; credits: number }>;
 }
@@ -47,14 +32,12 @@ export const Index = ({ courses }: courseType) => {
         height={'100px'}
       >
         <Link href='/protected/scholars'>
-          <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
+          <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
           Registered Courses
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />}>
-          Logout
-        </Button>
+        <Logout />
       </Box>
       <TableContainer>
         <Table
@@ -85,9 +68,7 @@ export const Index = ({ courses }: courseType) => {
           </Tbody>
         </Table>
       </TableContainer>
-      <StyledFooter>
-        © 2023 - Islamic University of Science and Technology.
-      </StyledFooter>
+      <InnerFooter />
     </>
   );
 };

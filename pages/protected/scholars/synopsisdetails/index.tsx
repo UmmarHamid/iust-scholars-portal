@@ -1,22 +1,16 @@
 import { Button } from '@chakra-ui/button';
-import { BiLogOut } from 'react-icons/bi';
 import Link from 'next/link';
 import { Box, Container, Heading, Text, Textarea } from '@chakra-ui/react';
-import styled from 'styled-components';
-import { MdArrowBackIosNew } from 'react-icons/md';
-
-const StyledIcon = styled.h1`
-  font-size: 42px;
-  font-weight: 700;
-  color: #0c2b50;
-`;
+import BackIcon from '@/components/BackIcon/BackIcon';
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import Logout from '@/components/Logout/Logout';
 
 export const Index = () => {
   const user = {
     name: 'Shabir',
     registrationNumber: '123123',
     department: 'Astronomy',
-    supervisor: 'Samin`s father',
+    supervisor: 'CCCc',
     titleOfResearch: 'Aquatic Habitat',
     introduction:
       'Lorem Ipsum is simply dummy text of the printing and typesetting industry remained essentially unchanged.',
@@ -47,14 +41,12 @@ export const Index = () => {
         height={'100px'}
       >
         <Link href='/protected/scholars'>
-          <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
+          <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
           Synopsis Details
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />}>
-          Logout
-        </Button>
+        <Logout />
       </Box>
       <Container maxWidth={'6xl'}>
         <Box
@@ -143,6 +135,7 @@ export const Index = () => {
           </Button>
         </Box>
       </Container>
+      <InnerFooter />
     </>
   );
 };

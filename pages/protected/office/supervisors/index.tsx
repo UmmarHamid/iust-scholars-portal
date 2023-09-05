@@ -1,12 +1,9 @@
 import styled from 'styled-components';
-import { MdArrowBackIosNew } from 'react-icons/md';
-import { BiLogOut } from 'react-icons/bi';
 import Head from 'next/head';
 import Image from 'next/image';
 import {
   Text,
   Box,
-  Button,
   Heading,
   Table,
   TableContainer,
@@ -17,12 +14,9 @@ import {
 import Link from 'next/link';
 import { GetServerSideProps } from 'next';
 import supabase from '@/utils/supabase';
-const StyledIcon = styled.h1`
-  font-size: 46px;
-  font-weight: 700;
-  color: #0c2b50;
-  padding-left: 30%;
-`;
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import BackIcon from '@/components/BackIcon/BackIcon';
+import Logout from '@/components/Logout/Logout';
 
 const ImageStyled = styled(Image)`
   padding: 10px;
@@ -40,7 +34,7 @@ export const index = ({ supervisors }: any) => {
   return (
     <>
       <Head>
-        <title>Supervisors</title>
+        <title>Supervisor</title>
       </Head>
       <Box
         display={'flex'}
@@ -49,31 +43,30 @@ export const index = ({ supervisors }: any) => {
         height={'100px'}
       >
         <Link href='/protected/office'>
-          <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
+          <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
           Supervisors
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />}>
-          Logout
-        </Button>
+        <Logout />
       </Box>
       <TableContainer>
         <Table
           display={'flex'}
           justifyContent={'space-around'}
           variant='simple'
+          marginBottom={'18%'}
         >
           <Tbody>
             {supervisors.map((supervisor: supervisorProfile) => (
               <Tr key={supervisor.id}>
-                <Td isNumeric>1</Td>
+                {/* <Td isNumeric>1</Td> */}
                 <Td>
                   <ImageStyled
                     alt='Image'
                     width={100}
                     height={75}
-                    src='/r.jfif'
+                    src='/.jfif'
                   />
                 </Td>
                 <Td>
@@ -90,6 +83,7 @@ export const index = ({ supervisors }: any) => {
           </Tbody>
         </Table>
       </TableContainer>
+      <InnerFooter />
     </>
   );
 };

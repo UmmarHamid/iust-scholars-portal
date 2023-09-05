@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import { BiArrowBack } from 'react-icons/bi';
 import Head from 'next/head';
 import {
@@ -12,16 +11,7 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-
-const StyledFooter = styled.footer`
-  bottom: 0;
-  position: fixed;
-  width: 100%;
-  background-color: #002147;
-  color: #fff;
-  text-align: center;
-  line-height: 50px;
-`;
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
 
 export const Index = () => {
   return (
@@ -52,7 +42,7 @@ export const Index = () => {
         </Heading>
       </Box>
       <TableContainer display={'block'} maxWidth={'100%'} overflowX={'auto'}>
-        <Table>
+        <Table marginBottom={'5%'}>
           <Tbody>
             <Tr>
               <Td isNumeric>1</Td>
@@ -160,9 +150,7 @@ export const Index = () => {
           </Tbody>
         </Table>
       </TableContainer>
-      <StyledFooter>
-        © 2023 - Islamic University of Science and Technology.
-      </StyledFooter>
+      <InnerFooter />
     </>
   );
 };
