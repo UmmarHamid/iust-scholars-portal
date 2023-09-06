@@ -1,45 +1,14 @@
 import Head from 'next/head';
-import { Button } from '@chakra-ui/button';
-import { Box, InputGroup, InputRightElement } from '@chakra-ui/react';
-import { styled } from 'styled-components';
+import { Box } from '@chakra-ui/react';
 import { Heading } from '@chakra-ui/react';
-import { Input } from '@chakra-ui/react';
-import NextLink from 'next/link';
-import { Text, Link } from '@chakra-ui/react';
-import { MdArrowBackIosNew } from 'react-icons/md';
+import { Link } from '@chakra-ui/react';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-
-const InputContainerStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-  padding: 20px;
-  width: 50%;
-`;
-const StyledFooter = styled.footer`
-  bottom: 0;
-  position: fixed;
-  width: 100%;
-  background-color: #002147;
-  color: #fff;
-  text-align: center;
-  line-height: 50px;
-  margin-top: 3%;
-`;
-const StyledIcon = styled.h1`
-  font-size: 42px;
-  font-weight: 700;
-  color: #0c2b50;
-`;
-
-const AuthStyled = styled(Auth)`
-  padding: 300px;
-`;
+import BackIcon from '@/components/BackIcon/BackIcon';
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
 
 export const Index = () => {
   const supabaseClient = useSupabaseClient();
@@ -75,7 +44,7 @@ export const Index = () => {
             width={'50%'}
           >
             <Link href='/'>
-              <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
+              <BackIcon />
             </Link>
             <Heading
               marginLeft={'43%'}
@@ -124,6 +93,7 @@ export const Index = () => {
                   },
                   container: {
                     margin: '20px 20%',
+                    marginBottom: '4%',
                   },
                   label: {},
                   input: { width: '100%' },
@@ -139,9 +109,7 @@ export const Index = () => {
               socialLayout='horizontal'
             />
           </main>
-          <StyledFooter>
-            © 2023 - Islamic University of Science and Technology.
-          </StyledFooter>
+          <InnerFooter />
         </>
       </>
     );

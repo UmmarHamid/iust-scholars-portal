@@ -1,14 +1,14 @@
 import Logo from '@/components/Logo/Logo';
-import { Box, Button, Heading, SimpleGrid } from '@chakra-ui/react';
+import { Box, Heading, SimpleGrid } from '@chakra-ui/react';
 import Head from 'next/head';
 import { styled } from 'styled-components';
-import { BiLogOut } from 'react-icons/bi';
 import Link from 'next/link';
 import { RxCube } from 'react-icons/rx';
 import { PiUserListFill } from 'react-icons/pi';
 import { IoPeopleCircle } from 'react-icons/io5';
 import { MdAssignmentAdd, MdOutlineGroups } from 'react-icons/md';
-
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import Logout from '@/components/Logout/Logout';
 const StyledIcon = styled.div`
   font-size: 7em;
   color: #0c2b50;
@@ -19,17 +19,6 @@ const LinkStyled = styled(Link)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
-
-const StyledFooter = styled.footer`
-  left: 0;
-  bottom: 0;
-  position: relative;
-  width: 100%;
-  background-color: #002147;
-  color: #fff;
-  text-align: center;
-  line-height: 50px;
 `;
 
 export const Index = () => {
@@ -46,7 +35,7 @@ export const Index = () => {
       >
         <Logo
           alt='IUST-logo'
-          href='google.com'
+          href='/'
           width={300}
           height={75}
           imgSrc='/iustlogo.png'
@@ -58,11 +47,9 @@ export const Index = () => {
           fontWeight='bold'
           color='teal'
         >
-          Name of DRC person
+          DRC Member
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />}>
-          Logout
-        </Button>
+        <Logout />
       </Box>
       <SimpleGrid
         columns={2}
@@ -70,6 +57,7 @@ export const Index = () => {
         columnGap={'200px'}
         height={'calc(100vh - 150px)'}
         padding={'5%'}
+        marginBottom={'18%'}
       >
         <LinkStyled
           href='/protected/drc/scholardetails'
@@ -99,16 +87,14 @@ export const Index = () => {
             Report Generation
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/protected/drc/approvesubmission'>
+        <LinkStyled href='/protected/drc/reportremarks'>
           <StyledIcon> {<IoPeopleCircle />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            Approve Submission
+            Report Remarks
           </Heading>
         </LinkStyled>
       </SimpleGrid>
-      <StyledFooter>
-        © 2023 - Islamic University of Science and Technology.
-      </StyledFooter>
+      <InnerFooter />
     </>
   );
 };

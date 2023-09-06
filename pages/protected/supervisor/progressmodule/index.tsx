@@ -1,29 +1,15 @@
-import styled from 'styled-components';
-import { MdArrowBackIosNew } from 'react-icons/md';
 import { Box, Button, Container, Heading, Input, Text } from '@chakra-ui/react';
-import { BiLogOut } from 'react-icons/bi';
 import { AiOutlineFolderView } from 'react-icons/ai';
 import Head from 'next/head';
 import Link from 'next/link';
-const StyledIcon = styled.h1`
-  font-size: 42px;
-  font-weight: 700;
-  color: #0c2b50;
-`;
-const StyledFooter = styled.footer`
-  bottom: 0;
-  position: fixed;
-  width: 100%;
-  background-color: #002147;
-  color: #fff;
-  text-align: center;
-  line-height: 50px;
-`;
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import BackIcon from '@/components/BackIcon/BackIcon';
+import Logout from '@/components/Logout/Logout';
 export const Index = () => {
   return (
     <>
       <Head>
-        <title>Research Progress</title>
+        <title>Progress Module</title>
       </Head>
       <Box
         display={'flex'}
@@ -32,14 +18,12 @@ export const Index = () => {
         height={'100px'}
       >
         <Link href='/protected/supervisor'>
-          <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
+          <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
-          Research Progress
+          Progress Module
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />}>
-          Logout
-        </Button>
+        <Logout />
       </Box>
       <Container maxWidth={'5xl'}>
         <Text fontSize={'2xl'} color={'#07443E'}>
@@ -94,7 +78,7 @@ export const Index = () => {
           </Button>
         </Box>
         <Text fontSize={'2xl'} color={'#07443E'}>
-          2. Samin DOCS IUST0121014521
+          2. Suhail DOCS IUST0121014521
         </Text>
         <Box
           marginTop={'1%'}
@@ -145,9 +129,7 @@ export const Index = () => {
           </Button>
         </Box>
       </Container>
-      <StyledFooter>
-        © 2023 - Islamic University of Science and Technology.
-      </StyledFooter>
+      <InnerFooter />
     </>
   );
 };
