@@ -1,11 +1,11 @@
-import { Button } from '@chakra-ui/button';
-import { BiArrowBack, BiLogOut } from 'react-icons/bi';
 import Link from 'next/link';
 import { Box, Heading, Text } from '@chakra-ui/react';
 import supabase from '../../../../utils/supabase';
 import { GetServerSideProps } from 'next';
 import { useUser } from '@supabase/auth-helpers-react';
-
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import BackIcon from '@/components/BackIcon/BackIcon';
+import Logout from '@/components/Logout/Logout';
 export const Index = ({ data: userDetails, error, userId }: any) => {
   const loggedinUser = useUser();
   return (
@@ -13,19 +13,12 @@ export const Index = ({ data: userDetails, error, userId }: any) => {
       <title>Personal Details</title>
       <Box
         display={'flex'}
-        justifyContent={'space-between'}
+        justifyContent={'space-around'}
         alignItems={'center'}
         height={'100px'}
       >
         <Link href={`/protected/scholars/${userDetails.email}`}>
-          <Button
-            leftIcon={<BiArrowBack />}
-            colorScheme='facebook'
-            variant='solid'
-            marginLeft={'20px'}
-          >
-            Back
-          </Button>
+          <BackIcon />
         </Link>
         <Heading
           as='h2'
@@ -36,15 +29,14 @@ export const Index = ({ data: userDetails, error, userId }: any) => {
         >
           Personal Details
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />} marginRight={'20px'}>
-          Logout
-        </Button>
+        <Logout />
       </Box>
       <Box
         display={'flex'}
         justifyContent={'space-around'}
         flexDirection={'column'}
         margin={'20px'}
+        marginLeft={'15%'}
       >
         <Text fontWeight={300} fontSize={'30px'}>
           {`Name: ${userDetails.username}`}
@@ -80,6 +72,7 @@ export const Index = ({ data: userDetails, error, userId }: any) => {
           {`Qualified Exam: ${userDetails.qualified_exam}`}
         </Text>
       </Box>
+      <InnerFooter />
     </>
   );
 };

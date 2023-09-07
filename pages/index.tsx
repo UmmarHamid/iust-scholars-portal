@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
+import Logout from '@/components/Logout/Logout';
 
 const StyledHeader = styled.header`
   display: flex;
@@ -138,15 +139,8 @@ const StyledSpotlightText2 = styled.h1`
 `;
 
 export const Homepage = () => {
-  const supabaseClient = useSupabaseClient();
   const user = useUser();
 
-  const router = useRouter();
-
-  const handleSignout = () => {
-    supabaseClient.auth.signOut();
-    router.push('/login');
-  };
   return (
     <>
       <Head>
@@ -173,7 +167,7 @@ export const Homepage = () => {
                   colorScheme='blue'
                   variant='solid'
                 >
-                  Student Login
+                  Login
                 </Button>
               </Link>
             )}
@@ -188,11 +182,7 @@ export const Homepage = () => {
                 </Button>
               </Link>
             )}
-            {user && (
-              <Button onClick={handleSignout} colorScheme='red' variant='solid'>
-                Sign Out
-              </Button>
-            )}
+            {user && <Logout />}
           </Stack>
         </StyledHeader>
         {/* Photo Gallery Section */}

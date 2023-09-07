@@ -1,29 +1,24 @@
 'use client';
 import styled from 'styled-components';
 import Select from 'react-select';
-import { MdArrowBackIosNew } from 'react-icons/md';
 import {
   Box,
   Button,
   Container,
-  Flex,
   FormControl,
   FormLabel,
   Heading,
   Input,
 } from '@chakra-ui/react';
-import { BiLogOut } from 'react-icons/bi';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import supabase from '@/utils/supabase';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
-const StyledIcon = styled.h1`
-  font-size: 42px;
-  font-weight: 700;
-  color: #0c2b50;
-`;
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import BackIcon from '@/components/BackIcon/BackIcon';
+import Logout from '@/components/Logout/Logout';
 
 type courseType = {
   id: string;
@@ -92,14 +87,12 @@ export const Index = ({ courses }: any) => {
         height={'100px'}
       >
         <Link href='/protected/office'>
-          <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
+          <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
           Add Scholar
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />}>
-          Logout
-        </Button>
+        <Logout />
       </Box>
       <Container maxW='2xl' centerContent>
         <FormControl>
@@ -185,7 +178,7 @@ export const Index = ({ courses }: any) => {
             <Select
               options={formattedCourses}
               isMulti
-              onChange={(values) => {
+              onChange={(values: any) => {
                 setSelectedCourses(values);
               }}
               closeMenuOnSelect={false}
@@ -198,10 +191,12 @@ export const Index = ({ courses }: any) => {
           colorScheme='teal'
           size='lg'
           width={'50%'}
+          marginBottom={'2%'}
         >
           Submit
         </Button>
       </Container>
+      <InnerFooter />
     </>
   );
 };

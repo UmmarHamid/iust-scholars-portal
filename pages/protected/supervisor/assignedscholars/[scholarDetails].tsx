@@ -1,12 +1,11 @@
-import { Button } from '@chakra-ui/button';
-import { BsFillHouseDoorFill } from 'react-icons/bs';
-import { BiArrowBack, BiLogOut } from 'react-icons/bi';
 import Link from 'next/link';
-import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Heading, Text } from '@chakra-ui/react';
 import supabase from '../../../../utils/supabase';
 import { GetServerSideProps } from 'next';
 import { useUser } from '@supabase/auth-helpers-react';
-
+import BackIcon from '@/components/BackIcon/BackIcon';
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import Logout from '@/components/Logout/Logout';
 export const ScholarDetails = ({ data, error }: any) => {
   const loggedinUser = useUser();
   const userDetails = data[0];
@@ -15,19 +14,12 @@ export const ScholarDetails = ({ data, error }: any) => {
       <title>Personal Details</title>
       <Box
         display={'flex'}
-        justifyContent={'space-between'}
+        justifyContent={'space-around'}
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href={'/protected/scholars'}>
-          <Button
-            leftIcon={<BiArrowBack />}
-            colorScheme='facebook'
-            variant='solid'
-            marginLeft={'20px'}
-          >
-            Back
-          </Button>
+        <Link href={'/protected/supervisor/assignedscholars'}>
+          <BackIcon />
         </Link>
         <Heading
           as='h2'
@@ -38,15 +30,14 @@ export const ScholarDetails = ({ data, error }: any) => {
         >
           Personal Details
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />} marginRight={'20px'}>
-          Logout
-        </Button>
+        <Logout />
       </Box>
       <Box
         display={'flex'}
         justifyContent={'space-around'}
         flexDirection={'column'}
         margin={'20px'}
+        marginLeft={'14%'}
       >
         <Text fontWeight={300} fontSize={'30px'}>
           {`Name: ${userDetails.username}`}
@@ -82,6 +73,7 @@ export const ScholarDetails = ({ data, error }: any) => {
           {`Qualified Exam: ${userDetails.qualified_exam}`}
         </Text>
       </Box>
+      <InnerFooter />
     </>
   );
 };

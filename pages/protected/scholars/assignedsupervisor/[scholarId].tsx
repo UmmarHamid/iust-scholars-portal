@@ -1,12 +1,10 @@
 import styled from 'styled-components';
-import { MdArrowBackIosNew } from 'react-icons/md';
-import { BiLogOut } from 'react-icons/bi';
+
 import Head from 'next/head';
 import Image from 'next/image';
 import { useUser } from '@supabase/auth-helpers-react';
 import {
   Box,
-  Button,
   Heading,
   Table,
   TableContainer,
@@ -17,21 +15,9 @@ import {
 import Link from 'next/link';
 import { GetServerSideProps } from 'next';
 import supabase from '@/utils/supabase';
-const StyledIcon = styled.h1`
-  font-size: 46px;
-  font-weight: 700;
-  color: #0c2b50;
-  padding-left: 30%;
-`;
-const StyledFooter = styled.footer`
-  bottom: 0;
-  position: fixed;
-  width: 100%;
-  background-color: #002147;
-  color: #fff;
-  text-align: center;
-  line-height: 50px;
-`;
+import BackIcon from '@/components/BackIcon/BackIcon';
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import Logout from '@/components/Logout/Logout';
 const ImageStyled = styled(Image)`
   padding: 10px;
   border-radius: 16px;
@@ -51,20 +37,19 @@ export const Index = ({ supervisor }: any) => {
         height={'100px'}
       >
         <Link href={`/protected/scholars/${loggedinUser?.email}`}>
-          <StyledIcon>{<MdArrowBackIosNew size={36} />}</StyledIcon>
+          <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
           Assigned Supervisor
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />}>
-          Logout
-        </Button>
+        <Logout />
       </Box>
       <TableContainer>
         <Table
           display={'flex'}
           justifyContent={'space-around'}
           variant='simple'
+          marginBottom={'20%'}
         >
           <Tbody>
             <Tr>
@@ -73,7 +58,7 @@ export const Index = ({ supervisor }: any) => {
                   alt='Not available yet'
                   width={200}
                   height={150}
-                  src='/vc.jpg'
+                  src='/r.jpg'
                 />
               </Td>
               <Td>
@@ -97,9 +82,7 @@ export const Index = ({ supervisor }: any) => {
           </Tbody>
         </Table>
       </TableContainer>
-      <StyledFooter>
-        © 2023 - Islamic University of Science and Technology.
-      </StyledFooter>
+      <InnerFooter />
     </>
   );
 };

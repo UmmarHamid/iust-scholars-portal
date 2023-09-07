@@ -1,11 +1,11 @@
-import { Button } from '@chakra-ui/button';
-import { BsFillHouseDoorFill } from 'react-icons/bs';
-import { BiArrowBack, BiLogOut } from 'react-icons/bi';
 import Link from 'next/link';
-import { Box, Heading, SimpleGrid, Text } from '@chakra-ui/react';
+import { Box, Heading, Text } from '@chakra-ui/react';
 import supabase from '../../../../utils/supabase';
 import { GetServerSideProps } from 'next';
 import { useUser } from '@supabase/auth-helpers-react';
+import BackIcon from '@/components/BackIcon/BackIcon';
+import Logout from '@/components/Logout/Logout';
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
 
 export const ScholarDetails = ({ data: userDetails, error }: any) => {
   const loggedinUser = useUser();
@@ -14,19 +14,12 @@ export const ScholarDetails = ({ data: userDetails, error }: any) => {
       <title>Personal Details</title>
       <Box
         display={'flex'}
-        justifyContent={'space-between'}
+        justifyContent={'space-around'}
         alignItems={'center'}
         height={'100px'}
       >
         <Link href={'/protected/drc/scholardetails'}>
-          <Button
-            leftIcon={<BiArrowBack />}
-            colorScheme='facebook'
-            variant='solid'
-            marginLeft={'20px'}
-          >
-            Back
-          </Button>
+          <BackIcon />
         </Link>
         <Heading
           as='h2'
@@ -37,15 +30,13 @@ export const ScholarDetails = ({ data: userDetails, error }: any) => {
         >
           Personal Details
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />} marginRight={'20px'}>
-          Logout
-        </Button>
+        <Logout />
       </Box>
       <Box
         display={'flex'}
         justifyContent={'space-around'}
         flexDirection={'column'}
-        margin={'20px'}
+        marginLeft={'17%'}
       >
         <Text fontWeight={300} fontSize={'30px'}>
           {`Name: ${userDetails.username}`}
@@ -81,11 +72,13 @@ export const ScholarDetails = ({ data: userDetails, error }: any) => {
           {`Qualified Exam: ${userDetails.qualified_exam}`}
         </Text>
       </Box>
+      <InnerFooter />
     </>
   );
 };
 export default ScholarDetails;
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  console.log(params);
   const { data, error } = await supabase
     .from('scholars_profiles')
     .select('*')

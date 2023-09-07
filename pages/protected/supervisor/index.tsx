@@ -1,17 +1,14 @@
 import Logo from '@/components/Logo/Logo';
-import { Box, Button, Heading, SimpleGrid } from '@chakra-ui/react';
+import { Box, Heading, SimpleGrid } from '@chakra-ui/react';
 import Head from 'next/head';
 import { styled } from 'styled-components';
-import { BiLogOut } from 'react-icons/bi';
 import Link from 'next/link';
-import { RxCube } from 'react-icons/rx';
-import { PiUserListFill } from 'react-icons/pi';
 import { GiArchiveResearch } from 'react-icons/gi';
-import { IoPeopleCircle } from 'react-icons/io5';
-import { MdAssignmentAdd, MdOutlineGroups } from 'react-icons/md';
+import { MdAssignmentAdd } from 'react-icons/md';
 import { FaClipboardList } from 'react-icons/fa';
 import { AiOutlineFileDone } from 'react-icons/ai';
-
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import Logout from '@/components/Logout/Logout';
 const StyledIcon = styled.div`
   font-size: 7em;
   color: #0c2b50;
@@ -22,17 +19,6 @@ const LinkStyled = styled(Link)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-`;
-
-const StyledFooter = styled.footer`
-  left: 0;
-  bottom: 0;
-  position: relative;
-  width: 100%;
-  background-color: #002147;
-  color: #fff;
-  text-align: center;
-  line-height: 50px;
 `;
 
 export const Index = () => {
@@ -63,9 +49,7 @@ export const Index = () => {
         >
           Name of Supervisor
         </Heading>
-        <Button colorScheme='red' leftIcon={<BiLogOut />}>
-          Logout
-        </Button>
+        <Logout />
       </Box>
       <SimpleGrid
         columns={2}
@@ -84,13 +68,13 @@ export const Index = () => {
             Assigned Scholars
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/'>
+        <LinkStyled href='/protected/supervisor/reportgeneration'>
           <StyledIcon> {<MdAssignmentAdd />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Report Generation
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/protected/supervisor/researchprogress'>
+        <LinkStyled href='/protected/supervisor/progressmodule'>
           <StyledIcon> {<GiArchiveResearch />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Progress Module
@@ -98,7 +82,7 @@ export const Index = () => {
         </LinkStyled>
 
         <LinkStyled
-          href='/protected/supervisor/approvesracmembers'
+          href='/protected/supervisor/assignsracmembers'
           style={{ gridColumn: 'span 2' }}
         >
           <StyledIcon> {<AiOutlineFileDone />} </StyledIcon>
@@ -107,9 +91,7 @@ export const Index = () => {
           </Heading>
         </LinkStyled>
       </SimpleGrid>
-      <StyledFooter>
-        © 2023 - Islamic University of Science and Technology.
-      </StyledFooter>
+      <InnerFooter />
     </>
   );
 };
