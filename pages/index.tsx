@@ -9,18 +9,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useUser } from '@supabase/auth-helpers-react';
 import Logout from '@/components/Logout/Logout';
-import Slider from 'react-slick'
+import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import ImageGallery from '@/components/ImageGallery/ImageGallery';
 const settings = {
   swipeToSlide: true,
   infinite: true,
   slidesToShow: 1,
   slidesToScroll: 1,
   autoplay: true,
-  speed: 3000,
-  autoplaySpeed: 9000,
+  speed: 2000,
+  autoplaySpeed: 7000,
   cssEase: 'linear',
 };
 const StyledHeader = styled.header`
@@ -150,6 +149,10 @@ const StyledSpotlightText2 = styled.h1`
   color: #00bcd4;
 `;
 
+const ImageStyled = styled(Image)`
+  border-radius: 10px;
+`;
+
 export const Homepage = () => {
   const user = useUser();
 
@@ -200,17 +203,17 @@ export const Homepage = () => {
         {/* Photo Gallery Section */}
         <Container maxW={'95%'}>
           <Slider {...settings}>
-            <ImageGallery
-              alt='NOT-available'
+            <ImageStyled
+              src={'/photogallery1.jpg'}
+              alt={'NOT-available'}
               width={1200}
               height={300}
-              imgSrc='/photogallery1.jpg'
             />
-            <ImageGallery
-              alt='NOT-available'
+            <ImageStyled
+              src={'/photogallery2.jpg'}
+              alt={'NOT-available'}
               width={1200}
-              height={500}
-              imgSrc='/photogallery2.jpg'
+              height={300}
             />
           </Slider>
         </Container>
