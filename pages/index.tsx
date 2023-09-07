@@ -1,16 +1,28 @@
 import Head from 'next/head';
 import Logo from '@/components/Logo/Logo';
 import { Button } from '@chakra-ui/button';
-import { Box, Heading, Stack } from '@chakra-ui/react';
+import { Box, Container, Heading, Stack } from '@chakra-ui/react';
 import { styled } from 'styled-components';
 import { BsFillPencilFill, BsFillPersonFill } from 'react-icons/bs';
 import Footer from '@/components/Footer/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
-import { useRouter } from 'next/router';
+import { useUser } from '@supabase/auth-helpers-react';
 import Logout from '@/components/Logout/Logout';
-
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import ImageGallery from '@/components/ImageGallery/ImageGallery';
+const settings = {
+  swipeToSlide: true,
+  infinite: true,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  speed: 3000,
+  autoplaySpeed: 9000,
+  cssEase: 'linear',
+};
 const StyledHeader = styled.header`
   display: flex;
   flex-direction: row;
@@ -186,19 +198,22 @@ export const Homepage = () => {
           </Stack>
         </StyledHeader>
         {/* Photo Gallery Section */}
-        <Box
-          mx='3%'
-          display='flex'
-          alignItems={'center'}
-          height={300}
-          border='3px solid black'
-          borderRadius={15}
-          mt={10}
-        >
-          <Heading size={'2xl'} mx={'auto'}>
-            Photo Gallery
-          </Heading>
-        </Box>
+        <Container maxW={'95%'}>
+          <Slider {...settings}>
+            <ImageGallery
+              alt='NOT-available'
+              width={1200}
+              height={300}
+              imgSrc='/photogallery1.jpg'
+            />
+            <ImageGallery
+              alt='NOT-available'
+              width={1200}
+              height={500}
+              imgSrc='/photogallery2.jpg'
+            />
+          </Slider>
+        </Container>
 
         {/* Departments Section */}
         {/* TODO: Make this section dynamic */}
