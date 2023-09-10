@@ -62,7 +62,7 @@ export const Index = ({ userId }: any) => {
         height={'calc(100vh - 150px)'}
         padding={'5%'}
         textAlign={'center'}
-        marginBottom={'6%'}
+        marginBottom={'10%'}
       >
         <LinkStyled href={`/protected/scholars/personaldetails/${userId}`}>
           <StyledIcon> {<BiSolidUserDetail />} </StyledIcon>

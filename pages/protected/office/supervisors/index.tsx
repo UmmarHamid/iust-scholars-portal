@@ -57,7 +57,7 @@ export const index = ({ supervisors }: any) => {
           marginBottom={'18%'}
         >
           <Tbody>
-            {supervisors.map((supervisor: supervisorProfile) => (
+            {supervisors?.map((supervisor: supervisorProfile) => (
               <Tr key={supervisor.id}>
                 {/* <Td isNumeric>1</Td> */}
                 <Td>

@@ -57,7 +57,7 @@ export const Index = () => {
         gap={'100px'}
         height={'calc(100vh - 150px)'}
         padding={'5%'}
-        marginBottom={'5%'}
+        marginBottom={'7%'}
       >
         <LinkStyled href='/protected/office/addscholar'>
           <StyledIcon> {<BiUserPlus />} </StyledIcon>
