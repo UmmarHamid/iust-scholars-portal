@@ -1,11 +1,14 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { Box, Container, Heading } from '@chakra-ui/react';
+import { Box, Container, Flex, Heading } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 import supabase from '@/utils/supabase';
 import BackIcon from '@/components/BackIcon/BackIcon';
 import Logout from '@/components/Logout/Logout';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import { FaEdit } from 'react-icons/fa';
+import { useRouter } from 'next/router';
+import { styled } from 'styled-components';
 type ScholarProfile = {
   address: string | null;
   department: string | null;
@@ -23,7 +26,14 @@ type ScholarProfile = {
   email: string;
 };
 
-export const index = ({ scholars }: any) => {
+const FaEditStyled = styled(FaEdit)`
+  cursor: pointer;
+`;
+export const Index = ({ scholars }: any) => {
+  const router = useRouter();
+  const handleScholarEdit = (scholarEmail: string) => {
+    router.push(`/protected/office/scholardetails/editscholar/${scholarEmail}`);
+  };
   return (
     <>
       <Head>
@@ -45,26 +55,36 @@ export const index = ({ scholars }: any) => {
       </Box>
       <Container maxW='5xl' marginBottom={'20%'}>
         {scholars.map((scholar: ScholarProfile, index: number) => (
-          <Link
+          <Flex
             key={scholar.id}
-            href={`/protected/office/scholardetails/${scholar.email}`}
+            alignItems='center'
+            justifyContent={'space-between'}
           >
-            <Heading
-              margin={'2%'}
-              as={'h6'}
-              color={'#07443E'}
-              letterSpacing={'10px'}
+            <Link
+              href={`/protected/office/scholardetails/${scholar.email}`}
+              style={{ flexBasis: '70%' }}
             >
-              {`${index + 1}- ${scholar.username} ${scholar.reg_no} `}
-            </Heading>
-          </Link>
+              <Heading
+                margin={'2%'}
+                as={'h6'}
+                color={'#07443E'}
+                letterSpacing={'10px'}
+              >
+                {`${index + 1}- ${scholar.username} ${scholar.reg_no} `}
+              </Heading>
+            </Link>
+            <FaEditStyled
+              onClick={() => handleScholarEdit(scholar.email)}
+              size={24}
+            />
+          </Flex>
         ))}
       </Container>
       <InnerFooter />
     </>
   );
 };
-export default index;
+export default Index;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data: scholars, error } = await supabase

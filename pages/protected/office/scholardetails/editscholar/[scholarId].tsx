@@ -1,5 +1,4 @@
 'use client';
-import Select from 'react-select';
 import {
   Box,
   Button,
@@ -11,73 +10,55 @@ import {
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState } from 'react';
 import supabase from '@/utils/supabase';
-import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import BackIcon from '@/components/BackIcon/BackIcon';
 import Logout from '@/components/Logout/Logout';
-
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 type courseType = {
   id: string;
   name: string;
   credits: number;
 };
-export const Index = ({ courses }: any) => {
+
+export const ScholarDetails = ({ data }: any) => {
   const router = useRouter();
-
   const [formData, setFormData] = useState({
-    username: '',
-    father: '',
-    mother: '',
-    address: '',
-    dob: '',
-    phone: '',
-    department: '',
-    reg_no: '',
-    join_date: '',
-    qualified_exam: '',
-    email: '',
-  });
-  const formattedCourses = courses.map((course: courseType) => {
-    return { label: course.name, value: course.id };
+    username: data.username,
+    father: data.father,
+    mother: data.mother,
+    address: data.address,
+    dob: data.dob,
+    phone: data.phone,
+    department: data.department,
+    reg_no: data.reg_no,
+    join_date: data.join_data,
+    qualified_exam: data.qualified_exam,
+    email: data.email,
   });
 
-  const handleAddScholar = async () => {
+  const handleEditScholar = async () => {
     // TODO: Add form Validation here
-    const { data, error } = await supabase
+    const { data: updatedScholar, error } = await supabase
       .from('scholars_profiles')
-      .insert([formData])
-      .select();
-
-    const scholar = data ? data[0] : [];
-
-    if (scholar) {
-      console.log(`User created successfully`, scholar);
-      const coursesPayload = selectedCourses.map((course: any) => {
-        return { course_id: course.value, scholar_id: scholar.id };
-      });
-      console.log(coursesPayload);
-      const { data, error } = await supabase
-        .from('scholar_registered_courses')
-        .insert(coursesPayload)
-        .select();
-
-      console.log(data, error);
-      // router.push('/protected/office');
+      .update([formData])
+      .eq('email', data.email)
+      .select()
+      .single();
+    if (updatedScholar) {
+      router.push(`/protected/office/scholardetails/${updatedScholar.email}`);
     }
     if (error) {
-      console.log('error creating new scholar');
+      console.log('error updating  scholar');
     }
   };
-
-  const [selectedCourses, setSelectedCourses] = useState(formattedCourses[0]);
 
   return (
     <>
       <Head>
-        <title>Add Scholar</title>
+        <title>Edit Scholar</title>
       </Head>
       <Box
         display={'flex'}
@@ -89,7 +70,7 @@ export const Index = ({ courses }: any) => {
           <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
-          Add Scholar
+          Edit Scholar
         </Heading>
         <Logout />
       </Box>
@@ -102,6 +83,7 @@ export const Index = ({ courses }: any) => {
             }
             type='Text'
             mb={4}
+            defaultValue={data.username}
           />
           <FormLabel>{`Father's Name`}</FormLabel>
           <Input
@@ -110,6 +92,7 @@ export const Index = ({ courses }: any) => {
             }
             type='Text'
             mb={4}
+            defaultValue={data.father}
           />
           <FormLabel>{`Mother's Name`}</FormLabel>
           <Input
@@ -118,6 +101,7 @@ export const Index = ({ courses }: any) => {
             }
             type='Text'
             mb={4}
+            defaultValue={data.mother}
           />
           <FormLabel>{`Address`}</FormLabel>
           <Input
@@ -125,12 +109,15 @@ export const Index = ({ courses }: any) => {
               setFormData({ ...formData, address: e.target.value })
             }
             type='Text'
+            mb={4}
+            defaultValue={data.address}
           />
           <FormLabel>{`D.O.B`}</FormLabel>
           <Input
             onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
             type='date'
             mb={4}
+            defaultValue={data.dob}
           />
           <FormLabel>{`Phone no.`}</FormLabel>
           <Input
@@ -139,6 +126,7 @@ export const Index = ({ courses }: any) => {
             }
             type='number'
             mb={4}
+            defaultValue={data.phone}
           />
           <FormLabel>{`Email`}</FormLabel>
           <Input
@@ -147,6 +135,7 @@ export const Index = ({ courses }: any) => {
             }
             type='email'
             mb={4}
+            defaultValue={data.email}
           />
           <FormLabel>{`Registration No.`}</FormLabel>
           <Input
@@ -155,6 +144,7 @@ export const Index = ({ courses }: any) => {
             }
             type='Text'
             mb={4}
+            defaultValue={data.reg_no}
           />
           <FormLabel>{`Joining Date`}</FormLabel>
           <Input
@@ -163,6 +153,7 @@ export const Index = ({ courses }: any) => {
             }
             type='Date'
             mb={4}
+            defaultValue={data.join_date}
           />
           <FormLabel>{`Qualified Exam`}</FormLabel>
           <Input
@@ -171,21 +162,11 @@ export const Index = ({ courses }: any) => {
             }
             type='Text'
             mb={4}
+            defaultValue={data.qualified_exam}
           />
-          <FormLabel>{`Selected Courses`}</FormLabel>
-          <Box marginBottom={'16px'}>
-            <Select
-              options={formattedCourses}
-              isMulti
-              onChange={(values: any) => {
-                setSelectedCourses(values);
-              }}
-              closeMenuOnSelect={false}
-            />
-          </Box>
         </FormControl>
         <Button
-          onClick={handleAddScholar}
+          onClick={handleEditScholar}
           fontSize={26}
           colorScheme='teal'
           size='lg'
@@ -199,10 +180,11 @@ export const Index = ({ courses }: any) => {
     </>
   );
 };
-export default Index;
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { data: courses, error } = await supabase.from('courses').select('*');
-  console.log(courses);
-  return { props: { courses, error } };
+export default ScholarDetails;
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const { data, error } = await supabase
+    .from('scholars_profiles')
+    .select('*')
+    .eq('email', params?.scholarId);
+  return { props: { data: data ? data[0] : [], error } };
 };
