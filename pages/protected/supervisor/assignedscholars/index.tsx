@@ -43,7 +43,7 @@ export const index = ({ scholars }: any) => {
         <Logout />
       </Box>
       <Container maxW='5xl' marginBottom={'20%'}>
-        {scholars.map((scholar: ScholarProfile, index: number) => (
+        {scholars?.map((scholar: ScholarProfile, index: number) => (
           <Link
             key={scholar.id}
             href={`/protected/supervisor/assignedscholars/${'1'}`}

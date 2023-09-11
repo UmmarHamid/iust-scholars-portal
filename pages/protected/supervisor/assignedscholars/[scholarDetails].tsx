@@ -38,6 +38,7 @@ export const ScholarDetails = ({ data, error }: any) => {
         flexDirection={'column'}
         margin={'20px'}
         marginLeft={'14%'}
+        marginBottom={'5%'}
       >
         <Text fontWeight={300} fontSize={'30px'}>
           {`Name: ${userDetails.username}`}

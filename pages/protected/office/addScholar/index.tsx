@@ -93,7 +93,7 @@ export const Index = ({ courses }: any) => {
         </Heading>
         <Logout />
       </Box>
-      <Container maxW='2xl' centerContent>
+      <Container maxW='2xl' centerContent marginBottom={'5%'}>
         <FormControl>
           <FormLabel>{`Full Name`}</FormLabel>
           <Input

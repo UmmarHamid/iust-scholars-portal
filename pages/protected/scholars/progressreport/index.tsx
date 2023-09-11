@@ -45,6 +45,7 @@ export const Index = () => {
           flexDirection={'column'}
           gap={'20px'}
           margin={'20px'}
+          marginBottom={'6%'}
         >
           <Text fontWeight={300} fontSize={'30px'}>
             {`Name of the Scholar: ${user.name}`}

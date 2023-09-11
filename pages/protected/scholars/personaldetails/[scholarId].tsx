@@ -37,6 +37,7 @@ export const Index = ({ data: userDetails, error, userId }: any) => {
         flexDirection={'column'}
         margin={'20px'}
         marginLeft={'15%'}
+        marginBottom={'5%'}
       >
         <Text fontWeight={300} fontSize={'30px'}>
           {`Name: ${userDetails.username}`}

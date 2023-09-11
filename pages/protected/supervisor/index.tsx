@@ -57,7 +57,7 @@ export const Index = () => {
         columnGap={'200px'}
         height={'calc(100vh - 150px)'}
         padding={'5%'}
-        marginBottom={'20%'}
+        marginBottom={'23%'}
       >
         <LinkStyled
           href='/protected/supervisor/assignedscholars'
