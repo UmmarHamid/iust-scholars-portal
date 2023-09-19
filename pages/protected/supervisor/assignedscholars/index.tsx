@@ -6,6 +6,7 @@ import supabase from '@/utils/supabase';
 import BackIcon from '@/components/BackIcon/BackIcon';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import Logout from '@/components/Logout/Logout';
+import { fetchUserDetails } from '@/utils/utils';
 type ScholarProfile = {
   address: string | null;
   department: string | null;
@@ -65,16 +66,16 @@ export const index = ({ scholars }: any) => {
 };
 export default index;
 
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { data: scholars } = await supabase
+export const getServerSideProps: GetServerSideProps = async (params) => {
+  const { data: scholarsResponse } = await supabase
     .from('scholars_profiles')
     .select('*');
 
-  const { data: supervisors } = await supabase
-    .from('supervisor_profiles')
-    .select('*');
-  // .eq('email', 'drrumaan@patheini.com')
-  console.log(supervisors);
-  // const currentScholars = scholars
+  const userDetails = await fetchUserDetails(
+    params?.query?.email?.toString() || ''
+  );
+  const scholars = scholarsResponse?.filter(
+    (scholar) => scholar.assigned_supervisor == userDetails.id
+  );
   return { props: { scholars } };
 };

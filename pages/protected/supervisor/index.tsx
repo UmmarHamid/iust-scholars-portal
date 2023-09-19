@@ -9,6 +9,8 @@ import { FaClipboardList } from 'react-icons/fa';
 import { AiOutlineFileDone } from 'react-icons/ai';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import Logout from '@/components/Logout/Logout';
+import { fetchUserDetails } from '@/utils/utils';
+import { useUser } from '@supabase/auth-helpers-react';
 const StyledIcon = styled.div`
   font-size: 7em;
   color: #0c2b50;
@@ -22,6 +24,7 @@ const LinkStyled = styled(Link)`
 `;
 
 export const Index = () => {
+  const user = useUser();
   return (
     <>
       <Head>
@@ -60,7 +63,7 @@ export const Index = () => {
         marginBottom={'23%'}
       >
         <LinkStyled
-          href='/protected/supervisor/assignedscholars'
+          href={`/protected/supervisor/assignedscholars?email=${user?.email}`}
           style={{ gridColumn: 'span 2' }}
         >
           <StyledIcon> {<FaClipboardList />} </StyledIcon>
