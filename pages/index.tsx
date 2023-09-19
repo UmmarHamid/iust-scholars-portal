@@ -182,18 +182,7 @@ export const Homepage = () => {
                   colorScheme='blue'
                   variant='solid'
                 >
-                  Login
-                </Button>
-              </Link>
-            )}
-            {!user && (
-              <Link href={'/signup'}>
-                <Button
-                  rightIcon={<BsFillPencilFill />}
-                  colorScheme='whatsapp'
-                  variant='outline'
-                >
-                  Sign Up
+                  Login / Sign Up
                 </Button>
               </Link>
             )}

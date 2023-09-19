@@ -9,7 +9,7 @@ export const Logout = () => {
 
   const handleSignout = () => {
     supabaseClient.auth.signOut();
-    router.push('/login');
+    router.push('/');
   };
   return (
     <>
