@@ -90,7 +90,8 @@ export default index;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data: supervisors, error } = await supabase
-    .from('supervisor_profiles')
-    .select('*');
+    .from('staff')
+    .select('*')
+    .eq('role', 'supervisor');
   return { props: { supervisors, error } };
 };

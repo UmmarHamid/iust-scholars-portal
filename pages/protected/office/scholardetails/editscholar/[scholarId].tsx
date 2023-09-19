@@ -66,7 +66,7 @@ export const ScholarDetails = ({ data }: any) => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/protected/office'>
+        <Link href='/protected/office/scholardetails'>
           <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>

@@ -72,6 +72,10 @@ export const Index = ({ data: userDetails, error, userId }: any) => {
         <Text fontWeight={300} fontSize={'30px'}>
           {`Qualified Exam: ${userDetails.qualified_exam}`}
         </Text>
+        {/* TODO: Add supervisor name here     */}
+        <Text fontWeight={300} fontSize={'30px'}>
+          {`Assigned Supervisor: ${userDetails.assigned_supervisor}`}
+        </Text>
       </Box>
       <InnerFooter />
     </>
@@ -83,8 +87,9 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { data, error } = await supabase
     .from('scholars_profiles')
     .select('*')
-    .eq('id', params?.scholarId);
+    .eq('id', params?.scholarId)
+    .single();
   return {
-    props: { data: data ? data[0] : [], error },
+    props: { data: data ? data : [], error },
   };
 };

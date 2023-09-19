@@ -13,7 +13,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 import supabase from '@/utils/supabase';
-import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import BackIcon from '@/components/BackIcon/BackIcon';
@@ -25,8 +24,6 @@ type courseType = {
   credits: number;
 };
 export const Index = ({ courses }: any) => {
-  const router = useRouter();
-
   const [formData, setFormData] = useState({
     username: '',
     father: '',
@@ -203,6 +200,5 @@ export default Index;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data: courses, error } = await supabase.from('courses').select('*');
-  console.log(courses);
   return { props: { courses, error } };
 };
