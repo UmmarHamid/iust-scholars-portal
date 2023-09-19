@@ -71,10 +71,10 @@ export const Index = () => {
             Scholars Details
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/protected/office/updatedetails'>
+        <LinkStyled href='/protected/office/updateaward'>
           <StyledIcon> {<RxUpdate />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            Update Details
+            Update Award
           </Heading>
         </LinkStyled>
 

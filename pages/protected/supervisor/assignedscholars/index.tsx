@@ -66,8 +66,15 @@ export const index = ({ scholars }: any) => {
 export default index;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { data: scholars, error } = await supabase
+  const { data: scholars } = await supabase
     .from('scholars_profiles')
     .select('*');
-  return { props: { scholars, error } };
+
+  const { data: supervisors } = await supabase
+    .from('supervisor_profiles')
+    .select('*');
+  // .eq('email', 'drrumaan@patheini.com')
+  console.log(supervisors);
+  // const currentScholars = scholars
+  return { props: { scholars } };
 };

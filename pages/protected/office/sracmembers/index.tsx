@@ -87,7 +87,8 @@ export const index = ({ members }: any) => {
 export default index;
 export const getServerSideProps: GetServerSideProps = async () => {
   const { data: members, error } = await supabase
-    .from('srac_profiles')
-    .select('*');
+    .from('staff')
+    .select('*')
+    .eq('role', 'srac-staff');
   return { props: { members, error } };
 };

@@ -114,7 +114,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
     .from('scholars_profiles')
     .select('*');
   const { data: supervisors } = await supabase
-    .from('supervisor_profiles')
-    .select('*');
+    .from('staff')
+    .select('*')
+    .eq('role', 'supervisor');
   return { props: { scholars, supervisors } };
 };

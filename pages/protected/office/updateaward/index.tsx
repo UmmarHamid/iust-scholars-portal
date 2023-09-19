@@ -24,7 +24,7 @@ export const index = () => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/protected/office/updatedetails'>
+        <Link href='/protected/office'>
           <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>

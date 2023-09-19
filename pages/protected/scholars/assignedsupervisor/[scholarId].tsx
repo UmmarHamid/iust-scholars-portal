@@ -100,12 +100,12 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   if (scholarData) {
     // Now, retrieve the supervisor information for the assigned supervisor
     let { data: supervisorData } = await supabase
-      .from('supervisor_profiles')
+      .from('staff')
       .select('*')
       .eq('id', scholarData.assigned_supervisor)
       .single();
     // Check if the supervisor record exists
-
+    console.log(supervisorData);
     return { props: { supervisor: supervisorData } };
   } else {
     return { props: { supervisor: [] } };
