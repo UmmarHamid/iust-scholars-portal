@@ -9,20 +9,45 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import BackIcon from '@/components/BackIcon/BackIcon';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import { fetchUserDetails } from '@/utils/utils';
 
 export const Index = () => {
   const supabaseClient = useSupabaseClient();
   const user = useUser();
-  const [data, setData] = useState();
-
   const router = useRouter();
 
   useEffect(() => {
-    if (user) router.push(`/protected/scholars/${user.email}`);
-  }, [user, router]);
+    if (user) {
+      const fetchDataFromApi = async () => {
+        try {
+          const data = await fetchUserDetails(user.email || '');
+          switch (data.role) {
+            case 'scholar':
+              router.push(`/protected/scholars/${user.email}`);
+              break;
+            case 'supervisor':
+              router.push(`/protected/supervisor`);
+              break;
+            case 'office-staff':
+              router.push(`/protected/office`);
+              break;
+            case 'drc-staff':
+              router.push(`/protected/drc`);
+              break;
+            case 'srac-member':
+              // Handle what happens if srac member logs in
+              break;
+            default:
+              break;
+          }
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
 
-  const [showPassword, setShowPassword] = useState(false);
-  const handleClick = () => setShowPassword(!showPassword);
+      fetchDataFromApi();
+    }
+  });
 
   if (!user) {
     return (
