@@ -9,7 +9,7 @@ import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import { FaEdit } from 'react-icons/fa';
 import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
-type ScholarProfile = {
+export type ScholarProfile = {
   address: string | null;
   department: string | null;
   dob: string | null;

@@ -72,6 +72,9 @@ export const ScholarDetails = ({ data: userDetails, error }: any) => {
         <Text fontWeight={300} fontSize={'30px'}>
           {`Qualified Exam: ${userDetails.qualified_exam}`}
         </Text>
+        <Text fontWeight={300} fontSize={'30px'}>
+          {`Assigned Supervisor: ${userDetails.assigned_supervisor}`}
+        </Text>
       </Box>
       <InnerFooter />
     </>
