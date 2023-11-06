@@ -137,6 +137,49 @@ export interface Database {
         }
         Relationships: []
       }
+      synopsis: {
+        Row: {
+          introduction: string | null
+          reviewOfLiterature: string | null
+          knowledgeGaps: string | null
+          originalityOfTheWork: string | null
+          hypothesis: string | null
+          objectives: string | null
+          methodology: string | null
+          deliverables: string | null
+          collaboration: string | null
+        }
+        Insert: {
+          introduction: string | null
+          reviewOfLiterature: string | null
+          knowledgeGaps: string | null
+          originalityOfTheWork: string | null
+          hypothesis: string | null
+          objectives: string | null
+          methodology: string | null
+          deliverables: string | null
+          collaboration: string | null
+        }
+        Update: {
+          introduction: string | null
+          reviewOfLiterature: string | null
+          knowledgeGaps: string | null
+          originalityOfTheWork: string | null
+          hypothesis: string | null
+          objectives: string | null
+          methodology: string | null
+          deliverables: string | null
+          collaboration: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "synopsis_scholars_id_fkey"
+            columns: ["scholars_id"]
+            referencedRelation: "scholars_profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       supervisor_profiles: {
         Row: {
           assigned_scholars: string | null
