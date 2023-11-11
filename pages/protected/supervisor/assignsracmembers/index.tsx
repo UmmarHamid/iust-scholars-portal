@@ -17,30 +17,43 @@ import supabase from '@/utils/supabase';
 import { ScholarProfile } from '../assignedscholars';
 import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from 'react';
-export const Index = ({ scholars, sracmembers }: any) => {
-  const [sracAssignments, setSracAssignments] = useState<any>({});
 
-  const handleSracChange = (
+export const Index = ({ scholars, srac }: any) => {
+  const [sracAssignmentsFirst, setSracAssignmentsFirst] = useState<any>({});
+  const [sracAssignmentsSecond, setSracAssignmentsSecond] = useState<any>({});
+
+  const handleSracChangeFirst = (
     e: ChangeEvent<HTMLSelectElement>,
     scholarId: string
   ) => {
-    const selectedSracId = e.target.value;
-
+    const selectedSracId1 = e.target.value;
     // Update the supervisorAssignments state with the selected supervisor for the scholar
-    setSracAssignments((prevState: any) => ({
+    setSracAssignmentsFirst((prevState: any) => ({
       ...prevState,
-      [scholarId]: selectedSracId,
+      [scholarId]: selectedSracId1,
+    }));
+  };
+  const handleSracChangeSecond = (
+    t: ChangeEvent<HTMLSelectElement>,
+    scholarId: string
+  ) => {
+    const selectedSracId2 = t.target.value;
+    // Update the supervisorAssignments state with the selected supervisor for the scholar
+    setSracAssignmentsSecond((prevState: any) => ({
+      ...prevState,
+      [scholarId]: selectedSracId2,
     }));
   };
   const router = useRouter();
   const handleSubmitSrac = async (scholarId: string) => {
-    const sracId = sracAssignments[scholarId];
+    const sracId1 = sracAssignmentsFirst[scholarId];
+    const sracId2 = sracAssignmentsSecond[scholarId];
 
     try {
       // Make an update query to update the supervisor assignment in the Supabase table
       const { error } = await supabase
         .from('scholars_profiles') // Replace with your table name
-        .update({ assigned_supervisor: sracId })
+        .update({ assigned_srac1: sracId1, assigned_srac2: sracId2 })
         .eq('id', scholarId);
 
       if (error) {
@@ -49,12 +62,11 @@ export const Index = ({ scholars, sracmembers }: any) => {
 
       // Success! You can also update the local state if needed.
       // For example, set a message to indicate success.
-      console.log(`Srac member assigned for scholar ${scholarId}`);
+      console.log(`Supervisor assigned for scholar ${scholarId}`);
     } catch (error) {
-      console.error('Error assigning srac:', error);
+      console.error('Error assigning supervisor:', error);
     }
   };
-
   return (
     <>
       <Head>
@@ -87,15 +99,32 @@ export const Index = ({ scholars, sracmembers }: any) => {
               placeholder='Select option'
               size='md'
               width={'100%'}
-              onChange={(e) => handleSracChange(e, scholar.id)}
+              onChange={(e) => handleSracChangeFirst(e, scholar.id)}
             >
-              {sracmembers?.map((srac: any) => (
+              {srac.map((srac: any) => (
                 <option key={srac.id} value={srac.id}>
                   {`${srac.name}`}
                 </option>
               ))}
             </Select>
+            <Select
+              placeholder='Select option'
+              size='md'
+              width={'100%'}
+              onChange={(t) => handleSracChangeSecond(t, scholar.id)}
+            >
+              {srac.map((srac: any) => (
+                <option key={srac.id} value={srac.id}>
+                  {`${srac.name}`}
+                </option>
+              ))}
+            </Select>
+
             <Button
+              marginLeft={'200'}
+              paddingLeft={'300'}
+              paddingRight={'300'}
+              size='lg'
               colorScheme='blue'
               onClick={() => handleSubmitSrac(scholar.id)}
             >
@@ -113,9 +142,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const { data: scholars } = await supabase
     .from('scholars_profiles')
     .select('*');
-  const { data: srac } = await supabase
-    .from('supervisor')
-    .select('*')
-    .eq('role', 'srac');
-  return { props: { scholars, srac } };
+  const { data: srac } = await supabase.from('srac_profiles').select('*');
+  return { props: { srac, scholars } };
 };
