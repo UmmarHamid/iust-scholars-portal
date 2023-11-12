@@ -89,7 +89,7 @@ export const Index = ({ userId }: any) => {
             Assigned Supervisor
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/protected/scholars/assignedsracmembers'>
+        <LinkStyled href='/protected/scholars/assignedsrac/${userId}'>
           <StyledIcon> {<AiOutlineTeam />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Assigned SRAC Members
