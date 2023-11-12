@@ -10,12 +10,13 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import supabase from '@/utils/supabase';
 import BackIcon from '@/components/BackIcon/BackIcon';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import Logout from '@/components/Logout/Logout';
-export const Index = ({ srac }: any) => {
+
+export const Index = ({ srac, sracsecond }: any) => {
   const loggedinUser = useUser();
   return (
     <>
@@ -32,7 +33,7 @@ export const Index = ({ srac }: any) => {
           <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
-          Assigned Srac
+          Assigned Srac Members
         </Heading>
         <Logout />
       </Box>
@@ -64,6 +65,26 @@ export const Index = ({ srac }: any) => {
                 {`${srac.email}`}
               </Td>
             </Tr>
+            <Tr>
+              <Td></Td>
+              <Td>
+                <Heading
+                  as='h1'
+                  fontFamily='Georgia'
+                  fontWeight={'300'}
+                  color='#4267B2'
+                  mr={'100px'}
+                >
+                  {`${sracsecond.name}`}
+                </Heading>
+              </Td>
+              <Td color='teal' fontWeight={300} fontSize={'30px'}>
+                {`${sracsecond.designation}`}
+              </Td>
+              <Td color='teal' fontWeight={300} fontSize={'30px'}>
+                {`${sracsecond.email}`}
+              </Td>
+            </Tr>
           </Tbody>
         </Table>
       </TableContainer>
@@ -75,25 +96,28 @@ export default Index;
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   let scholarId = params?.scholarId;
-  console.log(scholarId);
   let { data: scholarData } = await supabase
     .from('scholars_profiles')
-    .select('id,assigned_srac1,assigned_srac2')
+    .select('*')
     .eq('id', scholarId)
     .single();
 
   // Check if the scholar record exists
   if (scholarData) {
-    // Now, retrieve the srac information for the assigned srac
+    // Now, retrieve the supervisor information for the assigned supervisor
     let { data: sracData } = await supabase
       .from('srac_profiles')
       .select('*')
       .eq('id', scholarData.assigned_srac1)
       .single();
+    let { data: sracDataSecond } = await supabase
+      .from('srac_profiles')
+      .select('*')
+      .eq('id', scholarData.assigned_srac2)
+      .single();
     // Check if the supervisor record exists
-    console.log(sracData);
-    return { props: { srac: sracData } };
+    return { props: { srac: sracData, sracsecond: sracDataSecond } };
   } else {
-    return { props: { srac: [] } };
+    return { props: { srac: [], sracsecond: [] } };
   }
 };
