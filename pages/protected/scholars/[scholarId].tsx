@@ -95,7 +95,7 @@ export const Index = ({ userId }: any) => {
             Assigned SRAC Members
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/protected/scholars/synopsisdetails'>
+        <LinkStyled href={`/protected/scholars/synopsisdetails/${userId}`}>
           <StyledIcon> {<HiDocumentDuplicate />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Synopsis Details
