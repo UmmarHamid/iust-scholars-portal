@@ -60,14 +60,7 @@ export const index = ({ supervisors }: any) => {
             {supervisors?.map((supervisor: supervisorProfile) => (
               <Tr key={supervisor.id}>
                 {/* <Td isNumeric>1</Td> */}
-                <Td>
-                  <ImageStyled
-                    alt='Image'
-                    width={100}
-                    height={75}
-                    src='/z.jfif'
-                  />
-                </Td>
+                <Td></Td>
                 <Td>
                   <Heading>{supervisor.name}</Heading>
                   <Text>{supervisor.designation}</Text>

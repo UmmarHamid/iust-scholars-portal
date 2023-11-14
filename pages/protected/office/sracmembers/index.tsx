@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Head from 'next/head';
 import Image from 'next/image';
 import {
   Text,
@@ -13,27 +14,21 @@ import {
 import Link from 'next/link';
 import { GetServerSideProps } from 'next';
 import supabase from '@/utils/supabase';
+import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import BackIcon from '@/components/BackIcon/BackIcon';
 import Logout from '@/components/Logout/Logout';
-import InnerFooter from '@/components/InnerFooter/InnerFooter';
-import Head from 'next/head';
 
-const ImageStyled = styled(Image)`
-  padding: 10px;
-  border-radius: 16px;
-`;
-
-type sracMember = {
+type sracProfile = {
   designation: string | null;
-  email: string | null;
+  email: string;
   id: string;
   name: string | null;
 };
-export const index = ({ members }: any) => {
+export const index = ({ srac }: any) => {
   return (
     <>
       <Head>
-        <title>Srac Members</title>
+        <title>Srac Member</title>
       </Head>
       <Box
         display={'flex'}
@@ -45,7 +40,7 @@ export const index = ({ members }: any) => {
           <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
-          SRAC Members
+          SRAC
         </Heading>
         <Logout />
       </Box>
@@ -54,27 +49,17 @@ export const index = ({ members }: any) => {
           display={'flex'}
           justifyContent={'space-around'}
           variant='simple'
-          marginBottom={'25%'}
+          marginBottom={'18%'}
         >
           <Tbody>
-            {members?.map((member: sracMember, index: number) => (
-              <Tr key={member.id}>
-                <Td isNumeric>{index + 1}</Td>
+            {srac?.map((srac: sracProfile) => (
+              <Tr key={srac.id}>
+                {/* <Td isNumeric>1</Td> */}
+                <Td></Td>
                 <Td>
-                  <ImageStyled
-                    alt='Not available yet'
-                    width={100}
-                    height={75}
-                    src='/dd.jfif'
-                  />
+                  <Heading>{srac.name}</Heading>
+                  <Text>{srac.designation}</Text>
                 </Td>
-                <Td>
-                  <Heading>{member.name}</Heading>
-                  <Text></Text>
-                  <Text></Text>
-                </Td>
-                <Td color='teal'>{member.designation}</Td>
-                <Td color='teal'>{member.email}</Td>
               </Tr>
             ))}
           </Tbody>
@@ -85,10 +70,10 @@ export const index = ({ members }: any) => {
   );
 };
 export default index;
+
 export const getServerSideProps: GetServerSideProps = async () => {
-  const { data: members, error } = await supabase
-    .from('staff')
-    .select('*')
-    .eq('role', 'srac-staff');
-  return { props: { members, error } };
+  const { data: srac, error } = await supabase
+    .from('srac_profiles')
+    .select('*');
+  return { props: { srac, error } };
 };
