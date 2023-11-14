@@ -77,7 +77,9 @@ export const Index = () => {
             Report Generation
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/protected/supervisor/progressmodule'>
+        <LinkStyled
+          href={`/protected/supervisor/progressmodule?email=${user?.email}`}
+        >
           <StyledIcon> {<GiArchiveResearch />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Progress Module

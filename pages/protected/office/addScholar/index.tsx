@@ -47,7 +47,6 @@ export const Index = ({ courses }: any) => {
       .from('scholars_profiles')
       .insert([formData])
       .select();
-
     const scholar = data ? data[0] : [];
 
     if (scholar) {
