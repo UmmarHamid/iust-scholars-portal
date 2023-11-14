@@ -76,7 +76,7 @@ export const Index = ({ userId }: any) => {
             Registered Courses
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/protected/scholars/progressreport'>
+        <LinkStyled href={`/protected/scholars/progressreport/${userId}`}>
           <StyledIcon> {<MdOutlineSaveAs />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Progress Report
