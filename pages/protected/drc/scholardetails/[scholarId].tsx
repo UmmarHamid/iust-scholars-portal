@@ -52,7 +52,7 @@ export const ScholarDetails = ({ data: userDetails, error }: any) => {
           {`Address: ${userDetails.address}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Email: ${loggedinUser?.email}`}
+          {`Email: ${userDetails.email}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
           {`D.O.B: ${userDetails.dob}`}
