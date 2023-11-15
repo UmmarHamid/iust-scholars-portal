@@ -8,7 +8,7 @@ import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import Logout from '@/components/Logout/Logout';
 export const ScholarDetails = ({ data, error }: any) => {
   const loggedinUser = useUser();
-  const userDetails = data[0];
+  const user = data[0];
   return (
     <>
       <title>Personal Details</title>
@@ -18,7 +18,7 @@ export const ScholarDetails = ({ data, error }: any) => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href={'/protected/supervisor/assignedscholars'}>
+        <Link href={`/protected/supervisor/assignedscholars?email=${loggedinUser.email}`}>
           <BackIcon />
         </Link>
         <Heading
@@ -41,37 +41,37 @@ export const ScholarDetails = ({ data, error }: any) => {
         marginBottom={'5%'}
       >
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Name: ${userDetails.username}`}
+          {`Name: ${user.username}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Father's Name: ${userDetails.father}`}
+          {`Father's Name: ${user.father}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {` Mothers Name: ${userDetails.mother}`}
+          {` Mothers Name: ${user.mother}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Address: ${userDetails.address}`}
+          {`Address: ${user.address}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Email: ${loggedinUser?.email}`}
+          {`Email: ${user?.email}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`D.O.B: ${userDetails.dob}`}
+          {`D.O.B: ${user.dob}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Phone: ${userDetails.phone}`}
+          {`Phone: ${user.phone}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Department: ${userDetails.department}`}
+          {`Department: ${user.department}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Registration No: ${userDetails.reg_no}`}
+          {`Registration No: ${user.reg_no}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Joining Date: ${userDetails.join_date}`}
+          {`Joining Date: ${user.join_date}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Qualified Exam: ${userDetails.qualified_exam}`}
+          {`Qualified Exam: ${user.qualified_exam}`}
         </Text>
       </Box>
       <InnerFooter />
@@ -79,7 +79,12 @@ export const ScholarDetails = ({ data, error }: any) => {
   );
 };
 export default ScholarDetails;
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { data, error } = await supabase.from('scholars_profiles').select('*');
+export const getServerSideProps: GetServerSideProps = async (params) => {
+  const scholarId = params?.query?.id?.toString();
+  const { data, error } = await supabase
+    .from('scholars_profiles')
+    .select('*')
+    .eq('id', scholarId);
+
   return { props: { data, error } };
 };
