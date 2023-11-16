@@ -71,7 +71,9 @@ export const Index = () => {
             Assigned Scholars
           </Heading>
         </LinkStyled>
-        <LinkStyled href='/protected/supervisor/reportgeneration'>
+        <LinkStyled
+          href={`/protected/supervisor/reportgeneration?email=${user?.email}`}
+        >
           <StyledIcon> {<MdAssignmentAdd />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Report Generation

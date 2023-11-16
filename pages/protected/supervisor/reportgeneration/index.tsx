@@ -1,23 +1,35 @@
-import {
-  Box,
-  Container,
-  Heading,
-  Table,
-  TableContainer,
-  Tbody,
-  Td,
-  Text,
-  Tr,
-} from '@chakra-ui/react';
-import { ImCross } from 'react-icons/im';
-import { FaCheck } from 'react-icons/fa';
 import Head from 'next/head';
 import Link from 'next/link';
-import BackIcon from '@/components/BackIcon/BackIcon';
-import Logout from '@/components/Logout/Logout';
+import { Box, Container, Heading } from '@chakra-ui/react';
+import { GetServerSideProps } from 'next';
+import supabase from '@/utils/supabase';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import Logout from '@/components/Logout/Logout';
+import BackIcon from '@/components/BackIcon/BackIcon';
+import { fetchUserDetails } from '@/utils/utils';
 
-export const index = () => {
+type ScholarProfile = {
+  address: string | null;
+  department: string | null;
+  dob: string | null;
+  father: string | null;
+  id: string;
+  join_date: string | null;
+  mother: string | null;
+  phone: number | null;
+  qualified_exam: string | null;
+  reg_no: string | null;
+  registered_courses: string | null;
+  user_role: string | null;
+  username: string | null;
+  email: string;
+  assigned_srac1: string | null;
+  assigned_srac2: string | null;
+  assigned_supervisor: string | null;
+  credit_score: string | null;
+};
+
+export const index = ({ scholars }: any) => {
   return (
     <>
       <Head>
@@ -29,7 +41,7 @@ export const index = () => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/protected/supervisor'>
+        <Link href='/protected/drc'>
           <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
@@ -37,49 +49,40 @@ export const index = () => {
         </Heading>
         <Logout />
       </Box>
-      <Container maxWidth={'5xl'} marginBottom={'20%'}>
-        <Text fontSize={'2xl'} color={'#07443E'}>
-          1. Zubair DOCS IUST0121014521
-        </Text>
-        <TableContainer>
-          <Table>
-            <Tbody>
-              <Tr fontSize={'26px'} color='teal'>
-                <Td>Supervisor</Td>
-                <Td>SRAC Members</Td>
-
-                <Td>Synopsis</Td>
-                <Td>Thesis</Td>
-                <Td>Submission</Td>
-                <Td>Viva</Td>
-              </Tr>
-              <Tr fontSize={'20px'} color='green'>
-                <Td>Dr. Muzaffar</Td>
-                <Td>
-                  Dr. Asif <br />
-                  <br />
-                  Dr. Zahid
-                </Td>
-
-                <Td>
-                  <ImCross />
-                </Td>
-                <Td>
-                  <FaCheck />
-                </Td>
-                <Td>
-                  <FaCheck />
-                </Td>
-                <Td>
-                  <ImCross />
-                </Td>
-              </Tr>
-            </Tbody>
-          </Table>
-        </TableContainer>
+      <Container maxW='5xl' marginBottom={'20%'}>
+        {scholars?.map((scholar: ScholarProfile, index: number) => (
+          <Link
+            key={scholar.id}
+            href={`/protected/supervisor/reportgenerationdetails?id=${scholar.id}`}
+          >
+            <Heading
+              margin={'2%'}
+              as={'h6'}
+              color={'#07443E'}
+              letterSpacing={'10px'}
+            >
+              {`${index + 1}- ${scholar.username} ${scholar.reg_no} `}
+            </Heading>
+          </Link>
+        ))}
       </Container>
       <InnerFooter />
     </>
   );
 };
 export default index;
+
+export const getServerSideProps: GetServerSideProps = async (params) => {
+  const { data: scholarsResponse } = await supabase
+    .from('scholars_profiles')
+    .select('*');
+
+  const userDetails = await fetchUserDetails(
+    params?.query?.email?.toString() || ''
+  );
+  const scholars = scholarsResponse?.filter(
+    (scholar) => scholar.assigned_supervisor == userDetails.id
+  );
+
+  return { props: { scholars } };
+};
