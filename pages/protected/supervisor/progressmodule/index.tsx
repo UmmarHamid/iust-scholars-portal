@@ -9,13 +9,22 @@ import { GetServerSideProps } from 'next';
 import supabase from '@/utils/supabase';
 import { fetchUserDetails } from '@/utils/utils';
 import Modal from 'react-modal';
-import React, { useState } from 'react'
-export const Index = ({ scholars, synopsisIds }: any) => {
+import React, { useState } from 'react';
+export const Index = ({
+  scholars,
+  synopsisIds,
+  submissionIds,
+  synopsisValues,
+  submissionValues,
+  allSynopsis,
+  allSubmissions,
+}: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState('');
+
   const customStyles = {
     overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.6)'
+      backgroundColor: 'rgba(0, 0, 0, 0.6)',
     },
     content: {
       top: '50%',
@@ -24,45 +33,41 @@ export const Index = ({ scholars, synopsisIds }: any) => {
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
-      maxWidth: "700px",
-      maxHeight: "700px",
-      minWidth:"500px",
-      padding: "28px"
+      maxWidth: '700px',
+      maxHeight: '500px',
+      minWidth: '500px',
+      padding: '28px',
     },
-
-  }
+  };
   const closeBtn = {
-    backgroundColor: "#ff5050",
-    color: "#fff",
-    padding: "10px",
-    borderRadius: "8px",
-    fontSize: "12px",
-    marginTop: "12px",
-  }
+    backgroundColor: '#ff5050',
+    color: '#fff',
+    padding: '10px',
+    borderRadius: '8px',
+    fontSize: '12px',
+    marginTop: '12px',
+  };
   const heading = {
-    fontSize: "20px",
-    fontWeight: "700",
-    margin: "8px 0"
-  }
+    fontSize: '20px',
+    fontWeight: '700',
+    margin: '8px 0',
+    textTransform: 'capitalize',
+  };
   const text = {
-    fontSize: "14px",
-    lineHeight: "30px",
-    letterSpacing: "1px",
-    fontWeight: "400",
-  }
+    fontSize: '14px',
+    lineHeight: '30px',
+    letterSpacing: '1px',
+    fontWeight: '400',
+  };
 
+  const handleSynopsisRemark = async (scholarId) => {
+    let remark = document.getElementById('sysnopsisRemark')?.value;
 
+    const d = synopsisIds?.filter((el) => el.scholars_id == scholarId);
 
-  const handleRemark = async (scholarId) => {
-    const remark = document.getElementById("remark")?.value;
-    console.log(remark);
-
-    const d = synopsisIds?.filter(
-      (el) => (el.scholars_id == scholarId)
-    );
-
-    supabase.from("synopsis")
-    .update({ ["supervisor_remarks"]: remark })
+    supabase
+      .from('synopsis')
+      .update({ ['supervisor_remarks']: remark })
       .eq('id', d[0].synopsis_id)
       .then((response) => {
         if (response.error) {
@@ -70,33 +75,68 @@ export const Index = ({ scholars, synopsisIds }: any) => {
         } else {
           console.log('Update successful:', response.data);
         }
-      })
+      });
+    window.location.reload(false);
+  };
 
+  const handleSubmissionRemark = async (scholarId) => {
+    let remark = document.getElementById('submissionRemark')?.value;
 
-  }
+    const d = submissionIds?.filter((el) => el.scholars_id == scholarId);
 
+    // return
 
-  const openModal = async (ndata: any, sysnopsis: any[]) => {
+    supabase
+      .from('progress_report')
+      .update({ ['supervisior_remark']: remark })
+      .eq('id', d[0].progress_id)
+      .then((response) => {
+        if (response.error) {
+          console.error(response.error.message);
+        } else {
+          console.log('Update successful:', response.data);
+        }
+      });
+    window.location.reload(false);
+  };
 
-    const d = await sysnopsis?.filter(
-      (el) => (el.scholars_id == ndata.id)
-    );
-    const id = d[0].synopsis_id
+  const synopsisDetails = (scholarId) => {
+    const d = synopsisIds?.filter((el) => el.scholars_id == scholarId);
+    if (d.length >= 1) {
+      const data = allSynopsis.filter((el) => d[0].synopsis_id == el.id);
+      return data[0].supervisor_remarks == 'Pending';
+    } else {
+      return false;
+    }
+  };
 
+  const submissionDetails = (scholarId) => {
+    const d = submissionIds?.filter((el) => el.scholars_id == scholarId);
+
+    if (d.length >= 1) {
+      const data = allSubmissions.filter((el) => d[0].progress_id == el.id);
+      return data[0].supervisior_remark == 'Pending';
+    } else {
+      return false;
+    }
+  };
+
+  const openModal = async (ndata: any, sysnopsis: any[], tableName: string) => {
+    // return ;
+
+    const d = await sysnopsis?.filter((el) => el.scholars_id == ndata.id);
+    const id = d[0].synopsis_id ? d[0].synopsis_id : d[0].progress_id;
 
     const { data, error } = await supabase
-      .from('synopsis')
-      .select("*")
+      .from(tableName)
+      .select('*')
       .eq('id', id)
       .single();
-
-
-
-    console.log("synopsis", data)
 
     setIsModalOpen(true);
     setModalData(data);
   };
+
   const closeModal = () => {
     setIsModalOpen(false);
     setModalData(''); // Optionally reset data when closing the modal
@@ -122,90 +162,131 @@ export const Index = ({ scholars, synopsisIds }: any) => {
         <Logout />
       </Box>
       <Container maxWidth={'5xl'}>
-
-
         {scholars?.map((scholar: any, index: number) => (
-
           <>
-
             <Text fontSize={'2xl'} color={'#07443E'}>
               {`${index + 1}- ${scholar.username} ${scholar.reg_no} `}
             </Text>
-            <Box
-              marginTop={'1%'}
-              display={'flex'}
-              justifyContent={'space-around'}
-              alignItems={'center'}
-            >
-              <Button
-                leftIcon={<AiOutlineFolderView />}
-                padding={'10px 40px'}
-                colorScheme='green'
-                onClick={() => openModal(scholar, synopsisIds)}
+            {synopsisValues.includes(scholar.id) ? (
+              <Box
+                marginTop={'1%'}
+                display={'flex'}
+                justifyContent={'space-around'}
+                alignItems={'center'}
               >
-                View Synopsis
-              </Button>
-              <Input
-                type='text'
-                placeholder='Remarks'
-                padding={'10px 30px'}
-                size='2xl'
-                margin={'20px 20px'}
-                id="remark" />
-              <Button padding={'10px 30px'} colorScheme='blue' marginRight={'20px'} onClick={() => handleRemark(scholar.id)}>
-                Submit
-              </Button>
-            </Box><Box
-              marginTop={'1%'}
-              display={'flex'}
-              justifyContent={'space-around'}
-              alignItems={'center'}
-            >
-              <Button
-                leftIcon={<AiOutlineFolderView />}
-                padding={'10px 40px'}
-                colorScheme='green'
+                <Button
+                  leftIcon={<AiOutlineFolderView />}
+                  padding={'10px 40px'}
+                  colorScheme='green'
+                  onClick={() => openModal(scholar, synopsisIds, 'synopsis')}
+                >
+                  View Synopsis
+                </Button>
+
+                {synopsisDetails(scholar.id) ? (
+                  <>
+                    <Input
+                      type='text'
+                      placeholder='Remarks'
+                      padding={'10px 30px'}
+                      size='2xl'
+                      margin={'20px 20px'}
+                      id='sysnopsisRemark'
+                    />
+                    <Button
+                      padding={'10px 30px'}
+                      colorScheme='blue'
+                      marginRight={'20px'}
+                      onClick={() => handleSynopsisRemark(scholar.id)}
+                    >
+                      Submit
+                    </Button>
+                  </>
+                ) : (
+                  <h2 style={heading}>Remarks Done</h2>
+                )}
+              </Box>
+            ) : (
+              <></>
+            )}
+
+            {submissionValues.includes(scholar.id) ? (
+              <Box
+                marginTop={'1%'}
+                display={'flex'}
+                justifyContent={'space-around'}
+                alignItems={'center'}
               >
-                View Submission
-              </Button>
-              <Input
-                type='text'
-                placeholder='Remarks'
-                padding={'10px 30px'}
-                size='2xl'
-                margin={'20px 20px'} />
-              <Button padding={'10px 30px'} colorScheme='blue' marginRight={'20px'}>
-                Submit
-              </Button>
-            </Box>
+                <Button
+                  leftIcon={<AiOutlineFolderView />}
+                  padding={'10px 40px'}
+                  colorScheme='green'
+                  onClick={() =>
+                    openModal(scholar, submissionIds, 'progress_report')
+                  }
+                >
+                  View Submission
+                </Button>
+
+                {submissionDetails(scholar.id) ? (
+                  <>
+                    <Input
+                      type='text'
+                      placeholder='Remarks'
+                      padding={'10px 30px'}
+                      size='2xl'
+                      margin={'20px 20px'}
+                      id='submissionRemark'
+                    />
+                    <Button
+                      padding={'10px 30px'}
+                      colorScheme='blue'
+                      marginRight={'20px'}
+                      onClick={() => handleSubmissionRemark(scholar.id)}
+                    >
+                      Submit
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <h1 style={heading}>Remarks Done</h1>
+                  </>
+                )}
+              </Box>
+            ) : (
+              <></>
+            )}
           </>
-
-
         ))}
       </Container>
 
       <InnerFooter />
-      <Modal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} style={customStyles}>
-        <h1 style={{ fontSize: "30px", }} >Synopsis Details</h1>
-   
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        style={customStyles}
+      >
+        <h1 style={{ fontSize: '30px' }}>Synopsis Details</h1>
 
         <Box>
-
-      
-
-{Object.entries(modalData).map(([key, value]) => (
-  <Text key={key} fontSize={'2xl'} color={'#07443E'}>
-    <h3 style={heading}>{key}:</h3>
-    <p style={text}>{value}</p>
-  </Text>
-))}
-         
-
- 
+          {Object.entries(modalData).map(([key, value]) =>
+            key != 'supervisor_remarks' &&
+            key != 'drc_remarks' &&
+            key != 'id' &&
+            key != 'supervisior_remark' ? (
+              <Text key={key} fontSize={'2xl'} color={'#07443E'}>
+                <h3 style={heading}>{key}:</h3>
+                <p style={text}>{value}</p>
+              </Text>
+            ) : (
+              <></>
+            )
+          )}
         </Box>
 
-
-        <button onClick={() => closeModal(false)} style={closeBtn}>Close Synopsis</button>
+        <button onClick={() => closeModal()} style={closeBtn}>
+          Close Synopsis
+        </button>
       </Modal>
     </>
   );
@@ -217,33 +298,56 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
     .from('scholars_profiles')
     .select('*');
 
-
-
   const { data: synopsisData } = await supabase
     .from('submitted_synopsis')
     .select('*');
 
+  const { data: submissionData } = await supabase
+    .from('submitted_progress')
+    .select('*');
+
+  const { data: synopsisDetails } = await supabase.from('synopsis').select('*');
+  const { data: submissionDetails } = await supabase
+    .from('progress_report')
+    .select('*');
+
   const synopsisIds = synopsisData;
-  // console.log(synopsisIds)
+  const submissionIds = submissionData;
 
-  const values: any[] = [];
+  const allSynopsis = synopsisDetails;
+  const allSubmissions = submissionDetails;
+
+  const synopsisValues: any[] = [];
+  const submissionValues: any[] = [];
+
   for (const i in synopsisIds) {
+    synopsisValues.push(synopsisIds[i].scholars_id);
+  }
 
-    values.push(synopsisIds[i].scholars_id);
-
-  };
-
+  for (const i in submissionIds) {
+    submissionValues.push(submissionIds[i].scholars_id);
+  }
 
   const userDetails = await fetchUserDetails(
     params?.query?.email?.toString() || ''
   );
+
   const scholars = scholarsResponse?.filter(
-    (scholar) => (scholar.assigned_supervisor == userDetails.id && values.includes(scholar.id))
+    (scholar) =>
+      (scholar.assigned_supervisor == userDetails.id &&
+        synopsisValues.includes(scholar.id)) ||
+      submissionValues.includes(scholar.id)
   );
 
-
-  return { props: { scholars, synopsisIds } };
+  return {
+    props: {
+      scholars,
+      synopsisIds,
+      submissionIds,
+      synopsisValues,
+      submissionValues,
+      allSynopsis,
+      allSubmissions,
+    },
+  };
 };
-
-
-
