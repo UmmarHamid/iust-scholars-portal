@@ -15,6 +15,6 @@ export const fetchUserDetails = async (email: string) => {
     .eq('email', email)
     .single();
   if (staffMember.email) {
-    return staffMember || '';
+    return staffMember;
   }
 };
