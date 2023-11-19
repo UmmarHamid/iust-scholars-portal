@@ -12,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import Link from 'next/link';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import { AiOutlineFolderView } from 'react-icons/ai';
 
 export const Index = () => {
   return (
@@ -40,6 +41,15 @@ export const Index = () => {
         <Heading as={'h2'} color={'teal'} fontWeight={500}>
           Research Achievements By SOH&S
         </Heading>
+        <Link href='/SOHS/BORS-SOHS.pdf'>
+          <Button
+            leftIcon={<AiOutlineFolderView />}
+            colorScheme='green'
+            variant='solid'
+          >
+            BORS
+          </Button>
+        </Link>
       </Box>
       <TableContainer>
         <Table marginBottom={'21%'}>
@@ -54,10 +64,10 @@ export const Index = () => {
                 and Literature
               </Td>{' '}
               <Td color={'blue'}>
-                <Link href='/'>Thrust Areas </Link>
+                <Link href='/SOHS/DOAL&L-Thrust.pdf'>Thrust Areas </Link>
               </Td>
               <Td color={'blue'}>
-                <Link href='/'>PhD Awardees</Link>
+                <Link href='/SOHS/DOAL&L-Award.pdf'>PhD Awardees</Link>
               </Td>
             </Tr>
             <Tr>
@@ -70,7 +80,7 @@ export const Index = () => {
                 and Literature
               </Td>
               <Td color={'blue'}>
-                <Link href='/'>Degree/s Awarded </Link>
+                <Link href='/SOHS/DOELL-Award.pdf'>Degree/s Awarded </Link>
               </Td>
             </Tr>
           </Tbody>

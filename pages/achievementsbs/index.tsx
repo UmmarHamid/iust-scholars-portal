@@ -11,8 +11,9 @@ import {
   Td,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-
+import { Document } from '@react-pdf/renderer';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import { AiOutlineFolderView } from 'react-icons/ai';
 export const Index = () => {
   return (
     <>
@@ -40,6 +41,15 @@ export const Index = () => {
         <Heading as={'h2'} color={'teal'} fontWeight={500}>
           Research Achievements By SOBS
         </Heading>
+        <Link href='/SOBS/BORS-SOBS.pdf'>
+          <Button
+            leftIcon={<AiOutlineFolderView />}
+            colorScheme='green'
+            variant='solid'
+          >
+            BORS
+          </Button>
+        </Link>
       </Box>
       <TableContainer>
         <Table marginBottom={'26%'}>
@@ -48,20 +58,20 @@ export const Index = () => {
               <Td isNumeric>1</Td>
               <Td fontSize={'26px'}> Department of Management Studies</Td>{' '}
               <Td color={'blue'}>
-                <Link href='/'>Publications </Link>
+                <Link href='/SOBS/DOMS-Publications.pdf'>Publications</Link>
               </Td>
               <Td color={'blue'}>
-                <Link href='/'>Projects</Link>
+                <Link href='/SOBS/DOMS-Projects.pdf'>Projects</Link>
               </Td>
             </Tr>
             <Tr>
               <Td isNumeric>2</Td>
               <Td fontSize={'26px'}> Department of Economics</Td>
               <Td color={'blue'}>
-                <Link href='/'>Publications </Link>
+                <Link href='/SOBS/DOE-Publications.pdf'>Publications </Link>
               </Td>
               <Td color={'blue'}>
-                <Link href='/'>Projects</Link>
+                <Link href='/SOBS/DOE-Projects.pdf'>Projects</Link>
               </Td>
             </Tr>
           </Tbody>

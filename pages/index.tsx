@@ -1,9 +1,9 @@
 import Head from 'next/head';
 import Logo from '@/components/Logo/Logo';
 import { Button } from '@chakra-ui/button';
-import { Box, Container, Heading, Stack } from '@chakra-ui/react';
+import { Container, Heading, Stack, Box } from '@chakra-ui/react';
 import { styled } from 'styled-components';
-import { BsFillPencilFill, BsFillPersonFill } from 'react-icons/bs';
+import { BsFillPersonFill } from 'react-icons/bs';
 import Footer from '@/components/Footer/Footer';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -22,6 +22,21 @@ const settings = {
   autoplaySpeed: 7000,
   cssEase: 'linear',
 };
+const SlideContainer = styled.div`
+  position: relative;
+`;
+const SlideImage1 = styled.img`
+  background-image: url('/photogallery1.jpg');
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 300px;
+`;
+const SlideImage2 = styled.img`
+  background-image: url('/photogallery2.jpg');
+  width: 100%;
+  height: 300px;
+`;
+
 const StyledHeader = styled.header`
   display: flex;
   flex-direction: row;
@@ -37,28 +52,28 @@ const DepartmentsContainerStyled = styled.div`
   color: #ffff;
 `;
 const StyledDeptFirst = styled.div`
-  height: 300px;
+  height: 280px;
   width: 260px;
   border-radius: 10px;
   background-image: linear-gradient(43deg, #000000, #434343);
   padding: 2%;
 `;
 const StyledDeptSecond = styled.div`
-  height: 300px;
+  height: 280px;
   width: 260px;
   border-radius: 10px;
   background-image: linear-gradient(43deg, #1d2b64, #f8cdda);
   padding: 2%;
 `;
 const StyledDeptThird = styled.div`
-  height: 300px;
+  height: 280px;
   width: 260px;
   border-radius: 10px;
   background-image: linear-gradient(43deg, #0f2027, #203a43, #2c5364);
   padding: 2%;
 `;
 const StyledDeptFourth = styled.div`
-  height: 300px;
+  height: 280px;
   width: 260px;
   border-radius: 10px;
   background-image: linear-gradient(to right, #00b4db, #0083b0);
@@ -83,6 +98,10 @@ const StyledHeading = styled.h1`
   font-size: 28px;
   font-weight: bold;
 `;
+const StyledHeadingSecond = styled.h1`
+  font-size: 18px;
+  font-weight: bold;
+`;
 const StyledHeadingNew = styled.h1`
   font-size: 32px;
   font-weight: bold;
@@ -91,64 +110,114 @@ const StyledHeadingNew = styled.h1`
 const StyledSpotlight = styled.div`
   display: flex;
   align-content: center;
+  justify-content: space-around;
   justify-content: space-between;
   margin: 2%;
+  margin-left: 10%;
+  margin-right: 10%;
+  flex-direction: row;
+  flex-wrap: wrap;
 `;
 const StyledBg1 = styled.div`
   background-image: url('/1.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 297px;
-  height: 250px;
+  width: 250px;
+  height: 200px;
   text-align: center;
-  border-radius: 15px;
+  border-radius: 5px;
 `;
 const StyledBg2 = styled.div`
   background-image: url('/2.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 297px;
-  height: 250px;
+  width: 250px;
+  height: 200px;
   text-align: center;
-  border-radius: 15px;
+  border-radius: 5px;
 `;
 const StyledBg3 = styled.div`
   background-image: url('/3.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 297px;
-  height: 250px;
+  width: 250px;
+  height: 200px;
   text-align: center;
-  border-radius: 15px;
+  border-radius: 5px;
 `;
 const StyledBg4 = styled.div`
   background-image: url('/4.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  width: 297px;
-  height: 250px;
+  width: 250px;
+  height: 200px;
+  text-align: center;
+  border-radius: 5px;
+`;
+const StyledBg5 = styled.div`
+  margin-top: 3%;
+  background-image: url('/5.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 250px;
+  height: 200px;
+  text-align: center;
+  border-radius: 5px;
+`;
+const StyledBg6 = styled.div`
+  margin-top: 3%;
+  background-image: url('/6.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 250px;
+  height: 200px;
+  text-align: center;
+  border-radius: 5px;
+`;
+const StyledBg7 = styled.div`
+  margin-top: 3%;
+  background-image: url('/7.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 250px;
+  height: 200px;
+  text-align: center;
+  border-radius: 5px;
+`;
+const StyledBg8 = styled.div`
+  margin-top: 3%;
+  background-image: url('/8.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 250px;
+  height: 200px;
   text-align: center;
   border-radius: 15px;
 `;
 const StyledSpotlightText1 = styled.h1`
-  padding-top: 15%;
-  font-size: 36px;
+  margin-top: 15%;
+  font-size: 26px;
   font-weight: 600;
   line-height: 24px;
-  color: #fff;
+  color: #efcc00;
+  text-align: center;
 `;
 const StyledSpotlightText2 = styled.h1`
+  margin-top: 3%;
   padding: 10%;
-  font-size: 74px;
+  font-size: 50px;
   font-weight: 600;
   line-height: 24px;
   color: #00bcd4;
 `;
-
 const ImageStyled = styled(Image)`
   border-radius: 10px;
 `;
@@ -211,12 +280,12 @@ export const Homepage = () => {
         {/* TODO: Make this section dynamic */}
         <DepartmentsContainerStyled>
           <StyledDeptFirst>
-            <Link href='/researchachievementsoet'>
+            <Link href='/achievementsoet'>
               Research Achievements by School of Engineering and Technology
             </Link>
           </StyledDeptFirst>
           <StyledDeptSecond>
-            <Link href='/researchachievementsbs'>
+            <Link href='/achievementsbs'>
               Research Achievements by School of Business Studies
             </Link>
           </StyledDeptSecond>
@@ -236,8 +305,11 @@ export const Homepage = () => {
         <StyledMessage>
           <VCSectionStyled>
             <Image alt='Vc' width={134} height={144} src={'/vc.jpg'} />
-
             <StyledHeading>Vc Message</StyledHeading>
+
+            <StyledHeadingSecond>
+              Prof. Shakil Ahmad Romshoo
+            </StyledHeadingSecond>
             <p>
               I am delighted to welcome you to Islamic University of Science and
               Technology (IUST). IUST is committed to shoulder the
@@ -261,7 +333,7 @@ export const Homepage = () => {
           </VCSectionStyled>
           <VCSectionStyled>
             <Image alt='Vc' width={134} height={144} src={'/dean.jfif'} />
-
+            <StyledHeadingSecond>Prof. Sheikh Javid Ahmed</StyledHeadingSecond>
             <StyledHeading>Dean Research</StyledHeading>
             <p>
               @IUST, our dogma is that every faculty member is a meaningful
@@ -289,20 +361,36 @@ export const Homepage = () => {
         <StyledSpotlight>
           <StyledBg1>
             <StyledSpotlightText1>PUBLICATIONS</StyledSpotlightText1>
-            <StyledSpotlightText2>1967+</StyledSpotlightText2>
+            <StyledSpotlightText2>1985+</StyledSpotlightText2>
           </StyledBg1>
           <StyledBg2>
             <StyledSpotlightText1>PROJECTS</StyledSpotlightText1>
-            <StyledSpotlightText2>126+</StyledSpotlightText2>
+            <StyledSpotlightText2>133+</StyledSpotlightText2>
           </StyledBg2>
           <StyledBg3>
             <StyledSpotlightText1>PATENTS</StyledSpotlightText1>
-            <StyledSpotlightText2>29+</StyledSpotlightText2>
+            <StyledSpotlightText2>30+</StyledSpotlightText2>
           </StyledBg3>
           <StyledBg4>
             <StyledSpotlightText1>CONSULTANCES</StyledSpotlightText1>
             <StyledSpotlightText2>1+</StyledSpotlightText2>
           </StyledBg4>
+          <StyledBg5>
+            <StyledSpotlightText1>RESEARCH PROGRAMMES</StyledSpotlightText1>
+            <StyledSpotlightText2>23</StyledSpotlightText2>
+          </StyledBg5>
+          <StyledBg6>
+            <StyledSpotlightText1>SCHOLARS</StyledSpotlightText1>
+            <StyledSpotlightText2>207</StyledSpotlightText2>
+          </StyledBg6>
+          <StyledBg7>
+            <StyledSpotlightText1>FELLOWSHIPS</StyledSpotlightText1>
+            <StyledSpotlightText2>81</StyledSpotlightText2>
+          </StyledBg7>
+          <StyledBg8>
+            <StyledSpotlightText1>PROJECTS</StyledSpotlightText1>
+            <StyledSpotlightText2>66</StyledSpotlightText2>
+          </StyledBg8>
         </StyledSpotlight>
 
         <Footer />

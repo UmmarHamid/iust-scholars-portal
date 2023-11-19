@@ -11,8 +11,8 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import { AiOutlineFolderView } from 'react-icons/ai';
 export const Index = () => {
   return (
     <>
@@ -40,6 +40,15 @@ export const Index = () => {
         <Heading as={'h2'} color={'teal'} fontWeight={500}>
           Research Achievements By SOET
         </Heading>
+        <Link href='/SOET/BORS-SOET.pdf'>
+          <Button
+            leftIcon={<AiOutlineFolderView />}
+            colorScheme='green'
+            variant='solid'
+          >
+            BORS
+          </Button>
+        </Link>
       </Box>
       <TableContainer display={'block'} maxWidth={'100%'} overflowX={'auto'}>
         <Table marginBottom={'5%'}>
@@ -49,18 +58,19 @@ export const Index = () => {
               <Td fontSize={'26px'}> Department of Civil Engineering</Td>{' '}
               <Td color={'blue'}>
                 {' '}
-                <Link href='/'>Publications </Link>
+                <Link href='/SOET/DOCE-Publications.pdf'>Publications </Link>
               </Td>{' '}
               <Td color={'blue'}>
                 {' '}
-                <Link href='/'>Research Projects</Link>
+                <Link href='/SOET/DOCE-ResearchProjects.pdf'>
+                  Research Projects
+                </Link>
               </Td>
               <Td color={'blue'}>
                 {' '}
-                <Link href='/'>Collaborations </Link>{' '}
-              </Td>
-              <Td color={'blue'}>
-                <Link href='/'>Dissertations </Link>
+                <Link href='/SOET/DOCE-Collaboration.pdf'>
+                  Collaborations{' '}
+                </Link>{' '}
               </Td>
               <Td color={'blue'}>
                 <Link href='https://scholar.google.com/citations?user=1OFoUYgAAAAJ&hl=en&authuser=1'>
@@ -74,13 +84,15 @@ export const Index = () => {
               <Td isNumeric>2</Td>
               <Td fontSize={'26px'}> Department of Electrical Engineering</Td>
               <Td color={'blue'}>
-                <Link href='/'>Thrust areas</Link>
+                <Link href='/SOET/DOEE-Thrust.pdf'>Thrust areas</Link>
               </Td>{' '}
               <Td color={'blue'}>
-                <Link href='/'>Publications</Link>
+                <Link href='/SOET/DOEE-Publications.pdf'>Publications</Link>
               </Td>
               <Td color={'blue'}>
-                <Link href='/'>Research Projects</Link>
+                <Link href='/SOET/DOEE-ResearchProjects.pdf'>
+                  Research Projects
+                </Link>
               </Td>
               <Td color={'blue'}>
                 <Link href='https://scholar.google.com/citations?hl=en&user=tQLtj4AAAAAJ'>
@@ -94,16 +106,18 @@ export const Index = () => {
               <Td isNumeric>3</Td>
               <Td fontSize={'24px'}> Department of Mechanical Engineering</Td>
               <Td color={'blue'}>
-                <Link href='/'>Thrust areas</Link>
+                <Link href='/SOET/DOME-Thrust.pdf'>Thrust areas</Link>
               </Td>{' '}
               <Td color={'blue'}>
-                <Link href='/'>Publications</Link>
+                <Link href='https://scholar.google.co.in/citations?hl=en&authuser=1&user=DYT2fEUAAAAJ'>
+                  Publications
+                </Link>
               </Td>
               <Td color={'blue'}>
-                <Link href='/'>Journals</Link>
+                <Link href='/SOET/DOME-Jornals.pdf'>Journals</Link>
               </Td>
               <Td color={'blue'}>
-                <Link href='/'>Books</Link>
+                <Link href='/SOET/DOME-Books.pdf'>Books</Link>
               </Td>
             </Tr>
             <br />
@@ -112,16 +126,20 @@ export const Index = () => {
               <Td isNumeric>4</Td>
               <Td fontSize={'24px'}> Department of Computer Science</Td>
               <Td color={'blue'}>
-                <Link href='/'>Thrust areas</Link>
+                <Link href='/SOET/DOCS-Thrust.pdf'>Thrust areas</Link>
               </Td>{' '}
               <Td color={'blue'}>
-                <Link href='/'>Publications</Link>
+                <Link href='/SOET/DOCS-Publications.pdf'>Publications</Link>
               </Td>
               <Td color={'blue'}>
-                <Link href='/'>Journals</Link>
+                <Link href='https://ugccare.unipune.ac.in/apps1/home/index'>
+                  Journals
+                </Link>
               </Td>
               <Td color={'blue'}>
-                <Link href='/'>Research Projects</Link>
+                <Link href='/SOET/DOCS-ResearchProjects.pdf'>
+                  Research Projects
+                </Link>
               </Td>
             </Tr>
             <br />
@@ -133,13 +151,15 @@ export const Index = () => {
                 and Communication Engineering
               </Td>
               <Td color={'blue'}>
-                <Link href='/'>Thrust areas</Link>
+                <Link href='/SOET/DOEE&C-Thrust.pdf'>Thrust areas</Link>
               </Td>{' '}
               <Td color={'blue'}>
-                <Link href='/'>Publications</Link>
+                <Link href='/SOET/DOEE&C-Publications.pdf'>Publications</Link>
               </Td>
               <Td color={'blue'}>
-                <Link href='/'>Research Projects</Link>
+                <Link href='/SOET/DOEE&C-ResearchProjects.pdf'>
+                  Research Projects
+                </Link>
               </Td>
               <Td color={'blue'}>
                 <Link href='https://scholar.google.com/citations?hl=en&user=mDiLTIMAAAAJ'>
