@@ -7,6 +7,7 @@ import BackIcon from '@/components/BackIcon/BackIcon';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import Logout from '@/components/Logout/Logout';
 import { fetchUserDetails } from '@/utils/utils';
+import { useUser } from '@supabase/auth-helpers-react';
 export type ScholarProfile = {
   address: string | null;
   department: string | null;
@@ -24,7 +25,8 @@ export type ScholarProfile = {
   email: string;
 };
 
-export const index = ({ scholars }: any) => {
+export const index = ({ scholars ,email}: any) => {
+  console.log("userdetails",email)
   return (
     <>
       <Head>
@@ -48,7 +50,7 @@ export const index = ({ scholars }: any) => {
         {scholars?.map((scholar: ScholarProfile, index: number) => (
           <Link
             key={scholar.id}
-            href={`/protected/supervisor/assignedscholars/${'1'}`}
+            href={`/protected/supervisor/assignedscholardetails?id=${scholar.id}`}
           >
             <Heading
               margin={'2%'}
@@ -68,9 +70,12 @@ export const index = ({ scholars }: any) => {
 export default index;
 
 export const getServerSideProps: GetServerSideProps = async (params) => {
+  // const user = useUser();
   const { data: scholarsResponse } = await supabase
     .from('scholars_profiles')
     .select('*');
+ 
+    
 
   const userDetails = await fetchUserDetails(
     params?.query?.email?.toString() || ''
@@ -78,5 +83,6 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
   const scholars = scholarsResponse?.filter(
     (scholar) => scholar.assigned_supervisor == userDetails.id
   );
-  return { props: { scholars } };
+
+  return { props: { scholars} };
 };
