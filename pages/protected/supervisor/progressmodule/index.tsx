@@ -63,41 +63,53 @@ export const Index = ({
   const handleSynopsisRemark = async (scholarId) => {
     let remark = document.getElementById('sysnopsisRemark')?.value;
 
-    const d = synopsisIds?.filter((el) => el.scholars_id == scholarId);
+    if(remark){
+      const d = synopsisIds?.filter((el) => el.scholars_id == scholarId);
 
-    supabase
-      .from('synopsis')
-      .update({ ['supervisor_remarks']: remark })
-      .eq('id', d[0].synopsis_id)
-      .then((response) => {
-        if (response.error) {
-          console.error(response.error.message);
-        } else {
-          console.log('Update successful:', response.data);
-        }
-      });
-    window.location.reload(false);
+      supabase
+        .from('synopsis')
+        .update({ ['supervisor_remarks']: remark })
+        .eq('id', d[0].synopsis_id)
+        .then((response) => {
+          if (response.error) {
+            console.error(response.error.message);
+          } else {
+            console.log('Update successful:', response.data);
+          }
+        });
+      window.location.reload();
+    }else{
+      alert("Please enter the Remark");
+    }
+
+   
   };
 
   const handleSubmissionRemark = async (scholarId) => {
     let remark = document.getElementById('submissionRemark')?.value;
 
-    const d = submissionIds?.filter((el) => el.scholars_id == scholarId);
+    if(remark){
+      const d = submissionIds?.filter((el) => el.scholars_id == scholarId);
 
-    // return
+      // return
+  
+      supabase
+        .from('progress_report')
+        .update({ ['supervisior_remark']: remark })
+        .eq('id', d[0].progress_id)
+        .then((response) => {
+          if (response.error) {
+            console.error(response.error.message);
+          } else {
+            console.log('Update successful:', response.data);
+          }
+        });
+      window.location.reload();
+    }else{
+      alert('Please Enter the Remark')
+    }
 
-    supabase
-      .from('progress_report')
-      .update({ ['supervisior_remark']: remark })
-      .eq('id', d[0].progress_id)
-      .then((response) => {
-        if (response.error) {
-          console.error(response.error.message);
-        } else {
-          console.log('Update successful:', response.data);
-        }
-      });
-    window.location.reload(false);
+
   };
 
   const synopsisDetails = (scholarId) => {
