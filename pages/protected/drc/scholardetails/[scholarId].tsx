@@ -8,7 +8,6 @@ import Logout from '@/components/Logout/Logout';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
 
 export const ScholarDetails = ({ data: userDetails, error }: any) => {
-  const loggedinUser = useUser();
   return (
     <>
       <title>Personal Details</title>
@@ -71,9 +70,6 @@ export const ScholarDetails = ({ data: userDetails, error }: any) => {
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
           {`Qualified Exam: ${userDetails.qualified_exam}`}
-        </Text>
-        <Text fontWeight={300} fontSize={'30px'}>
-          {`Assigned Supervisor: ${userDetails.assigned_supervisor}`}
         </Text>
       </Box>
       <InnerFooter />

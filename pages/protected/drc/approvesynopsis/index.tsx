@@ -1,20 +1,11 @@
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
-import {
-  Box,
-  Button,
-  Container,
-  Heading,
-  Input,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, Container, Heading, Input, Text } from '@chakra-ui/react';
 import { AiOutlineFolderView } from 'react-icons/ai';
 import Head from 'next/head';
 import Link from 'next/link';
 import BackIcon from '@/components/BackIcon/BackIcon';
 import Logout from '@/components/Logout/Logout';
 import supabase from '@/utils/supabase';
-import { fetchUserDetails } from '@/utils/utils';
 import { GetServerSideProps } from 'next';
 import Modal from 'react-modal';
 import React, { useState } from 'react';
@@ -24,7 +15,7 @@ export const Index = ({
   synopsisIds,
   synopsisValues,
   allSynopsis,
-}) => {
+}: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState('');
 
@@ -53,16 +44,15 @@ export const Index = ({
     setModalData(''); // Optionally reset data when closing the modal
   };
 
-
-  const handleSynopsisRemark = async (scholarId , status) => {
+  const handleSynopsisRemark = async (scholarId: any, status: any) => {
     let remark = document.getElementById('sysnopsisRemark')?.value;
 
-    if(remark){
-      const d = synopsisIds?.filter((el) => el.scholars_id == scholarId);
+    if (remark) {
+      const d = synopsisIds?.filter((el: any) => el.scholars_id == scholarId);
 
       supabase
         .from('synopsis')
-        .update({ ['drc_remarks']: remark , ['drc_approval']: status})
+        .update({ ['drc_remarks']: remark, ['drc_approval']: status })
         .eq('id', d[0].synopsis_id)
         .then((response) => {
           if (response.error) {
@@ -72,17 +62,15 @@ export const Index = ({
           }
         });
       window.location.reload();
-    }else{
+    } else {
       alert('Please Enter The Remark');
     }
-
-  
   };
 
-  const synopsisDetails = (scholarId) => {
-    const d = synopsisIds?.filter((el) => el.scholars_id == scholarId);
+  const synopsisDetails = (scholarId: any) => {
+    const d = synopsisIds?.filter((el: any) => el.scholars_id == scholarId);
     if (d.length >= 1) {
-      const data = allSynopsis.filter((el) => d[0].synopsis_id == el.id);
+      const data = allSynopsis.filter((el: any) => d[0].synopsis_id == el.id);
       return data[0].drc_approval == 'Pending';
     } else {
       return false;
@@ -162,46 +150,59 @@ export const Index = ({
                   </Text>
 
                   {/* <Stack direction={['row']} spacing={'3%'}> */}
-                    <Button
-                      padding={'10px 30px'}
-                      leftIcon={<AiOutlineFolderView />}
-                      colorScheme='green'
-                      onClick={() =>
-                        openModal(scholar, synopsisIds, 'synopsis')
-                      }
-                    >
-                      {' '}
-                      View
-                    </Button>
-                    {synopsisDetails(scholar.id) ? (
-                      <>
-                      <Box display={'flex'}
-                  justifyContent={'space-between'}
-                  alignItems={'center'}
-                  margin={'20px 0'}>
-                      <Input type='text'
-                      placeholder='Remarks'
-                      padding={'10px 30px'}
-                      size='2xl'
-                      margin={'20px 20px'}
-                      required
-                      id='sysnopsisRemark' />
-                    <Button padding={'10px 30px'} margin={'0 10px'} colorScheme='blue'
-                    onClick={() => handleSynopsisRemark(scholar.id, 'approve')}>
-                      Approve
-                    </Button>
-                    <Button padding={'10px 30px'}  margin={'0 10px'}  colorScheme='red'
-                    onClick={() => handleSynopsisRemark(scholar.id, 'reject')}>
-                      Reject
-                    </Button>
+                  <Button
+                    padding={'10px 30px'}
+                    leftIcon={<AiOutlineFolderView />}
+                    colorScheme='green'
+                    onClick={() => openModal(scholar, synopsisIds, 'synopsis')}
+                  >
+                    {' '}
+                    View
+                  </Button>
+                  {synopsisDetails(scholar.id) ? (
+                    <>
+                      <Box
+                        display={'flex'}
+                        justifyContent={'space-between'}
+                        alignItems={'center'}
+                        margin={'20px 0'}
+                      >
+                        <Input
+                          type='text'
+                          placeholder='Remarks'
+                          padding={'10px 30px'}
+                          size='2xl'
+                          margin={'20px 20px'}
+                          required
+                          id='sysnopsisRemark'
+                        />
+                        <Button
+                          padding={'10px 30px'}
+                          margin={'0 10px'}
+                          colorScheme='blue'
+                          onClick={() =>
+                            handleSynopsisRemark(scholar.id, 'approve')
+                          }
+                        >
+                          Approve
+                        </Button>
+                        <Button
+                          padding={'10px 30px'}
+                          margin={'0 10px'}
+                          colorScheme='red'
+                          onClick={() =>
+                            handleSynopsisRemark(scholar.id, 'reject')
+                          }
+                        >
+                          Reject
+                        </Button>
                       </Box>
-                     
-
-                      </>
-                    ) : (<>
-                    
-                    <h1 style={heading}  >Remarks Done</h1>
-                    </>)}
+                    </>
+                  ) : (
+                    <>
+                      <h1 style={heading}>Remarks Done</h1>
+                    </>
+                  )}
                   {/* </Stack> */}
                 </Box>
               </>
@@ -210,34 +211,6 @@ export const Index = ({
             )}
           </>
         ))}
-
-        {/* // <Box
-        //   marginTop='3%'
-        //   display={'flex'}
-        //   justifyContent={'space-between'}
-        //   alignItems={'center'}
-        // >
-        //   <Text fontSize={'2xl'} color={'#07443E'}>
-        //     2. Suhail DOCS IUST0121014521
-        //   </Text>
-        //   <Stack direction={['row']} spacing={'3%'}>
-        //     <Button
-        //       padding={'10px 30px'}
-        //       leftIcon={<AiOutlineFolderView />}
-        //       colorScheme='green'
-        //     >
-        //       {' '}
-        //       View
-        //     </Button>
-        //     <Input padding={'0 10px'} placeholder='Remarks' size='xl' />
-        //     <Button padding={'10px 30px'} colorScheme='blue'>
-        //       Approve
-        //     </Button>
-        //     <Button padding={'10px 30px'} colorScheme='red'>
-        //       Reject
-        //     </Button>
-        //   </Stack>
-        // </Box> */}
       </Container>
       <InnerFooter />
 
@@ -294,8 +267,6 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
   for (const i in synopsisIds) {
     synopsisValues.push(synopsisIds[i].scholars_id);
   }
-
-
 
   return {
     props: {

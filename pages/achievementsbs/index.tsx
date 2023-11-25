@@ -11,7 +11,6 @@ import {
   Td,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { Document } from '@react-pdf/renderer';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import { AiOutlineFolderView } from 'react-icons/ai';
 export const Index = () => {

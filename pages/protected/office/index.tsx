@@ -59,7 +59,7 @@ export const Index = () => {
         padding={'5%'}
         marginBottom={'7%'}
       >
-        <LinkStyled href='/protected/office/addscholar'>
+        <LinkStyled href='/protected/office/addScholar'>
           <StyledIcon> {<BiUserPlus />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
             Add Scholar

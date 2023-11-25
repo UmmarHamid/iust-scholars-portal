@@ -14,7 +14,6 @@ import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import BackIcon from '@/components/BackIcon/BackIcon';
 import Logout from '@/components/Logout/Logout';
 import supabase from '@/utils/supabase';
-import { fetchUserDetails } from '@/utils/utils';
 import { GetServerSideProps } from 'next';
 import Modal from 'react-modal';
 import React, { useState } from 'react';
@@ -24,7 +23,7 @@ export const index = ({
   submissionIds,
   submissionValues,
   allSubmissions,
-}) => {
+}: any) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState('');
 
@@ -47,14 +46,14 @@ export const index = ({
     setModalData(''); // Optionally reset data when closing the modal
   };
 
-  const handleSubmissionRemark = async (scholarId, status) => {
+  const handleSubmissionRemark = async (scholarId: any, status: any) => {
     let remark = document.getElementById('submissionRemark')?.value;
 
     if (remark) {
-      const d = submissionIds?.filter((el) => el.scholars_id == scholarId);
-      console.log(d)
-      console.log(remark)
-// return;
+      const d = submissionIds?.filter((el: any) => el.scholars_id == scholarId);
+      console.log(d);
+      console.log(remark);
+      // return;
       supabase
         .from('progress_report')
         .update({ ['drc_remark']: remark, ['drc_approval']: status })
@@ -72,18 +71,18 @@ export const index = ({
     }
   };
 
-  const submissionDetails = (scholarId) => {
-    const d = submissionIds?.filter((el) => el.scholars_id == scholarId);
+  const submissionDetails = (scholarId: any) => {
+    const d = submissionIds?.filter((el: any) => el.scholars_id == scholarId);
 
     if (d.length >= 1) {
-      const data = allSubmissions.filter((el) => d[0].progress_id == el.id);
+      const data = allSubmissions.filter(
+        (el: any) => d[0].progress_id == el.id
+      );
       return data[0].drc_remark == 'Pending';
     } else {
       return false;
     }
   };
-
-
 
   const customStyles = {
     overlay: {
@@ -272,14 +271,11 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
 
   const allSubmissions = submissionDetails;
 
-
   const submissionValues: any[] = [];
 
   for (const i in submissionIds) {
     submissionValues.push(submissionIds[i].scholars_id);
   }
-
-
 
   const scholars = scholarsResponse;
 

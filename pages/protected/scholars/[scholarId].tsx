@@ -92,7 +92,7 @@ export const Index = ({ userId }: any) => {
         <LinkStyled href={`/protected/scholars/assignedsrac/${userId}`}>
           <StyledIcon> {<MdAssignmentInd />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            Assigned Srac
+            Assigned Srac Members
           </Heading>
         </LinkStyled>
         <LinkStyled href={`/protected/scholars/synopsisdetails/${userId}`}>
