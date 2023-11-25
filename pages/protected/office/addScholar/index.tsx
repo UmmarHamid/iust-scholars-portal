@@ -59,9 +59,10 @@ export const Index = ({ courses }: any) => {
         .from('scholar_registered_courses')
         .insert(coursesPayload)
         .select();
-
+      alert('Scholar has been added');
       console.log(data, error);
       // router.push('/protected/office');
+      window.location.reload();
     }
     if (error) {
       console.log('error creating new scholar');

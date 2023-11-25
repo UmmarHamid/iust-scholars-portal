@@ -6,7 +6,12 @@ import { useUser } from '@supabase/auth-helpers-react';
 import BackIcon from '@/components/BackIcon/BackIcon';
 import Logout from '@/components/Logout/Logout';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
-export const ScholarDetails = ({ data: userDetails, error }: any) => {
+export const ScholarDetails = ({
+  data: userDetails,
+  srac,
+  supervisor,
+  error,
+}: any) => {
   const loggedinUser = useUser();
   return (
     <>
@@ -52,7 +57,7 @@ export const ScholarDetails = ({ data: userDetails, error }: any) => {
           {`Address: ${userDetails.address}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Email: ${loggedinUser?.email}`}
+          {`Email: ${userDetails.email}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
           {`D.O.B: ${userDetails.dob}`}
@@ -73,7 +78,28 @@ export const ScholarDetails = ({ data: userDetails, error }: any) => {
           {`Qualified Exam: ${userDetails.qualified_exam}`}
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Assigned Supervisor: ${userDetails.assigned_supervisor}`}
+          Assigned supervisor:
+          {supervisor
+            .filter(
+              (supervisorObj: any) =>
+                supervisorObj.id === userDetails.assigned_supervisor
+            )
+            .map((filteredSupervisor: any) => (
+              <Text key={filteredSupervisor.id}>{filteredSupervisor.name}</Text>
+            ))}
+        </Text>
+        <Text fontWeight={300} fontSize={'30px'}>
+          Assigned Srac Members:
+          {srac
+            .filter((sracObj: any) => sracObj.id === userDetails.assigned_srac1)
+            .map((filteredSrac: any) => (
+              <Text key={filteredSrac.id}>{filteredSrac.name}</Text>
+            ))}
+          {srac
+            .filter((sracObj: any) => sracObj.id === userDetails.assigned_srac2)
+            .map((filteredSrac: any) => (
+              <Text key={filteredSrac.id}>{filteredSrac.name}</Text>
+            ))}
         </Text>
       </Box>
       <InnerFooter />
@@ -86,5 +112,15 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     .from('scholars_profiles')
     .select('*')
     .eq('email', params?.scholarId);
-  return { props: { data: data ? data[0] : [], error } };
+  let { data: sracData } = await supabase.from('srac_profiles').select('*');
+  let { data: supervisorData } = await supabase.from('staff').select('*');
+
+  return {
+    props: {
+      data: data ? data[0] : [],
+      srac: sracData,
+      supervisor: supervisorData,
+      error,
+    },
+  };
 };

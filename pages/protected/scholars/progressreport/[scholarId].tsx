@@ -6,8 +6,6 @@ import {
   FormControl,
   FormLabel,
   Heading,
-  Input,
-  Text,
   Textarea,
 } from '@chakra-ui/react';
 import Logout from '@/components/Logout/Logout';

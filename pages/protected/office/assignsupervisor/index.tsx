@@ -42,6 +42,8 @@ export const Index = ({ scholars, supervisors }: any) => {
         .from('scholars_profiles') // Replace with your table name
         .update({ assigned_supervisor: supervisorId })
         .eq('id', scholarId);
+      alert('sucessfully assigned supervisor');
+      window.location.reload();
 
       if (error) {
         throw error;
@@ -70,7 +72,7 @@ export const Index = ({ scholars, supervisors }: any) => {
           <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
-          Scholar Details
+          Assign Supervisor
         </Heading>
         <Logout />
       </Box>

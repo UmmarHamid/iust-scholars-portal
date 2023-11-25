@@ -10,7 +10,7 @@ import {
   Tr,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import { GetServerSideProps } from 'next';
 import supabase from '@/utils/supabase';
 import BackIcon from '@/components/BackIcon/BackIcon';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';

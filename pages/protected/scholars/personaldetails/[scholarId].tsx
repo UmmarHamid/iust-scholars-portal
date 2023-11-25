@@ -73,9 +73,6 @@ export const Index = ({ data: userDetails, error, userId }: any) => {
           {`Qualified Exam: ${userDetails.qualified_exam}`}
         </Text>
         {/* TODO: Add supervisor name here     */}
-        <Text fontWeight={300} fontSize={'30px'}>
-          {`Assigned Supervisor: ${userDetails.assigned_supervisor}`}
-        </Text>
       </Box>
       <InnerFooter />
     </>
