@@ -7,7 +7,7 @@ import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import Logout from '@/components/Logout/Logout';
 import BackIcon from '@/components/BackIcon/BackIcon';
 
-type ScholarProfile = {
+export type ScholarProfile = {
   address: string | null;
   department: string | null;
   dob: string | null;
@@ -22,6 +22,8 @@ type ScholarProfile = {
   user_role: string | null;
   username: string | null;
   email: string;
+  assigned_srac1: string | null;
+  assigned_srac2: string | null;
 };
 
 export const index = ({ scholars }: any) => {
