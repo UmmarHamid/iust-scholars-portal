@@ -19,13 +19,12 @@ import { GetServerSideProps } from 'next';
 export const Index = ({ scholar, progressReport }: any) => {
   const loggedinUser = useUser();
 
-  console.log("All Progress",progressReport)
+  console.log('All Progress', progressReport);
 
   const table = {
     minWidth: 650,
     borderCollapse: 'separate',
     borderSpacing: '0px 4px',
-    
   };
 
   let [formData, setFormData] = useState({
@@ -42,54 +41,44 @@ export const Index = ({ scholar, progressReport }: any) => {
   const [Report, setReport] = useState(true);
   const [Id, setid] = useState(0);
 
-
-
   // console.log('progressStatus',ProgressData)
 
-
-
   const handleAddProgress = async () => {
-
-    if(Report){
-      
-            // progressReport = {...progressReport ,...formData};
-            // console.log('old',progressReport)
+    if (Report) {
+      // progressReport = {...progressReport ,...formData};
+      // console.log('old',progressReport)
       // setProgressData(false);
 
       //       return;
 
       const { data, error } = await supabase
-      .from('progress_report')
-      .insert([formData])
-      .select();
-
-
-    const progress = data ? data[0] : [];
-    // progressReport = {...progressReport ,...progress};
-    console.log('new',progressReport)
-
-
-    const scholarid = scholar.id;
-    console.log(progress.id);
-    if (progress) {
-      const { data, error } = await supabase
-        .from('submitted_progress')
-        .insert({ progress_id: progress.id, scholars_id: scholarid })
+        .from('progress_report')
+        .insert([formData])
         .select();
 
-      console.log(data, error);
-    console.log('new',progressReport)
+      const progress = data ? data[0] : [];
+      // progressReport = {...progressReport ,...progress};
+      console.log('new', progressReport);
 
+      const scholarid = scholar.id;
+      console.log(progress.id);
+      if (progress) {
+        const { data, error } = await supabase
+          .from('submitted_progress')
+          .insert({ progress_id: progress.id, scholars_id: scholarid })
+          .select();
+
+        console.log(data, error);
+        console.log('new', progressReport);
 
         window.location.reload();
-      
-      // router.push('/protected/office');
-    }
-    if (error) {
-      console.log('error creating new scholar');
-    }
-    }else{
 
+        // router.push('/protected/office');
+      }
+      if (error) {
+        console.log('error creating new scholar');
+      }
+    } else {
       supabase
         .from('progress_report')
         .update({
@@ -111,26 +100,20 @@ export const Index = ({ scholar, progressReport }: any) => {
           }
         });
 
-
-// -----------------End------------
-
-
-
+      // -----------------End------------
     }
-    
   };
 
-  function addNewReport(){
-    console.log('add new')
+  function addNewReport() {
+    console.log('add new');
 
-   
     formData.titleOfResearch = '';
     formData.period = '';
     formData.detailedProgressReport = '';
     formData.summaryOfProgressReport = '';
 
-    setid(0)
-    setReport(true)
+    setid(0);
+    setReport(true);
     setProgressData(true);
   }
 
@@ -141,13 +124,12 @@ export const Index = ({ scholar, progressReport }: any) => {
     formData.period = data[0].period;
     formData.detailedProgressReport = data[0].detailedProgressReport;
     formData.summaryOfProgressReport = data[0].summaryOfProgressReport;
-    data[0].supervisior_remark = "Pending";
-    data[0].drc_approval = "Pending";
-    data[0].drc_remark = "Pending";
-    setid(data[0].id)
-    setReport(false)
+    data[0].supervisior_remark = 'Pending';
+    data[0].drc_approval = 'Pending';
+    data[0].drc_remark = 'Pending';
+    setid(data[0].id);
+    setReport(false);
     setProgressData(true);
-
   }
   return (
     <>
@@ -225,15 +207,15 @@ export const Index = ({ scholar, progressReport }: any) => {
         <>
           <Container maxWidth={'6xl'}>
             <table style={table}>
-              <tr>
-                <th>Supervisor Remark</th>
-                <th>DRC Remark</th>
-                <th>Report Status</th>
-                <th></th>
-              </tr>
-              {progressReport?.map((report: any, index: number) => (
-                
-                  <tr style={{textAlign:'center'}}>
+              <tbody>
+                <tr>
+                  <th>Supervisor Remark</th>
+                  <th>DRC Remark</th>
+                  <th>Report Status</th>
+                  <th></th>
+                </tr>
+                {progressReport?.map((report: any, index: number) => (
+                  <tr style={{ textAlign: 'center' }}>
                     <td>{report.supervisior_remark}</td>
                     <td>{report.drc_remark}</td>
                     <td>{report.drc_approval}</td>
@@ -243,27 +225,30 @@ export const Index = ({ scholar, progressReport }: any) => {
                           Edit
                         </button>
                       ) : (
-                        <>
-                          
-                          
-                        </>
+                        <></>
                       )}
                     </td>
                   </tr>
-                
-              ))}
-
+                ))}
+              </tbody>
             </table>
             <Box
-             display={'flex'}
-             justifyContent={'space-around'}
-             alignItems={'center'}
-             height={'100px'}
-             >
-            <button style={{background:'teal', padding:'20px ' , borderRadius:'12px',color:'#fff'}}
-            onClick={addNewReport}
-            >Add New Report</button>
-
+              display={'flex'}
+              justifyContent={'space-around'}
+              alignItems={'center'}
+              height={'100px'}
+            >
+              <button
+                style={{
+                  background: 'teal',
+                  padding: '20px ',
+                  borderRadius: '12px',
+                  color: '#fff',
+                }}
+                onClick={addNewReport}
+              >
+                Add New Report
+              </button>
             </Box>
           </Container>
         </>
@@ -291,24 +276,21 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     .from('progress_report')
     .select('*');
 
-    let progressData ={}
+  let progressData = {};
 
-    if(submissionData?.length !== 0){
-      const Sdata = submissionData?.filter((el) => el.scholars_id == scholarId);
+  if (submissionData?.length !== 0) {
+    const Sdata = submissionData?.filter((el) => el.scholars_id == scholarId);
 
-      let submissionValues = [];
-    
-      for (const i in Sdata) {
-        submissionValues.push(Sdata[i].progress_id);
-      }
-    
-       progressData = submissionDetails?.filter((el) =>
-        submissionValues?.includes(el.id)
-      );
+    let submissionValues = [];
 
+    for (const i in Sdata) {
+      submissionValues.push(Sdata[i].progress_id);
     }
 
-
+    progressData = submissionDetails?.filter(
+      (el) => submissionValues?.includes(el.id)
+    );
+  }
 
   return { props: { scholar: scholarData, progressReport: progressData } };
 };
