@@ -63,7 +63,7 @@ export const Index = ({
   const handleSynopsisRemark = async (scholarId) => {
     let remark = document.getElementById('sysnopsisRemark')?.value;
 
-    if(remark){
+    if (remark) {
       const d = synopsisIds?.filter((el) => el.scholars_id == scholarId);
 
       supabase
@@ -78,25 +78,23 @@ export const Index = ({
           }
         });
       window.location.reload();
-    }else{
-      alert("Please enter the Remark");
+    } else {
+      alert('Please enter the Remark');
     }
-
-   
   };
 
-  const handleSubmissionRemark = async (scholarId) => {
-    let remark = document.getElementById('submissionRemark')?.value;
+  const handleSubmissionRemark = async (id, inputValue) => {
+    let remark = document.getElementById(inputValue)?.value;
 
-    if(remark){
-      const d = submissionIds?.filter((el) => el.scholars_id == scholarId);
+    if (remark) {
+      // const d = submissionIds?.filter((el) => el.scholars_id == scholarId);
 
       // return
-  
+
       supabase
         .from('progress_report')
         .update({ ['supervisior_remark']: remark })
-        .eq('id', d[0].progress_id)
+        .eq('id', id)
         .then((response) => {
           if (response.error) {
             console.error(response.error.message);
@@ -105,11 +103,9 @@ export const Index = ({
           }
         });
       window.location.reload();
-    }else{
-      alert('Please Enter the Remark')
+    } else {
+      alert('Please Enter the Remark');
     }
-
-
   };
 
   const synopsisDetails = (scholarId) => {
@@ -122,15 +118,15 @@ export const Index = ({
     }
   };
 
-  const submissionDetails = (scholarId) => {
-    const d = submissionIds?.filter((el) => el.scholars_id == scholarId);
+  const submissionDetails = (id) => {
+    // const d = submissionIds?.filter((el) => el.scholars_id == id);
 
-    if (d.length >= 1) {
-      const data = allSubmissions.filter((el) => d[0].progress_id == el.id);
-      return data[0].supervisior_remark == 'Pending';
-    } else {
-      return false;
-    }
+    // if (d.length >= 1) {
+    const data = allSubmissions.filter((el) => id == el.id);
+    return data[0].supervisior_remark == 'Pending';
+    // } else {
+    //   return false;
+    // }
   };
 
   const openModal = async (ndata: any, sysnopsis: any[], tableName: string) => {
@@ -152,6 +148,12 @@ export const Index = ({
   const closeModal = () => {
     setIsModalOpen(false);
     setModalData(''); // Optionally reset data when closing the modal
+  };
+
+  const getScholarReports = (scholarId: number) => {
+    const d = submissionIds?.filter((el: any) => el.scholars_id == scholarId);
+
+    return d;
   };
 
   return (
@@ -223,48 +225,59 @@ export const Index = ({
             )}
 
             {submissionValues.includes(scholar.id) ? (
-              <Box
-                marginTop={'1%'}
-                display={'flex'}
-                justifyContent={'space-around'}
-                alignItems={'center'}
-              >
-                <Button
-                  leftIcon={<AiOutlineFolderView />}
-                  padding={'10px 40px'}
-                  colorScheme='green'
-                  onClick={() =>
-                    openModal(scholar, submissionIds, 'progress_report')
-                  }
-                >
-                  View Submission
-                </Button>
-
-                {submissionDetails(scholar.id) ? (
-                  <>
-                    <Input
-                      type='text'
-                      placeholder='Remarks'
-                      padding={'10px 30px'}
-                      size='2xl'
-                      margin={'20px 20px'}
-                      id='submissionRemark'
-                    />
-                    <Button
-                      padding={'10px 30px'}
-                      colorScheme='blue'
-                      marginRight={'20px'}
-                      onClick={() => handleSubmissionRemark(scholar.id)}
+              <>
+                {getScholarReports(scholar.id)?.map(
+                  (synopsis: any, ind: number) => (
+                    <Box
+                      marginTop={'1%'}
+                      display={'flex'}
+                      justifyContent={'space-around'}
+                      alignItems={'center'}
                     >
-                      Submit
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    <h1 style={heading}>Remarks Done</h1>
-                  </>
+                      <Button
+                        leftIcon={<AiOutlineFolderView />}
+                        padding={'10px 40px'}
+                        colorScheme='green'
+                        onClick={() =>
+                          openModal(scholar, submissionIds, 'progress_report')
+                        }
+                      >
+                        View Submission
+                      </Button>
+
+                      {submissionDetails(synopsis.progress_id) ? (
+                        <>
+                          <Input
+                            type='text'
+                            placeholder='Remarks'
+                            padding={'10px 30px'}
+                            size='2xl'
+                            margin={'20px 20px'}
+                            id={`submissionRemark${index}${ind}`}
+                          />
+                          <Button
+                            padding={'10px 30px'}
+                            colorScheme='blue'
+                            marginRight={'20px'}
+                            onClick={() =>
+                              handleSubmissionRemark(
+                                synopsis.progress_id,
+                                `submissionRemark${index}${ind}`
+                              )
+                            }
+                          >
+                            Submit
+                          </Button>
+                        </>
+                      ) : (
+                        <>
+                          <h1 style={heading}>Remarks Done</h1>
+                        </>
+                      )}
+                    </Box>
+                  )
                 )}
-              </Box>
+              </>
             ) : (
               <></>
             )}
@@ -283,6 +296,8 @@ export const Index = ({
         <Box>
           {Object.entries(modalData).map(([key, value]) =>
             key != 'supervisor_remarks' &&
+            key != 'drc_remark' &&
+            key != 'drc_approval' &&
             key != 'drc_remarks' &&
             key != 'id' &&
             key != 'supervisior_remark' ? (

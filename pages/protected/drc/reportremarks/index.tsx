@@ -27,13 +27,13 @@ export const index = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState('');
 
-  const openModal = async (ndata: any, sysnopsis: any[], tableName: string) => {
-    const d = await sysnopsis?.filter((el) => el.scholars_id == ndata.id);
+  const openModal = async (id: number) => {
+    // const d = await sysnopsis?.filter((el) => el.scholars_id == ndata.id);
 
-    const id = d[0].synopsis_id ? d[0].synopsis_id : d[0].progress_id;
+    // const id = d[0].synopsis_id ? d[0].synopsis_id : d[0].progress_id;
 
     const { data, error } = await supabase
-      .from(tableName)
+      .from('progress_report')
       .select('*')
       .eq('id', id)
       .single();
@@ -46,18 +46,15 @@ export const index = ({
     setModalData(''); // Optionally reset data when closing the modal
   };
 
-  const handleSubmissionRemark = async (scholarId: any, status: any) => {
-    let remark = document.getElementById('submissionRemark')?.value;
+  const handleSubmissionRemark = async (Id: any, status: any, inputValue) => {
+    let remark = document.getElementById(inputValue)?.value;
 
     if (remark) {
-      const d = submissionIds?.filter((el: any) => el.scholars_id == scholarId);
-      console.log(d);
-      console.log(remark);
       // return;
       supabase
         .from('progress_report')
         .update({ ['drc_remark']: remark, ['drc_approval']: status })
-        .eq('id', d[0].progress_id)
+        .eq('id', Id)
         .then((response) => {
           if (response.error) {
             console.error(response.error.message);
@@ -71,17 +68,17 @@ export const index = ({
     }
   };
 
-  const submissionDetails = (scholarId: any) => {
+  const submissionDetails = (id: any) => {
+    // const d = submissionIds?.filter((el: any) => el.scholars_id == scholarId);
+
+    const data = allSubmissions.filter((el: any) => id == el.id);
+    return data[0].drc_remark == 'Pending';
+  };
+
+  const getScholarReports = (scholarId: number) => {
     const d = submissionIds?.filter((el: any) => el.scholars_id == scholarId);
 
-    if (d.length >= 1) {
-      const data = allSubmissions.filter(
-        (el: any) => d[0].progress_id == el.id
-      );
-      return data[0].drc_remark == 'Pending';
-    } else {
-      return false;
-    }
+    return d;
   };
 
   const customStyles = {
@@ -156,63 +153,83 @@ export const index = ({
                   </Text>
 
                   {/* <Stack direction={['row']} spacing={'3%'}> */}
-                  <Button
-                    padding={'10px 30px'}
-                    leftIcon={<AiOutlineFolderView />}
-                    colorScheme='green'
-                    onClick={() =>
-                      openModal(scholar, submissionIds, 'progress_report')
-                    }
-                  >
-                    {' '}
-                    View
-                  </Button>
-                  {submissionDetails(scholar.id) ? (
+                </Box>
+
+                {getScholarReports(scholar.id)?.map(
+                  (synopsis: any, index: number) => (
                     <>
                       <Box
                         display={'flex'}
-                        justifyContent={'space-between'}
-                        alignItems={'center'}
+                        justifyContent={'space-around'}
+                        // alignItems={'center'}
                         margin={'20px 0'}
                       >
-                        <Input
-                          type='text'
-                          placeholder='Remarks'
-                          padding={'10px 30px'}
-                          size='2xl'
-                          margin={'20px 20px'}
-                          required
-                          id='submissionRemark'
-                        />
                         <Button
                           padding={'10px 30px'}
-                          margin={'0 10px'}
-                          colorScheme='blue'
-                          onClick={() =>
-                            handleSubmissionRemark(scholar.id, 'approve')
-                          }
+                          leftIcon={<AiOutlineFolderView />}
+                          colorScheme='green'
+                          onClick={() => openModal(synopsis.progress_id)}
                         >
-                          Approve
+                          {' '}
+                          View
                         </Button>
-                        <Button
-                          padding={'10px 30px'}
-                          margin={'0 10px'}
-                          colorScheme='red'
-                          onClick={() =>
-                            handleSubmissionRemark(scholar.id, 'reject')
-                          }
-                        >
-                          Reject
-                        </Button>
+                        {submissionDetails(synopsis.progress_id) ? (
+                          <>
+                            <Box
+                              display={'flex'}
+                              justifyContent={'space-between'}
+                              // alignItems={'center'}
+                              // margin={'20px 0'}
+                            >
+                              <Input
+                                type='text'
+                                placeholder='Remarks'
+                                padding={'10px 30px'}
+                                size='2xl'
+                                // margin={'20px 20px'}
+                                required
+                                id={`submissionRemark${index}`}
+                              />
+                              <Button
+                                padding={'10px 30px'}
+                                margin={'0 10px'}
+                                colorScheme='blue'
+                                onClick={() =>
+                                  handleSubmissionRemark(
+                                    synopsis.progress_id,
+                                    'approve',
+                                    `submissionRemark${index}`
+                                  )
+                                }
+                              >
+                                Approve
+                              </Button>
+                              <Button
+                                padding={'10px 30px'}
+                                margin={'0 10px'}
+                                colorScheme='red'
+                                onClick={() =>
+                                  handleSubmissionRemark(
+                                    synopsis.progress_id,
+                                    'reject',
+                                    `submissionRemark${index}`
+                                  )
+                                }
+                              >
+                                Reject
+                              </Button>
+                            </Box>
+                          </>
+                        ) : (
+                          <>
+                            <h1 style={heading}>Remarks Done</h1>
+                          </>
+                        )}
+                        {/* </Stack> */}
                       </Box>
                     </>
-                  ) : (
-                    <>
-                      <h1 style={heading}>Remarks Done</h1>
-                    </>
-                  )}
-                  {/* </Stack> */}
-                </Box>
+                  )
+                )}
               </>
             ) : (
               <></>
