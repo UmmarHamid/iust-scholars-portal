@@ -16,7 +16,6 @@ import BackIcon from '@/components/BackIcon/BackIcon';
 import Logout from '@/components/Logout/Logout';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import { useUser } from '@supabase/auth-helpers-react';
-import { fetchUserDetails } from '@/utils/utils';
 
 export const ScholarDetails = ({
   userDetails,
@@ -66,8 +65,17 @@ export const ScholarDetails = ({
               <Tr fontSize={'26px'} color='teal'>
                 <Td>Supervisor</Td>
                 <Td>SRAC Members</Td>
-                <Td>Viva Score</Td>
-                <Td>Credit Score</Td>
+                <Td>
+                  Paper
+                  <br />
+                  <br />
+                  Published
+                </Td>
+                <Td>
+                  Conference
+                  <br />
+                  <br /> Attended
+                </Td>
                 <Td>Synopsis</Td>
                 <Td>Progress Report</Td>
               </Tr>
@@ -79,8 +87,8 @@ export const ScholarDetails = ({
                   <br />
                   {`${sracDetails2nd?.name}`}
                 </Td>
-                <Td>{`${scholarScore?.viva_score}`}</Td>
-                <Td>{`${scholarScore?.credit_score}`}</Td>
+                <Td>{`${scholarScore?.paper_published}`}</Td>
+                <Td>{`${scholarScore?.confrence_attended}`}</Td>
                 <Td>{`${synopsis}`}</Td>
                 <Td>{`${progress}`}</Td>
               </Tr>
@@ -131,7 +139,7 @@ export const getServerSideProps: GetServerSideProps = async (params: any) => {
       .from('submitted_progress')
       .select('scholars_id')
       .eq('scholars_id', scholarData.id)
-      .single();
+      .select();
     return {
       props: {
         userDetails: scholarData,

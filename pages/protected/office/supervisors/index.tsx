@@ -1,6 +1,4 @@
-import styled from 'styled-components';
 import Head from 'next/head';
-import Image from 'next/image';
 import {
   Text,
   Box,
@@ -17,11 +15,6 @@ import supabase from '@/utils/supabase';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import BackIcon from '@/components/BackIcon/BackIcon';
 import Logout from '@/components/Logout/Logout';
-const ImageStyled = styled(Image)`
-  padding: 10px;
-  border-radius: 16px;
-`;
-
 type supervisorProfile = {
   assigned_scholars: string | null;
   designation: string | null;

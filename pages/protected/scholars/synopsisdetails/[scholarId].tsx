@@ -239,7 +239,7 @@ export const Index = ({ scholar, synopsis }: any) => {
 
             <h2 style={heading}>
               DRC Remarks: &nbsp;{' '}
-              <span style={text}>{synopsis.supervisor_remarks}</span>{' '}
+              <span style={text}>{synopsis.drc_remarks}</span>{' '}
             </h2>
 
             <h2 style={heading}>
@@ -282,7 +282,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { data: synopsisData } = await supabase
     .from('submitted_synopsis')
     .select('*');
-    
+
   let synopsis = {};
   const d = await synopsisData?.filter((el) => el.scholars_id == scholarId);
   if (d.length !== 0) {

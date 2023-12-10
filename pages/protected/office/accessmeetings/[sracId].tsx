@@ -3,24 +3,20 @@ import { Box, Heading, Text } from '@chakra-ui/react';
 import supabase from '../../../../utils/supabase';
 import { GetServerSideProps } from 'next';
 import { useUser } from '@supabase/auth-helpers-react';
-import BackIcon from '@/components/BackIcon/BackIcon';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
+import BackIcon from '@/components/BackIcon/BackIcon';
 import Logout from '@/components/Logout/Logout';
-export const ScholarDetails = ({ data, error }: any) => {
-  const loggedinUser = useUser();
-  const user = data[0];
+export const Index = ({ data: userDetails }: any) => {
   return (
     <>
-      <title>Personal Details</title>
+      <title>Detailed Meetings</title>
       <Box
         display={'flex'}
         justifyContent={'space-around'}
         alignItems={'center'}
         height={'100px'}
       >
-        <Link
-          href={`/protected/supervisor/assignedscholars?email=${loggedinUser?.email}`}
-        >
+        <Link href={'/protected/office/accessmeetings'}>
           <BackIcon />
         </Link>
         <Heading
@@ -30,7 +26,7 @@ export const ScholarDetails = ({ data, error }: any) => {
           fontWeight='bold'
           color='teal'
         >
-          Personal Details
+          Detailed Meeting
         </Heading>
         <Logout />
       </Box>
@@ -39,54 +35,58 @@ export const ScholarDetails = ({ data, error }: any) => {
         justifyContent={'space-around'}
         flexDirection={'column'}
         margin={'20px'}
-        marginLeft={'14%'}
+        marginLeft={'15%'}
         marginBottom={'5%'}
       >
-        <Text fontWeight={300} fontSize={'30px'}>
-          {`Name: ${user.username}`}
+        <Text fontWeight={500} fontSize={'36px'} color={'teal'}>
+          Date:
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Father's Name: ${user.father}`}
+          {`${userDetails.date}`}
+        </Text>
+        <Text fontWeight={500} fontSize={'36px'} color={'teal'}>
+          Time:
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {` Mothers Name: ${user.mother}`}
+          {`${userDetails.time}`}
+        </Text>
+        <Text fontWeight={500} fontSize={'36px'} color={'teal'}>
+          Location:
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Address: ${user.address}`}
+          {`${userDetails.location}`}
+        </Text>
+        <Text fontWeight={500} fontSize={'36px'} color={'teal'}>
+          Committee Members Present:
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Email: ${user?.email}`}
+          {`${userDetails.committee_members_present}`}
+        </Text>
+        <Text fontWeight={500} fontSize={'36px'} color={'teal'}>
+          Agenda Items:
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`D.O.B: ${user.dob}`}
+          {` ${userDetails.agenda_items}`}
+        </Text>
+        <Text fontWeight={500} fontSize={'36px'} color={'teal'}>
+          Meeting Notes:
         </Text>
         <Text fontWeight={300} fontSize={'30px'}>
-          {`Phone: ${user.phone}`}
-        </Text>
-        <Text fontWeight={300} fontSize={'30px'}>
-          {`Department: ${user.department}`}
-        </Text>
-        <Text fontWeight={300} fontSize={'30px'}>
-          {`Registration No: ${user.reg_no}`}
-        </Text>
-        <Text fontWeight={300} fontSize={'30px'}>
-          {`Joining Date: ${user.join_date}`}
-        </Text>
-        <Text fontWeight={300} fontSize={'30px'}>
-          {`Qualified Exam: ${user.qualified_exam}`}
+          {`${userDetails.meeting_notes}`}
         </Text>
       </Box>
       <InnerFooter />
     </>
   );
 };
-export default ScholarDetails;
-export const getServerSideProps: GetServerSideProps = async (params) => {
-  const scholarId = params?.query?.id?.toString();
+export default Index;
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const { data, error } = await supabase
-    .from('scholars_profiles')
+    .from('srac_meeting')
     .select('*')
-    .eq('id', scholarId);
-
-  return { props: { data, error } };
+    .eq('id', params?.sracId)
+    .single();
+  return {
+    props: { data: data ? data : [], error },
+  };
 };

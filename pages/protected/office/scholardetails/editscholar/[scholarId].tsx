@@ -171,7 +171,7 @@ export const ScholarDetails = ({ data }: any) => {
           colorScheme='teal'
           size='lg'
           width={'50%'}
-          marginBottom={'2%'}
+          marginBottom={'12%'}
         >
           Submit
         </Button>

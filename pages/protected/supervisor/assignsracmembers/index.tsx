@@ -17,8 +17,10 @@ import supabase from '@/utils/supabase';
 import { ScholarProfile } from '../assignedscholars';
 import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from 'react';
+import { fetchUserDetails } from '@/utils/utils';
+import { useUser } from '@supabase/auth-helpers-react';
 
-export const Index = ({ scholars, srac }: any) => {
+export const Index = ({ srac, scholars }: any) => {
   const [sracAssignmentsFirst, setSracAssignmentsFirst] = useState<any>({});
   const [sracAssignmentsSecond, setSracAssignmentsSecond] = useState<any>({});
 
@@ -27,6 +29,7 @@ export const Index = ({ scholars, srac }: any) => {
     scholarId: string
   ) => {
     const selectedSracId1 = e.target.value;
+
     // Update the supervisorAssignments state with the selected supervisor for the scholar
     setSracAssignmentsFirst((prevState: any) => ({
       ...prevState,
@@ -38,35 +41,34 @@ export const Index = ({ scholars, srac }: any) => {
     scholarId: string
   ) => {
     const selectedSracId2 = t.target.value;
-    // Update the supervisorAssignments state with the selected supervisor for the scholar
     setSracAssignmentsSecond((prevState: any) => ({
       ...prevState,
       [scholarId]: selectedSracId2,
     }));
   };
-  const router = useRouter();
   const handleSubmitSrac = async (scholarId: string) => {
     const sracId1 = sracAssignmentsFirst[scholarId];
     const sracId2 = sracAssignmentsSecond[scholarId];
-
-    try {
+    if (sracId1 && sracId2) {
+      // try {
       // Make an update query to update the supervisor assignment in the Supabase table
-      const { error } = await supabase
+      supabase
         .from('scholars_profiles') // Replace with your table name
         .update({ assigned_srac1: sracId1, assigned_srac2: sracId2 })
-        .eq('id', scholarId);
+        .eq('id', scholarId)
+        .then((response) => {
+          if (response.error) {
+            console.error(response.error.message);
+          } else {
+            console.log('Update successful:', response.data);
+          }
+        });
 
-      if (error) {
-        throw error;
-      }
-
-      // Success! You can also update the local state if needed.
-      // For example, set a message to indicate success.
-      console.log(`Supervisor assigned for scholar ${scholarId}`);
-    } catch (error) {
-      console.error('Error assigning supervisor:', error);
+      alert('SRAC members are assigned');
+      window.location.reload();
     }
   };
+  const loggedinUser = useUser();
   return (
     <>
       <Head>
@@ -79,7 +81,7 @@ export const Index = ({ scholars, srac }: any) => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/protected/supervisor'>
+        <Link href={`/protected/supervisor/${loggedinUser?.email}`}>
           <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
@@ -93,8 +95,6 @@ export const Index = ({ scholars, srac }: any) => {
             <Text fontSize={'2xl'} color={'#07443E'}>
               {`${index + 1} - ${scholar.username} ${scholar.reg_no}`}
             </Text>
-
-            {/* TODO: Add default value for the selectors */}
             <Select
               placeholder='Select option'
               size='md'
@@ -119,7 +119,6 @@ export const Index = ({ scholars, srac }: any) => {
                 </option>
               ))}
             </Select>
-
             <Button
               marginLeft={'200'}
               paddingLeft={'300'}
@@ -138,10 +137,18 @@ export const Index = ({ scholars, srac }: any) => {
   );
 };
 export default Index;
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { data: scholars } = await supabase
+export const getServerSideProps: GetServerSideProps = async (params) => {
+  const { data: scholarsResponse } = await supabase
     .from('scholars_profiles')
     .select('*');
+
+  const userDetails = await fetchUserDetails(
+    params?.query?.email?.toString() || ''
+  );
+  const scholars = scholarsResponse?.filter(
+    (scholar) => scholar.assigned_supervisor == userDetails.id
+  );
+
   const { data: srac } = await supabase.from('srac_profiles').select('*');
   return { props: { srac, scholars } };
 };

@@ -10,6 +10,9 @@ import supabase from '@/utils/supabase';
 import { fetchUserDetails } from '@/utils/utils';
 import Modal from 'react-modal';
 import React, { useState } from 'react';
+import { RxCross2 } from 'react-icons/rx';
+import { useUser } from '@supabase/auth-helpers-react';
+
 export const Index = ({
   scholars,
   synopsisIds,
@@ -44,7 +47,7 @@ export const Index = ({
     color: '#fff',
     padding: '10px',
     borderRadius: '8px',
-    fontSize: '12px',
+    fontSize: '16px',
     marginTop: '12px',
   };
   const heading = {
@@ -155,7 +158,7 @@ export const Index = ({
 
     return d;
   };
-
+  const loggedinUser = useUser();
   return (
     <>
       <Head>
@@ -167,7 +170,7 @@ export const Index = ({
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/protected/supervisor'>
+        <Link href={`/protected/supervisor/${loggedinUser?.email}`}>
           <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
@@ -242,7 +245,7 @@ export const Index = ({
                           openModal(scholar, submissionIds, 'progress_report')
                         }
                       >
-                        View Submission
+                        View progress
                       </Button>
 
                       {submissionDetails(synopsis.progress_id) ? (
@@ -291,7 +294,7 @@ export const Index = ({
         onRequestClose={() => setIsModalOpen(false)}
         style={customStyles}
       >
-        <h1 style={{ fontSize: '30px' }}>Synopsis Details</h1>
+        <h1 style={{ fontSize: '30px' }}> </h1>
 
         <Box>
           {Object.entries(modalData).map(([key, value]) =>
@@ -311,9 +314,16 @@ export const Index = ({
           )}
         </Box>
 
-        <button onClick={() => closeModal()} style={closeBtn}>
-          Close Synopsis
-        </button>
+        <Button
+          display={'flex'}
+          flexDirection={'row'}
+          justifyContent={'space-between'}
+          onClick={() => closeModal()}
+          style={closeBtn}
+        >
+          Close
+          <RxCross2 />
+        </Button>
       </Modal>
     </>
   );
@@ -358,13 +368,14 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
   const userDetails = await fetchUserDetails(
     params?.query?.email?.toString() || ''
   );
-
-  const scholars = scholarsResponse?.filter(
-    (scholar) =>
-      (scholar.assigned_supervisor == userDetails.id &&
-        synopsisValues.includes(scholar.id)) ||
-      submissionValues.includes(scholar.id)
-  );
+  const scholars = scholarsResponse?.filter((scholar) => {
+    const isAssigned = scholar.assigned_supervisor === userDetails.id;
+    const isInSynopsisValues =
+      synopsisValues.includes(scholar.id) && isAssigned;
+    const isInSubmissionValues =
+      submissionValues.includes(scholar.id) && isAssigned;
+    return (isAssigned && isInSynopsisValues) || isInSubmissionValues;
+  });
 
   return {
     props: {

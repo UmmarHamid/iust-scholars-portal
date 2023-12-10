@@ -25,7 +25,7 @@ const LinkStyled = styled(Link)`
   justify-content: center;
 `;
 
-export const Index = ({ userId }: any) => {
+export const Index = ({ userId, name }: any) => {
   const user = useUser();
   return (
     <>
@@ -52,7 +52,7 @@ export const Index = ({ userId }: any) => {
           fontWeight='bold'
           color='teal'
         >
-          Welcome User
+          Welcome {`${name}`}
         </Heading>
         <Logout />
       </Box>
@@ -90,9 +90,9 @@ export const Index = ({ userId }: any) => {
           </Heading>
         </LinkStyled>
         <LinkStyled href={`/protected/scholars/assignedsrac/${userId}`}>
-          <StyledIcon> {<MdAssignmentInd />} </StyledIcon>
+          <StyledIcon> {<AiOutlineTeam />} </StyledIcon>
           <Heading as={'h2'} color={'teal'} paddingTop={'2%'} fontWeight={300}>
-            Assigned Srac Members
+            Assigned SRAC Members
           </Heading>
         </LinkStyled>
         <LinkStyled href={`/protected/scholars/synopsisdetails/${userId}`}>
@@ -114,5 +114,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
     .select('*')
     .eq('email', params?.scholarId);
   const userId = data ? data[0].id : null;
-  return { props: { userId, error } };
+  const name = data ? data[0].username : null;
+  return { props: { userId, name, error } };
 };

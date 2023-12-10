@@ -32,6 +32,7 @@ export const Index = ({ courses }: any) => {
     dob: '',
     phone: '',
     department: '',
+    role: '',
     reg_no: '',
     join_date: '',
     qualified_exam: '',
@@ -61,7 +62,6 @@ export const Index = ({ courses }: any) => {
         .select();
       alert('Scholar has been added');
       console.log(data, error);
-      // router.push('/protected/office');
       window.location.reload();
     }
     if (error) {
@@ -134,6 +134,20 @@ export const Index = ({ courses }: any) => {
             onChange={(e) =>
               setFormData({ ...formData, phone: e.target.value })
             }
+            type='number'
+            mb={4}
+          />
+          <FormLabel>{`Department`}</FormLabel>
+          <Input
+            onChange={(e) =>
+              setFormData({ ...formData, department: e.target.value })
+            }
+            type='number'
+            mb={4}
+          />
+          <FormLabel>{`Role`}</FormLabel>
+          <Input
+            onChange={(e) => setFormData({ ...formData, role: e.target.value })}
             type='number'
             mb={4}
           />

@@ -14,7 +14,6 @@ import BackIcon from '@/components/BackIcon/BackIcon';
 import { GetServerSideProps } from 'next';
 import supabase from '@/utils/supabase';
 import { ScholarProfile } from '../scholardetails';
-
 export const Index = ({ scholar, srac }: any) => {
   const handleApproveSrac = async (scholarId: any, status: any) => {
     supabase
@@ -24,6 +23,7 @@ export const Index = ({ scholar, srac }: any) => {
       .then((response) => {
         alert('Updated Successfully');
       });
+    window.location.reload();
   };
   return (
     <>
@@ -52,7 +52,7 @@ export const Index = ({ scholar, srac }: any) => {
               <Text fontSize={'2xl'} color={'#07443E'}>
                 {`${index + 1} - ${scholar.username} ${scholar.reg_no}`}
               </Text>
-              <Text
+              <Heading
                 fontFamily='Georgia'
                 fontSize={'xl'}
                 color='#4267B2'
@@ -65,8 +65,8 @@ export const Index = ({ scholar, srac }: any) => {
                   .map((filteredSrac: any) => (
                     <Text key={filteredSrac.id}>{filteredSrac.name}</Text>
                   ))}
-              </Text>
-              <Text
+              </Heading>
+              <Heading
                 fontFamily='Georgia'
                 fontSize={'xl'}
                 color='#4267B2'
@@ -79,7 +79,7 @@ export const Index = ({ scholar, srac }: any) => {
                   .map((filteredSrac: any) => (
                     <Text key={filteredSrac.id}>{filteredSrac.name}</Text>
                   ))}
-              </Text>
+              </Heading>
               <Button
                 padding={'10px 30px'}
                 margin={'0 10px'}

@@ -19,24 +19,9 @@ const settings = {
   slidesToScroll: 1,
   autoplay: true,
   speed: 2000,
-  autoplaySpeed: 7000,
+  autoplaySpeed: 6000,
   cssEase: 'linear',
 };
-const SlideContainer = styled.div`
-  position: relative;
-`;
-const SlideImage1 = styled.img`
-  background-image: url('/photogallery1.jpg');
-  background-repeat: no-repeat;
-  width: 100%;
-  height: 300px;
-`;
-const SlideImage2 = styled.img`
-  background-image: url('/photogallery2.jpg');
-  width: 100%;
-  height: 300px;
-`;
-
 const StyledHeader = styled.header`
   display: flex;
   flex-direction: row;
@@ -259,7 +244,7 @@ export const Homepage = () => {
           </Stack>
         </StyledHeader>
         {/* Photo Gallery Section */}
-        <Container maxW={'95%'}>
+        <Container maxW={'98%'}>
           <Slider {...settings}>
             <ImageStyled
               src={'/photogallery1.jpg'}
@@ -268,7 +253,13 @@ export const Homepage = () => {
               height={300}
             />
             <ImageStyled
-              src={'/photogallery2.jpg'}
+              src={'/home1.jpg'}
+              alt={'NOT-available'}
+              width={1200}
+              height={300}
+            />
+            <ImageStyled
+              src={'/home2.jpg'}
               alt={'NOT-available'}
               width={1200}
               height={300}

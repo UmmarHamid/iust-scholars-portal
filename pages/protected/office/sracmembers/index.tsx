@@ -57,8 +57,9 @@ export const index = ({ srac }: any) => {
                 {/* <Td isNumeric>1</Td> */}
                 <Td></Td>
                 <Td>
-                  <Heading>{srac.name}</Heading>
+                  <Heading color={'teal'}>{srac.name}</Heading>
                   <Text>{srac.designation}</Text>
+                  <Text color={'blue'}>{srac.email}</Text>
                 </Td>
               </Tr>
             ))}

@@ -47,7 +47,7 @@ export const Index = () => {
           fontWeight='bold'
           color='teal'
         >
-          DRC Member
+          DRC Chairman
         </Heading>
         <Logout />
       </Box>

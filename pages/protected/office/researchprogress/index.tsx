@@ -25,6 +25,8 @@ export const Index = ({ scholars }: any) => {
   const [formData, setFormData] = useState({
     viva_score: '',
     credit_score: '',
+    paper_published: '',
+    confrence_attended: '',
   });
   const handleSubmitScore = async (scholarId: string) => {
     const { data, error } = await supabase
@@ -51,11 +53,13 @@ export const Index = ({ scholars }: any) => {
     } catch (error) {
       console.error('Error assigning score:', error);
     }
+    alert('Progess has been updated');
+    window.location.reload();
   };
   return (
     <>
       <Head>
-        <title>Update Awards</title>
+        <title>Research Progress</title>
       </Head>
 
       <Box
@@ -68,7 +72,7 @@ export const Index = ({ scholars }: any) => {
           <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
-          Update Awards
+          Research Progress
         </Heading>
         <Logout />
       </Box>
@@ -108,6 +112,36 @@ export const Index = ({ scholars }: any) => {
                   placeholder='Credit Score'
                   onChange={(e) =>
                     setFormData({ ...formData, credit_score: e.target.value })
+                  }
+                  mb={2}
+                />
+                <Input
+                  variant='outline'
+                  padding={7}
+                  marginRight={4}
+                  htmlSize={30}
+                  width='auto'
+                  placeholder='Paper Published'
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      paper_published: e.target.value,
+                    })
+                  }
+                  mb={2}
+                />
+                <Input
+                  variant='outline'
+                  padding={7}
+                  marginRight={4}
+                  htmlSize={30}
+                  width='auto'
+                  placeholder='Confrence Attended'
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      confrence_attended: e.target.value,
+                    })
                   }
                   mb={2}
                 />

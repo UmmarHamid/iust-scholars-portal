@@ -9,8 +9,10 @@ import { FaClipboardList } from 'react-icons/fa';
 import { AiOutlineFileDone } from 'react-icons/ai';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import Logout from '@/components/Logout/Logout';
-import { fetchUserDetails } from '@/utils/utils';
 import { useUser } from '@supabase/auth-helpers-react';
+import { GetServerSideProps } from 'next';
+import supabase from '@/utils/supabase';
+
 const StyledIcon = styled.div`
   font-size: 7em;
   color: #0c2b50;
@@ -23,7 +25,8 @@ const LinkStyled = styled(Link)`
   justify-content: center;
 `;
 
-export const Index = () => {
+export const Index = ({ userId }: any) => {
+  console.log(userId);
   const user = useUser();
   return (
     <>
@@ -50,7 +53,7 @@ export const Index = () => {
           fontWeight='bold'
           color='teal'
         >
-          Name of Supervisor
+          {`${userId}`}
         </Heading>
         <Logout />
       </Box>
@@ -89,7 +92,7 @@ export const Index = () => {
         </LinkStyled>
 
         <LinkStyled
-          href='/protected/supervisor/assignsracmembers'
+          href={`/protected/supervisor/assignsracmembers?email=${user?.email}`}
           style={{ gridColumn: 'span 2' }}
         >
           <StyledIcon> {<AiOutlineFileDone />} </StyledIcon>
@@ -103,3 +106,11 @@ export const Index = () => {
   );
 };
 export default Index;
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const { data, error } = await supabase
+    .from('staff')
+    .select('*')
+    .eq('email', params?.supervisorId);
+  const userId = data ? data[0].name : null;
+  return { props: { userId, error } };
+};

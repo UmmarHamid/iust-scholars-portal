@@ -25,8 +25,8 @@ export type ScholarProfile = {
   email: string;
 };
 
-export const index = ({ scholars ,email}: any) => {
-  console.log("userdetails",email)
+export const index = ({ scholars, email }: any) => {
+  const loggedinUser = useUser();
   return (
     <>
       <Head>
@@ -38,7 +38,7 @@ export const index = ({ scholars ,email}: any) => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/protected/supervisor'>
+        <Link href={`/protected/supervisor/${loggedinUser?.email}`}>
           <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
@@ -74,8 +74,6 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
   const { data: scholarsResponse } = await supabase
     .from('scholars_profiles')
     .select('*');
- 
-    
 
   const userDetails = await fetchUserDetails(
     params?.query?.email?.toString() || ''
@@ -84,5 +82,5 @@ export const getServerSideProps: GetServerSideProps = async (params) => {
     (scholar) => scholar.assigned_supervisor == userDetails.id
   );
 
-  return { props: { scholars} };
+  return { props: { scholars } };
 };

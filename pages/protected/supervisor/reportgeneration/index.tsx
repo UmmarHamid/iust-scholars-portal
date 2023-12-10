@@ -7,6 +7,7 @@ import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import Logout from '@/components/Logout/Logout';
 import BackIcon from '@/components/BackIcon/BackIcon';
 import { fetchUserDetails } from '@/utils/utils';
+import { useUser } from '@supabase/auth-helpers-react';
 
 type ScholarProfile = {
   address: string | null;
@@ -30,6 +31,7 @@ type ScholarProfile = {
 };
 
 export const index = ({ scholars }: any) => {
+  const loggedinUser = useUser();
   return (
     <>
       <Head>
@@ -41,7 +43,7 @@ export const index = ({ scholars }: any) => {
         alignItems={'center'}
         height={'100px'}
       >
-        <Link href='/protected/drc'>
+        <Link href={`/protected/supervisor/${loggedinUser?.email}`}>
           <BackIcon />
         </Link>
         <Heading as={'h2'} color={'teal'} fontWeight={300}>
