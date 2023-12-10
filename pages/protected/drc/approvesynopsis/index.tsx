@@ -146,7 +146,7 @@ export const Index = ({
                   margin={'20px 0'}
                 >
                   <Text fontSize={'2xl'} color={'#07443E'}>
-                    {`${index + 1}- ${scholar.username} ${scholar.reg_no} `}
+                    {` ${scholar.username} ${scholar.reg_no} `}
                   </Text>
 
                   {/* <Stack direction={['row']} spacing={'3%'}> */}

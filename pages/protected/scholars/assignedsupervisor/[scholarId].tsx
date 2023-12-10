@@ -1,6 +1,4 @@
-import styled from 'styled-components';
 import Head from 'next/head';
-import Image from 'next/image';
 import { useUser } from '@supabase/auth-helpers-react';
 import {
   Box,
@@ -17,13 +15,10 @@ import supabase from '@/utils/supabase';
 import BackIcon from '@/components/BackIcon/BackIcon';
 import InnerFooter from '@/components/InnerFooter/InnerFooter';
 import Logout from '@/components/Logout/Logout';
-const ImageStyled = styled(Image)`
-  padding: 10px;
-  border-radius: 16px;
-`;
-
 export const Index = ({ supervisor }: any) => {
+  const id = supervisor?.id;
   const loggedinUser = useUser();
+
   return (
     <>
       <Head>
@@ -52,14 +47,7 @@ export const Index = ({ supervisor }: any) => {
         >
           <Tbody>
             <Tr>
-              <Td>
-                <ImageStyled
-                  alt='Not available yet'
-                  width={200}
-                  height={150}
-                  src='/r.jpg'
-                />
-              </Td>
+              <Td></Td>
               <Td>
                 <Heading
                   as='h1'
@@ -68,19 +56,20 @@ export const Index = ({ supervisor }: any) => {
                   color='#4267B2'
                   mr={'100px'}
                 >
-                  {`${supervisor.name}`}
+                  {`${supervisor?.name}`}
                 </Heading>
               </Td>
               <Td color='teal' fontWeight={300} fontSize={'30px'}>
-                {`${supervisor.designation}`}
+                {`${supervisor?.designation}`}
               </Td>
               <Td color='teal' fontWeight={300} fontSize={'30px'}>
-                {`${supervisor.email}`}
+                {`${supervisor?.email}`}
               </Td>
             </Tr>
           </Tbody>
         </Table>
       </TableContainer>
+
       <InnerFooter />
     </>
   );

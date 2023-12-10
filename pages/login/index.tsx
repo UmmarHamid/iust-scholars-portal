@@ -26,7 +26,7 @@ export const Index = () => {
               router.push(`/protected/scholars/${user.email}`);
               break;
             case 'supervisor':
-              router.push(`/protected/supervisor`);
+              router.push(`/protected/supervisor/${user.email}`);
               break;
             case 'office-staff':
               router.push(`/protected/office`);
@@ -134,8 +134,10 @@ export const Index = () => {
               socialLayout='horizontal'
             />
           </main>
-          <InnerFooter />
+          <br />
+          <br />
         </>
+        <InnerFooter />
       </>
     );
   }

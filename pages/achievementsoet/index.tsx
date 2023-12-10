@@ -78,7 +78,6 @@ export const Index = () => {
                 </Link>
               </Td>
             </Tr>
-            <br />
 
             <Tr>
               <Td isNumeric>2</Td>
@@ -100,7 +99,6 @@ export const Index = () => {
                 </Link>
               </Td>
             </Tr>
-            <br />
 
             <Tr>
               <Td isNumeric>3</Td>
@@ -120,7 +118,6 @@ export const Index = () => {
                 <Link href='/SOET/DOME-Books.pdf'>Books</Link>
               </Td>
             </Tr>
-            <br />
 
             <Tr>
               <Td isNumeric>4</Td>
@@ -142,7 +139,6 @@ export const Index = () => {
                 </Link>
               </Td>
             </Tr>
-            <br />
             <Tr>
               <Td isNumeric>5</Td>
               <Td fontSize={'26px'}>

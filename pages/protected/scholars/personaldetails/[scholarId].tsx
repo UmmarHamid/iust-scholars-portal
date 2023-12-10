@@ -8,6 +8,7 @@ import BackIcon from '@/components/BackIcon/BackIcon';
 import Logout from '@/components/Logout/Logout';
 export const Index = ({ data: userDetails, error, userId }: any) => {
   const loggedinUser = useUser();
+  console.log(userDetails);
   return (
     <>
       <title>Personal Details</title>

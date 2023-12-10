@@ -198,6 +198,7 @@ export const Index = ({ scholar, progressReport }: any) => {
             colorScheme='teal'
             size='lg'
             width={'30%'}
+            marginTop={'3%'}
             marginBottom={'10%'}
           >
             Submit

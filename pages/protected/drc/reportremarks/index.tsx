@@ -149,7 +149,7 @@ export const index = ({
                   margin={'20px 0'}
                 >
                   <Text fontSize={'2xl'} color={'#07443E'}>
-                    {`${index + 1}- ${scholar.username} ${scholar.reg_no} `}
+                    {` ${scholar.username} ${scholar.reg_no} `}
                   </Text>
 
                   {/* <Stack direction={['row']} spacing={'3%'}> */}
@@ -244,7 +244,7 @@ export const index = ({
         onRequestClose={() => setIsModalOpen(false)}
         style={customStyles}
       >
-        <h1 style={{ fontSize: '30px' }}>Synopsis Details</h1>
+        <h1 style={{ fontSize: '30px' }}>Report Details</h1>
 
         <Box>
           {Object.entries(modalData).map(([key, value]) =>
@@ -263,7 +263,7 @@ export const index = ({
         </Box>
 
         <button onClick={() => closeModal()} style={closeBtn}>
-          Close Synopsis
+          Close Report
         </button>
       </Modal>
     </>
